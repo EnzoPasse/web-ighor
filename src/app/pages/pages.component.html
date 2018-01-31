@@ -1,60 +1,52 @@
-<span class="ui-float-label">
-  <input id="float-input" type="text" size="30" pInputText>
-  <label for="float-input">Username</label>
-</span>
+<!-- MAIN WRAPPER - style puedes encontrarlo en pages.scss -->
+<!-- ============================================================== -->
+<div id="main-wrapper">
 
-<h3 class="first">Addons</h3>
-<div class="ui-g ui-fluid">
-  <div class="ui-g-12 ui-md-4">
-    <div class="ui-inputgroup">
-      <span class="ui-inputgroup-addon">
-        <i class="fa fa-user"></i>
-      </span>
-      <input type="text" pInputText placeholder="Username">
+  <!-- NAV BAR  -->
+  <!-- ============================================================== -->
+  <app-header></app-header>
+
+
+  <!-- SIDE BAR  -->
+  <!-- ============================================================== -->
+  <app-sidebar></app-sidebar>
+
+
+  <!-- Page wrapper  -->
+  <!-- ============================================================== -->
+  <div class="page-wrapper">
+
+    <!-- Container fluid  -->
+    <!-- ============================================================== -->
+    <div class="container-fluid">
+
+      <app-breadcrums></app-breadcrums>
+
+
+      <!-- Start Page Content -->
+      <!-- ============================================================== -->
+
+      <router-outlet></router-outlet>
+
+      <!-- <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body">
+
+            </div>
+          </div>
+        </div>
+      </div>
+ -->
+      <!-- End PAge Content -->
+      <!-- ============================================================== -->
+
     </div>
+    <!-- END Container fluid  -->
+    <!-- ============================================================== -->
   </div>
+  <!-- END Page wrapper  -->
+  <!-- ============================================================== -->
+
+
 </div>
-<h3>Checkbox and RadioButton</h3>
-<div class="ui-g ui-fluid">
-  <div class="ui-g-12 ui-md-4">
-    <div class="ui-inputgroup">
-      <span class="ui-inputgroup-addon">
-        <p-checkbox></p-checkbox>
-      </span>
-      <input type="text" pInputText placeholder="Username">
-    </div>
-  </div>
-  <div class="ui-g-12 ui-md-4">
-    <div class="ui-inputgroup">
-      <span class="ui-inputgroup-addon">
-        <p-checkbox></p-checkbox>
-      </span>
-      <input type="text" pInputText placeholder="Username">
-    </div>
-  </div>
-</div>
-
-<button pButton type="button" (click)="count()" icon="fa-check" iconPos="left" label="Click" class="ui-button-secondary">
-</button>
-
-<!-- <p-growl [(value)]="msgs"></p-growl> -->
-<p-messages [(value)]="msgs"></p-messages>
-
-<button type="button" pButton (click)="showSuccess()" label="Success" class="ui-button-warning"></button>
-
-<p-sidebar [(visible)]="display" styleClass="ui-sidebar-md" position="left">
-  <h1 style="font-weight:normal">New User</h1>
-  <br>
-  <span class="ui-float-label">
-    <input id="float-input" type="text" size="30" pInputText>
-    <label for="float-input">Username</label>
-  </span>
-  <br>
-  <button pButton type="button" (click)="count()" icon="fa-check" iconPos="left" label="Guardar" class="ui-button-success">
-  </button>
-  <button pButton type="button" (click)="count()" icon="fa-close" iconPos="left" label="Cancelar" class="ui-button-danger">
-  </button>
-
-</p-sidebar>
-
-<button type="text" (click)="display = true" pButton icon="fa-external-link-square" label="Show"></button>

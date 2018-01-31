@@ -1,15 +1,16 @@
-import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { NgModule } from '@angular/core';
 
-import { PagesComponent } from './pages/pages.component';
+import { LoginComponent } from './login/login.component';
 import { PageNoFoundComponent } from './shared/page-no-found/page-no-found.component';
 
 const routes: Routes = [
-  { path: 'dashboard', component: PagesComponent },
-  { path: 'path2', component: PagesComponent },
-  { path: 'path3', component: PagesComponent },
-  { path: '', redirectTo: '/dashboard', pathMatch : 'full' },
-  { path: '**', component: PageNoFoundComponent }
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent }
 ];
 
-export const APP_ROUTES = RouterModule.forRoot(routes, {useHash: true});
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutes {}

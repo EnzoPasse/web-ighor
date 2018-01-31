@@ -1,51 +1,46 @@
+// ANGULAR
 import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
-
-
-import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
-import { SidebarModule, InputTextModule, ButtonModule, CheckboxModule, MessageModule, MessagesModule, GrowlModule} from 'primeng/primeng';
 
+// RUTAS
+import { AppRoutes } from './app.routes';
 
+// MODULOS
+import { PagesModule } from './pages/pages.module';
 
+// COMPONENTES
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './shared/header/header.component';
-import { SidebarComponent } from './shared/sidebar/sidebar.component';
-import { BreadcrumsComponent } from './shared/breadcrums/breadcrums.component';
-import { PageNoFoundComponent } from './shared/page-no-found/page-no-found.component';
-import { PagesComponent } from './pages/pages.component';
 import { LoginComponent } from './login/login.component';
 
-import { APP_ROUTES } from './app.routes';
+// PRIME NG BORRAR - HACER OTRO MODULO
 
-
+// import { PrimeNgModule } from './pages/primeng.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    SidebarComponent,
-    BreadcrumsComponent,
-    PageNoFoundComponent,
-    PagesComponent,
-    LoginComponent
-  ],
+    LoginComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
+    AppRoutes, // siempre importar primero las rutas y luego el modulo
+    PagesModule
+    // PrimeNgModule
+    /* // primeng
     InputTextModule,
     ButtonModule,
     CheckboxModule,
     MessageModule,
     MessagesModule,
     GrowlModule,
-    SidebarModule,
-    APP_ROUTES
+    SidebarModule */
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

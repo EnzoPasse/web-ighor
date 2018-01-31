@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-page-no-found',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styles: []
 })
 export class PageNoFoundComponent implements OnInit {
+
+  year = new Date().getFullYear();
 
   constructor() { }
 

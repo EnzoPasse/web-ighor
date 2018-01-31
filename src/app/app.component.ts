@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Route } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,5 +7,4 @@ import { Route } from '@angular/router';
 })
 export class AppComponent {
   title = 'app';
-  route: Route;
 }
