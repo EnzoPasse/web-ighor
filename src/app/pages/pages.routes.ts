@@ -6,6 +6,7 @@ import { PagesComponent } from './pages.component';
 import { PruebaComponent } from './prueba/prueba.component';
 import { PageNoFoundComponent } from '../shared/page-no-found/page-no-found.component';
 import { HomeComponent } from './home/home.component';
+import { AccountSettingComponent } from './account-setting/account-setting.component';
 
 const pagesRoutes: Routes = [
   {
@@ -15,6 +16,7 @@ const pagesRoutes: Routes = [
       { path: '', redirectTo: '/home', pathMatch: 'full' },
       { path: 'prueba', component: PruebaComponent },
       { path: 'home', component: HomeComponent },
+      { path: 'account-setting', component: AccountSettingComponent },
       { path: '**', component: PageNoFoundComponent }
     ]
   }

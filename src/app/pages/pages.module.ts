@@ -13,13 +13,15 @@ import { PrimeNgModule } from './primeng.module';
 import { PagesComponent } from './pages.component';
 import { PruebaComponent } from './prueba/prueba.component';
 import { HomeComponent } from './home/home.component';
+import { AccountSettingComponent } from './account-setting/account-setting.component';
 
 
 @NgModule({
   declarations: [
     PagesComponent,
     PruebaComponent,
-    HomeComponent
+    HomeComponent,
+    AccountSettingComponent
   ],
   imports: [
     CommonModule,
@@ -31,6 +33,7 @@ import { HomeComponent } from './home/home.component';
     // PagesComponent,
     PruebaComponent,
     HomeComponent
+
   ],
   providers: [
   ]

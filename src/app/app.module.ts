@@ -16,9 +16,9 @@ import { PagesModule } from './pages/pages.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 
-// PRIME NG BORRAR - HACER OTRO MODULO
+// servicios
 
-// import { PrimeNgModule } from './pages/primeng.module';
+import { SettingsService } from './services/service.index';
 
 @NgModule({
   declarations: [
@@ -40,7 +40,7 @@ import { LoginComponent } from './login/login.component';
     GrowlModule,
     SidebarModule */
   ],
-  providers: [],
+  providers: [SettingsService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

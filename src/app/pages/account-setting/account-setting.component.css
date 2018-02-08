@@ -1,0 +1,7 @@
+/*pone la manito sobre colores del dashboard*/
+#themecolors a {
+   cursor: pointer;
+}
+.card-title{
+  padding-top: 15px;
+}

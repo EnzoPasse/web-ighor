@@ -83,12 +83,16 @@
       "check-else",
       "check-whitespace"
     ],
-    "prefer-const": true,
+    "prefer-const": [
+      false,
+      {"ignoreReadBeforeAssign": true}
+    ],
     "quotemark": [
       true,
       "single",
       "jsx-single"
     ],
+    "prettier.singleQuote":true,
     "radix": true,
     "semicolon": [
       true,

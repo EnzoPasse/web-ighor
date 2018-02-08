@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Message } from 'primeng/components/common/api';
 
+import { SettingsService } from '../services/service.index';
+
 @Component({
   selector: 'app-pages',
   templateUrl: './pages.component.html',
@@ -10,7 +12,7 @@ export class PagesComponent implements OnInit {
   display = '';
   msgs: Message[] = [];
 
-  constructor() {}
+  constructor(public _settings: SettingsService) {}
 
   ngOnInit() {}
 
