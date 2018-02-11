@@ -1,7 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Message } from 'primeng/components/common/api';
 
-import { SettingsService } from '../services/service.index';
+import { SettingsService } from './account-setting/settings.service';
+
+
+// llamda a un script fuera de angular
+// esa funcion se encutra dentro de custom.js
+// esa funcion inicializa los plugins del template
+// se usa en la pagina principal y la del login
+
+declare function init_plugins();
 
 @Component({
   selector: 'app-pages',
@@ -14,7 +22,9 @@ export class PagesComponent implements OnInit {
 
   constructor(public _settings: SettingsService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    init_plugins();
+  }
 
   showSuccess() {
     this.msgs = [];

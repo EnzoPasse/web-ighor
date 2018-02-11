@@ -11,14 +11,15 @@ import { AppRoutes } from './app.routes';
 
 // MODULOS
 import { PagesModule } from './pages/pages.module';
+import { ServicesModule } from './services/services.module';
+
 
 // COMPONENTES
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 
-// servicios
+// SERVICIOS
 
-import { SettingsService } from './services/service.index';
 
 @NgModule({
   declarations: [
@@ -29,18 +30,10 @@ import { SettingsService } from './services/service.index';
     BrowserAnimationsModule,
     FormsModule,
     AppRoutes, // siempre importar primero las rutas y luego el modulo
-    PagesModule
-    // PrimeNgModule
-    /* // primeng
-    InputTextModule,
-    ButtonModule,
-    CheckboxModule,
-    MessageModule,
-    MessagesModule,
-    GrowlModule,
-    SidebarModule */
+    PagesModule,
+    ServicesModule
   ],
-  providers: [SettingsService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

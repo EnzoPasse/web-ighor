@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { SettingsService, SidebarService } from './service.index';
+import { SidebarService } from './service.index';
 
 
 
@@ -9,6 +9,13 @@ import { SettingsService, SidebarService } from './service.index';
   imports: [
     CommonModule
   ],
-  declarations: []
+  providers: [
+        SidebarService
+  ],
+  declarations: [
+
+  ],
+  exports: [
+  ]
 })
 export class ServicesModule { }

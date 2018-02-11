@@ -9,6 +9,7 @@ import { PagesRoutes } from './pages.routes';
 import { SharedModule } from '../shared/shared.module';
 import { PrimeNgModule } from './primeng.module';
 
+
 // PAGINAS
 import { PagesComponent } from './pages.component';
 import { PruebaComponent } from './prueba/prueba.component';
@@ -35,7 +36,6 @@ import { AccountSettingComponent } from './account-setting/account-setting.compo
     HomeComponent
 
   ],
-  providers: [
-  ]
+  providers: []
 })
 export class PagesModule {}

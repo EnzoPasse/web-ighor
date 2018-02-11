@@ -17,13 +17,9 @@ export class SettingsService {
   }
 
   cargarAjustes() {
+    // si ya esta guardado lo cargo sino cargo por defecto!
     if (localStorage.getItem('ajustes')) {
-      // tslint:disable-next-line:quotemark
-      console.log("cargando ajustes");
-      this.ajustes = JSON.parse(localStorage.getItem('ajustes'));
-    } else {
-      // tslint:disable-next-line:quotemark
-      console.log("cargando valores por defecto");
+       this.ajustes = JSON.parse(localStorage.getItem('ajustes'));
     }
     this.aplicarTema(this.ajustes.tema);
   }

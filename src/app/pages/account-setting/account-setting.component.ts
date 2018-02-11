@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
-import { SettingsService } from '../../services/service.index';
+import { SettingsService } from './settings.service';
 
 @Component({
   selector: 'app-account-setting',
