@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
-
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+
 import { BreadcrumsComponent } from './breadcrums/breadcrums.component';
 import { PageNoFoundComponent } from './page-no-found/page-no-found.component';
 import { SidebarComponent } from './sidebar/sidebar.component';

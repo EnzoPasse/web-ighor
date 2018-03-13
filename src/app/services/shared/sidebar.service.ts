@@ -9,7 +9,9 @@ export class SidebarService {
      icono: 'mdi mdi-gauge',
      submenu: [
        { titulo: 'Home', url: '/home' },
-       { titulo: 'Pruebas', url: '/prueba' }
+       { titulo: 'Pruebas', url: '/prueba' },
+       { titulo: 'Usuarios', url: '/usuario' },
+       { titulo: 'Provincias', url: '/provincia' }
      ]
   }
   ];

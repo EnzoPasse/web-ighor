@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+
 import { Message } from 'primeng/components/common/api';
 
-import { SettingsService } from './account-setting/settings.service';
+import { SettingsService } from '../services/service.index';
+
+
+
 
 
 // llamda a un script fuera de angular

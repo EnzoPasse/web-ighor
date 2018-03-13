@@ -6,6 +6,8 @@ import { PruebaComponent } from './prueba/prueba.component';
 import { PageNoFoundComponent } from '../shared/page-no-found/page-no-found.component';
 import { HomeComponent } from './home/home.component';
 import { AccountSettingComponent } from './account-setting/account-setting.component';
+import { UsuarioComponent } from './usuario/usuario.component';
+import { ProvinciasComponent } from './provincia/provincias.component';
 
 const pagesRoutes: Routes = [
   {
@@ -18,11 +20,23 @@ const pagesRoutes: Routes = [
         component: PruebaComponent,
         data: { titulo: 'Pruebas' }
       },
-      { path: 'home', component: HomeComponent, data: { titulo: 'Home' } },
+      { path: 'home',
+        component: HomeComponent,
+        data: { titulo: 'Home' } },
       {
         path: 'account-setting',
         component: AccountSettingComponent,
         data: { titulo: 'Ajustes de Cuenta' }
+      },
+      {
+        path: 'usuario',
+        component: UsuarioComponent,
+        data: { titulo: 'Usuario' }
+      },
+      {
+        path: 'provincia',
+        component: ProvinciasComponent,
+        data: { titulo: 'Provincias' }
       },
       { path: '**', component: PageNoFoundComponent }
     ]

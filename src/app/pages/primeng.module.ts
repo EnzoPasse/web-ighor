@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 // serivicios
-import { SettingsService } from './account-setting/settings.service';
+// import { SettingsService } from './account-setting/settings.service';
 
 // componentes primeng
 import { SidebarModule } from 'primeng/components/sidebar/sidebar';
@@ -39,6 +39,6 @@ import { CardModule } from 'primeng/card';
     RadioButtonModule,
     CardModule
   ],
-  providers: [SettingsService]
+  providers: []// settingService
 })
 export class PrimeNgModule {}
