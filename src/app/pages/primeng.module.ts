@@ -14,6 +14,7 @@ import { MessagesModule } from 'primeng/components/messages/messages';
 import { GrowlModule } from 'primeng/components/growl/growl';
 import { RadioButtonModule } from 'primeng/components/radioButton/radioButton';
 import { CardModule } from 'primeng/card';
+import { MessageService } from 'primeng/components/common/messageservice';
 
 
 @NgModule({
@@ -39,6 +40,6 @@ import { CardModule } from 'primeng/card';
     RadioButtonModule,
     CardModule
   ],
-  providers: []// settingService
+  providers: [MessageService]// settingService
 })
 export class PrimeNgModule {}

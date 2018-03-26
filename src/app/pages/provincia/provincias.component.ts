@@ -8,17 +8,15 @@ import { SweetAlert } from 'sweetalert/typings/core';
 import { error } from 'util';
 const swal: SweetAlert = _swal as any;
 
-
-
 @Component({
   selector: 'app-provincias',
   templateUrl: './provincias.component.html',
   styles: []
 })
 export class ProvinciasComponent implements OnInit {
-  provincias: Provincia[];
-  cargando: boolean = false;
-  totalRegistros: number = 0;
+  public provincias: Provincia[];
+  public cargando: boolean = false;
+  public totalRegistros: number = 0;
 
   constructor(public _prov: ProvinciaService) {}
 
@@ -42,33 +40,40 @@ export class ProvinciasComponent implements OnInit {
   }
 
   actualizarProvincia(provincia: Provincia) {
-   this._prov.actualizarPronvincia(provincia)
-             .subscribe(() => error => {
-              swal('Error', error, 'error');
-             });
+    this._prov.actualizarPronvincia(provincia).subscribe(
+      (resp: any) => {
+        this.cargarProvincias();
+      },
+      error => {
+        swal('Error', error, 'error');
+      }
+    );
   }
 
   crearProvincia() {
     swal({
       title: 'Crear hospital',
       content: {
-      element: 'input',
+        element: 'input',
         attributes: {
           placeholder: 'Introduzca el nombre de la provincia'
-        },
+        }
       },
       icon: 'info',
-      buttons: [true, true]
+      buttons: ['Cancelar', 'Guardar']
     }).then((valor: string) => {
       if (!valor || valor.length === 0) {
         return;
       }
       let nombreProv = valor.toUpperCase().trim();
-      this._prov.crearProvincia(nombreProv).subscribe(resp => {
-        this.cargarProvincias();
-      }, error => {
-        swal('Error', error, 'error');
-      });
+      this._prov.crearProvincia(nombreProv).subscribe(
+        resp => {
+          this.cargarProvincias();
+        },
+        error => {
+          swal('Error', error, 'error');
+        }
+      );
     });
   }
 
@@ -78,17 +83,18 @@ export class ProvinciasComponent implements OnInit {
       title: '¿ Estás seguro ?',
       text: `Estás a punto de borrar ${provincia.nombre}`,
       icon: 'warning',
-      buttons: [true, true],
+      buttons: ['Cancelar', 'Borrar'],
       dangerMode: true
     }).then(borrar => {
       if (borrar) {
-        this._prov
-          .borrarProvincia(provincia.IdProvincia)
-          .subscribe((borrado: Boolean) => {
+        this._prov.borrarProvincia(provincia.IdProvincia).subscribe(
+          (borrado: Boolean) => {
             this.cargarProvincias();
-          }, error => {
+          },
+          error => {
             swal('Error', error, 'error');
-          });
+          }
+        );
       }
     });
   }

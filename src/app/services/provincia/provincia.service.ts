@@ -1,14 +1,15 @@
+
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { Provincia } from '../../models/provincia.model';
+
 import { URL_SERVICIO } from '../../config/config';
 
-import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
+import { Observable } from 'rxjs/Observable';
 import { catchError } from 'rxjs/operators/catchError';
-
 import 'rxjs/add/observable/throw';
 
-import { Provincia } from '../../models/provincia.model';
 
 
 const ORIGEN = 'ProvinciaService';
@@ -28,21 +29,25 @@ export class ProvinciaService {
   crearProvincia(nombre: string) {
     const url = `${URL_SERVICIO}/provincia`;
 
+
     return this.http.post(url, { nombre } )
       .map((resp: any) => {
-          this.msjAvisoFugaz('Provincia Creada');
+        this.msjAvisoFugaz('Provincia Creada');
           return resp;
     }).pipe(catchError(this.handleError('crearProvincias'))) ;
   }
 
 
    actualizarPronvincia(provincia: Provincia) {
-    const url = `${URL_SERVICIO}/provincia/${provincia.IdProvincia}`;
-    let nombre: string = provincia.nombre.toUpperCase();
 
-    return this.http.put(url, nombre)
+    const url = `${URL_SERVICIO}/provincia/${provincia.IdProvincia}`;
+
+    let body = JSON.stringify(provincia);
+
+    return this.http.put(url, body, this.getHttpHeaders())
     .map((resp: any) => {
       this.msjAvisoFugaz('Provincia Actualizada');
+      console.log(resp);
       return resp;
     }).pipe(catchError(this.handleError('actualizarProvincia')));
    }
@@ -66,13 +71,22 @@ export class ProvinciaService {
       if (err instanceof HttpErrorResponse) {
         // you could extract more info about the error if you want, e.g.:
         errMsg += `
+                    Mensaje: ${err.error} - ${err.error.message}
                     Estado: ${err.statusText}
-                    Mensaje: ${err.error}
                     Ubicacion: ${err.url}`;
       }
       return Observable.throw(errMsg);
     };
   }
+
+private getHttpHeaders() {
+   const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json; charset=UTF-8'
+    })
+  };
+  return httpOptions;
+}
 
 
   private msjAvisoFugaz(titulo: string) {
@@ -81,7 +95,7 @@ export class ProvinciaService {
       text: ' ',
       icon: 'success',
       buttons: [false],
-      timer: 1000
+      timer: 1100
     });
   }
 
