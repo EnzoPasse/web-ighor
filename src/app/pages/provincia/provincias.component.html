@@ -10,6 +10,7 @@
   </div>
 </div>
  -->
+ <p-growl [value]="msgs" life="1500"></p-growl>
 
 <app-cargando *ngIf="cargando"></app-cargando>
 
@@ -38,7 +39,7 @@
           <table class="table table-hover">
             <thead class="thead-dark">
               <tr>
-                <th>
+                <th class="w150">
                   <i class="fa fa-key"></i> Id</th>
                 <th>
                   <i class="fa fa-list-alt"></i> Provincia</th>
@@ -52,8 +53,9 @@
                 <td>
                   {{ item.IdProvincia }}
                 </td>
-                <td>
-                  <input [(ngModel)]="item.nombre " name="nombre" type="text" class="form-control pointer">
+                <td (click)="edit(item)">
+                  <span *ngIf="item !== editProv">{{ item.nombre }}</span>
+                  <input *ngIf="item === editProv" [(ngModel)]="item.nombre " name="nombre" type="text" class="form-control pointer">
                 </td>
                 <td>
                   <button (click)="actualizarProvincia(item)" class="btn btn-primary">

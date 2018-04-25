@@ -1,7 +1,45 @@
-/* You can add global styles to this file, and also import other style files */
 
 
+/***************
+ CURSOR
+ ***************/
 .pointer {
   cursor: pointer;
+}
+
+/***************
+ANCHOS
+****************/
+
+.w150 {
+  width: 150px;
+}
+.w70 {
+  width: 70px;
+}
+
+/************************************************
+ CAMBIANDO LA FUENTE DE LOS COMPONENTES PRIMENG
+ ************************************************/
+.ui-datatable,.ui-paginator,.ui-dialog,.ui-inputtext,.ui-growl{
+font-weight: 300;
+font-family: "Montserrat", sans-serif;
+}
+
+/***************************************
+ DATA TABLE
+ ****************************************/
+.ui-datatable .ui-datatable-thead > tr > th {
+  background-color: aliceblue;
+  height: 50px;
+}
+
+.ui-paginator-rpp-options {
+  font-weight: 300;
+  font-family: "Montserrat", sans-serif;
+}
+.ui-cell-data	{
+  padding: 10px;
+  border: 10px;
 }
 

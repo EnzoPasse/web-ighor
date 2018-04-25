@@ -21,7 +21,7 @@ import { AccountSettingComponent } from './account-setting/account-setting.compo
 import { UsuarioComponent } from './usuario/usuario.component';
 import { ProvinciasComponent } from './provincia/provincias.component';
 import { CargandoComponent } from '../components/cargando/cargando.component';
-import { LocalidadComponent } from './localidad/localidad.component';
+import { LocalidadModule } from './localidad/localidad.module';
 
 
 @NgModule({
@@ -32,8 +32,7 @@ import { LocalidadComponent } from './localidad/localidad.component';
     AccountSettingComponent,
     UsuarioComponent,
     ProvinciasComponent,
-    CargandoComponent,
-    LocalidadComponent
+    CargandoComponent
   ],
   imports: [
     CommonModule,
@@ -41,7 +40,8 @@ import { LocalidadComponent } from './localidad/localidad.component';
     SharedModule,
     PagesRoutes,
     PrimeNgModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    LocalidadModule
   ],
   exports: [
     // PagesComponent,

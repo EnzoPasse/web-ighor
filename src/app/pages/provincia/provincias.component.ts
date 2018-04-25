@@ -3,6 +3,9 @@ import { ProvinciaService } from '../../services/service.index';
 import { Observable } from 'rxjs/Observable';
 import { Provincia } from '../../models/provincia.model';
 
+import {Message} from 'primeng/components/common/api';
+
+
 import * as _swal from 'sweetalert';
 import { SweetAlert } from 'sweetalert/typings/core';
 import { error } from 'util';
@@ -14,15 +17,23 @@ const swal: SweetAlert = _swal as any;
   styles: []
 })
 export class ProvinciasComponent implements OnInit {
+
+  msgs: Message[] = [];
+
   public provincias: Provincia[];
   public cargando: boolean = false;
   public totalRegistros: number = 0;
+  public editProv: Provincia;
 
   constructor(public _prov: ProvinciaService) {}
 
   ngOnInit() {
     this.cargarProvincias();
   }
+
+edit(prov: Provincia) {
+ this.editProv = prov;
+}
 
   cargarProvincias() {
     this.cargando = true;
@@ -40,14 +51,27 @@ export class ProvinciasComponent implements OnInit {
   }
 
   actualizarProvincia(provincia: Provincia) {
-    this._prov.actualizarPronvincia(provincia).subscribe(
-      (resp: any) => {
-        this.cargarProvincias();
+
+    if (!provincia) {
+      return;
+    }
+
+    let newProv = { ...provincia, nombre: provincia.nombre.toUpperCase() };
+
+    this._prov.actualizarPronvincia(newProv).subscribe(
+      (resp: Provincia) => {
+         const ix = resp ? this.provincias.findIndex(h => h.IdProvincia === resp.IdProvincia) : -1;
+         if (ix > -1) {
+            this.provincias[ix] = resp;
+         }
+         this.msgs = [];
+          this.msgs.push({severity: 'info', summary: 'Provincia Actualizada', detail: `${resp.nombre}`});
+        // this.cargarProvincias();
       },
       error => {
         swal('Error', error, 'error');
-      }
-    );
+      });
+       this.editProv = undefined;
   }
 
   crearProvincia() {
@@ -65,10 +89,15 @@ export class ProvinciasComponent implements OnInit {
       if (!valor || valor.length === 0) {
         return;
       }
-      let nombreProv = valor.toUpperCase().trim();
-      this._prov.crearProvincia(nombreProv).subscribe(
+      let newProv: Provincia = {nombre: valor.toUpperCase().trim()} as Provincia;
+      this._prov.crearProvincia(newProv).subscribe(
         resp => {
-          this.cargarProvincias();
+          this.msgs = [];
+          this.msgs.push({severity: 'info', summary: 'Provincia Creada', detail: `${resp.nombre}`});
+
+          this.provincias.push(resp);
+          this.totalRegistros += 1;
+          // this.cargarProvincias();
         },
         error => {
           swal('Error', error, 'error');
@@ -78,7 +107,6 @@ export class ProvinciasComponent implements OnInit {
   }
 
   borrarProvincia(provincia: Provincia) {
-    console.log(provincia);
     swal({
       title: '¿ Estás seguro ?',
       text: `Estás a punto de borrar ${provincia.nombre}`,
@@ -89,7 +117,11 @@ export class ProvinciasComponent implements OnInit {
       if (borrar) {
         this._prov.borrarProvincia(provincia.IdProvincia).subscribe(
           (borrado: Boolean) => {
-            this.cargarProvincias();
+            this.provincias = this.provincias.filter(h => h !== provincia);
+            this.totalRegistros -= 1;
+            this.msgs = [];
+            this.msgs.push({severity: 'info', summary: 'Provincia Eliminada', detail: `${provincia.nombre}`});
+            // this.cargarProvincias();
           },
           error => {
             swal('Error', error, 'error');

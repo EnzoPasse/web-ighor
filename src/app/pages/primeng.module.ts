@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-// serivicios
-// import { SettingsService } from './account-setting/settings.service';
-
 // componentes primeng
 import { SidebarModule } from 'primeng/components/sidebar/sidebar';
 import { InputTextModule } from 'primeng/components/inputtext/inputtext';
@@ -15,6 +12,8 @@ import { GrowlModule } from 'primeng/components/growl/growl';
 import { RadioButtonModule } from 'primeng/components/radioButton/radioButton';
 import { CardModule } from 'primeng/card';
 import { MessageService } from 'primeng/components/common/messageservice';
+import { DataTableModule } from 'primeng/components/datatable/datatable';
+
 
 
 @NgModule({
@@ -28,7 +27,8 @@ import { MessageService } from 'primeng/components/common/messageservice';
     MessagesModule,
     GrowlModule,
     RadioButtonModule,
-    CardModule
+    CardModule,
+    DataTableModule
     ],
   exports: [
     InputTextModule,
@@ -38,7 +38,8 @@ import { MessageService } from 'primeng/components/common/messageservice';
     MessagesModule,
     GrowlModule,
     RadioButtonModule,
-    CardModule
+    CardModule,
+    DataTableModule
   ],
   providers: [MessageService]// settingService
 })
