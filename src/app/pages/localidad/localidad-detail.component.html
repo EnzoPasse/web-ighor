@@ -11,12 +11,13 @@
     <!-- <div class="card">-->
       <!-- <div class="card-body"> -->
 
-        <form action="">
+        <form [formGroup]="localidadForm" (ngSubmit)="guardar(localidadForm.value)" >
 
           <div class="form-group">
             <div class="ui-inputgroup">
               <span class="ui-float-label">
-                <input [disabled]="true" id="prov" type="text" pInputText [ngModel]="localidad.provincia.nombre" name="prov" size="40">
+                <input [disabled]="true" id="prov" type="text" pInputText
+                        formControlName="nombreProvincia" name="prov" size="40">
                 <label for="prov">Provincia</label>
               </span>
               <span class="ui-inputgroup-addon">
@@ -28,7 +29,8 @@
           <div class="form-group">
             <div class="ui-inputgroup">
               <span class="ui-float-label">
-                <input id="nombre" type="text" size="40" pInputText [(ngModel)]="localidad.nombre" name="nombre">
+                <input id="nombre" type="text" size="40" pInputText
+                formControlName="nombreLocalidad" name="nombre">
                 <label for="nombre">Localidad</label>
               </span>
               <span class="ui-inputgroup-addon">
@@ -40,7 +42,8 @@
           <div class="form-group">
             <div class="ui-inputgroup">
               <span class="ui-float-label">
-                <input id="cod" type="text" size="40" pInputText [(ngModel)]="localidad.CodigoPostal" name="cod">
+                <input id="cod" type="text" size="40" pInputText
+                formControlName="codigoPostal" name="cod">
                 <label for="cod">Codigo Postal</label>
               </span>
               <span class="ui-inputgroup-addon">
@@ -55,7 +58,7 @@
    <!--  </div> -->
 
     <p-footer>
-      <button type="button" pButton icon="fa-check" (click)="saveLocalidad(localidad)" label="Guardar" class="ui-button-success ui-state-hover"></button>
+      <button type="submit" pButton icon="fa-check" (click)="saveLocalidad(localidad)" label="Guardar" class="ui-button-success ui-state-hover"></button>
       <button type="button" pButton icon="fa-close" label="Cancelar" class="ui-button-danger"></button>
     </p-footer>
 
