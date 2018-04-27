@@ -55,6 +55,11 @@ export class LocalidadListComponent implements OnInit {
   }
 
 
+  guardarLocalidad(event: Localidad) {
+    this.localidades.push(event);
+    this.msgs = [{severity: 'success', summary: 'Operación Aceptada', detail: `${event.nombre} Creada!`}];
+    }
+
   actualizarLocalidad(localidad: Localidad) {}
 
 

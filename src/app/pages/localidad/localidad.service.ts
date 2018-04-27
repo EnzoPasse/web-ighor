@@ -36,7 +36,7 @@ export class LocalidadService {
 
  crearLocalidad(localidad: Localidad) {
 
-  const url = `${URL_SERVICIO}/localidad/localidad`;
+  const url = `${URL_SERVICIO}/localidad`;
   let body = JSON.stringify(localidad);
 
   return this.http.post(url, body, this.getHttpHeaders())
@@ -46,7 +46,7 @@ export class LocalidadService {
  }
 
  actualizarLocalidad() {
-
+   console.log('AUN NO ACTUALIZO NADA');
  }
 
  borrarLocalidad(localidad: Localidad) {

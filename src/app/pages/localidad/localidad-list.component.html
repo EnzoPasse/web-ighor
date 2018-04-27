@@ -50,7 +50,7 @@
 
 <div *ngIf="localidadSelected" class="animated fadeIn">
   <app-localidad-detail [localidad]="localidadSelected" [displayOption]="true"
-  [tituloOption]= "(nuevo) ? 'Nueva Localidad' : 'Editar Localidad'" ></app-localidad-detail>
+  [tituloOption]= "(nuevo) ? 'Nueva Localidad' : 'Editar Localidad'" (localidadInfo)="guardarLocalidad($event)"></app-localidad-detail>
 </div>
 
 <p-confirmDialog #cd [responsive]="true">
