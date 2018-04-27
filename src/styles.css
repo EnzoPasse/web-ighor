@@ -43,3 +43,14 @@ font-family: "Montserrat", sans-serif;
   border: 10px;
 }
 
+/*****************
+  VALIDADORES
+*****************/
+
+.ng-valid[required],.ng-valid.required  {
+  border-left: 3px solid #42A948; /* green */
+}
+
+.ng-invalid:not(form)  {
+  border-left: 3px solid #a94442; /* red */
+}

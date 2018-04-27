@@ -11,12 +11,14 @@ import { ConfirmationService, Message } from 'primeng/components/common/api';
   styles: []
 })
 export class LocalidadListComponent implements OnInit {
-  // tablaFiltrada: Localidad [];
+
+
   provinciaSelected: Provincia;
   localidadSelected: Localidad;
   localidades: Localidad[];
   cargando: boolean = false;
   msgs: Message[] = [];
+  nuevo: boolean = false;
 
   prov: Provincia = {
     IdProvincia: '3',
@@ -44,10 +46,12 @@ export class LocalidadListComponent implements OnInit {
   selectLocalidad(localidad: Localidad) {
     this.localidadSelected = localidad;
     this.localidadSelected.provincia = this.provinciaSelected;
+    this.nuevo = false;
   }
 
   newLocalidad() {
     this.localidadSelected = new Localidad(null, '', null, this.provinciaSelected );
+    this.nuevo = true;
   }
 
 
