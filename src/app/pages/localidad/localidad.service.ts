@@ -45,8 +45,15 @@ export class LocalidadService {
   );
  }
 
- actualizarLocalidad() {
-   console.log('AUN NO ACTUALIZO NADA');
+ actualizarLocalidad(localidad: Localidad) {
+
+  const url = `${URL_SERVICIO}/localidad/${localidad.IdLocalidad}`;
+  let body = JSON.stringify(localidad);
+
+  return this.http.put(url, body, this.getHttpHeaders())
+  .pipe(
+    catchError(this.alert.handleError('cargarLocalidades', ORIGEN))
+  );
  }
 
  borrarLocalidad(localidad: Localidad) {

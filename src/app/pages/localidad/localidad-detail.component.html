@@ -71,7 +71,7 @@
     <p-footer>
       <button [disabled]="localidadForm.invalid" type="submit" pButton icon="fa-check" (click)="saveLocalidad(localidadForm.value)" label="Guardar"
         class="ui-button-success ui-state-hover"></button>
-      <button type="button" pButton icon="fa-close" label="Cancelar" class="ui-button-danger"></button>
+      <button type="button" pButton icon="fa-close" class="ui-button-danger" (click)=" hideDialog()"  label="Cancelar"></button>
     </p-footer>
 
   </p-dialog>

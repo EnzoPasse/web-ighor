@@ -31,7 +31,7 @@
 
         <p-dataTable #dt [value]="localidades" [rows]="5" [paginator]="true" [pageLinks]="5" [rowsPerPageOptions]="[5,10,20]" [globalFilter]="gb"
           [responsive]="true" [emptyMessage]="'No hay registros para mostrar'" resizableColumns="true"
-          rowHover="true">
+          rowHover="true" [immutable]="false">
 
           <p-column field="IdLocalidad" header="ID" [style]="{'width':'70px', 'text-align':'center'}"></p-column>
           <p-column field="nombre" header="NOMBRE"></p-column>

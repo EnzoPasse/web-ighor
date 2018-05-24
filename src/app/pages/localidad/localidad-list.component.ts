@@ -11,8 +11,6 @@ import { ConfirmationService, Message } from 'primeng/components/common/api';
   styles: []
 })
 export class LocalidadListComponent implements OnInit {
-
-
   provinciaSelected: Provincia;
   localidadSelected: Localidad;
   localidades: Localidad[];
@@ -50,38 +48,63 @@ export class LocalidadListComponent implements OnInit {
   }
 
   newLocalidad() {
-    this.localidadSelected = new Localidad(null, '', null, this.provinciaSelected );
+    this.localidadSelected = new Localidad(null, '', null, this.provinciaSelected);
     this.nuevo = true;
   }
 
-
   guardarLocalidad(event: Localidad) {
-    this.localidades.push(event);
-    this.msgs = [{severity: 'success', summary: 'Operación Aceptada', detail: `${event.nombre} Creada!`}];
+    if (event.IdLocalidad === null) {
+      // this.localidades.push(event);
+      this.localidades = [...this.localidades, event];
+      this.msgs = [
+        {
+          severity: 'success',
+          summary: 'Operación Aceptada',
+          detail: `${event.nombre} Creada!`
+        }
+      ];
+    } else {
+      this.msgs = [
+        {
+          severity: 'success',
+          summary: 'Operación Aceptada',
+          detail: `${event.nombre} Actualizada!`
+        }
+      ];
     }
+  }
 
   actualizarLocalidad(localidad: Localidad) {}
 
-
-
   borrarLocalidad(localidad: Localidad) {
     this.confirmationService.confirm({
-      header: '¿ Estás Seguro?',
+      header: '¿ Estás Seguro ?',
       icon: 'fa-exclamation-circle 2x',
       message: `Estás a punto de borrar la Localidad:
-                 " ${localidad.nombre} " ? `,
+                 "${localidad.nombre}"? `,
       accept: () => {
-        this.localidadService.borrarLocalidad(localidad).
-         subscribe((data: any) => {
-          this.localidades = this.localidades.filter(c => c !== localidad);
-          this.msgs = [{severity: 'error', summary: 'Operación Aceptada', detail: `${localidad.nombre} Eliminada!`}];
-        });
+        this.localidadService
+          .borrarLocalidad(localidad)
+          .subscribe((data: any) => {
+            this.localidades = this.localidades.filter(c => c !== localidad);
+            this.msgs = [
+              {
+                severity: 'error',
+                summary: 'Operación Aceptada',
+                detail: `${localidad.nombre} Eliminada!`
+              }
+            ];
+          });
       },
       reject: () => {
-        this.msgs = [{severity: 'warn', summary: 'Operación Cancelada', detail: `${localidad.nombre} NO Eliminada!`}];
+        this.msgs = [
+          {
+            severity: 'warn',
+            summary: 'Operación Cancelada',
+            detail: `${localidad.nombre} NO Eliminada!`
+          }
+        ];
       }
     });
   }
-
-
 }

@@ -36,24 +36,14 @@ export class LocalidadDetailComponent implements OnInit, OnChanges {
   crearForm() {
     this.localidadForm = this.fb.group({
       nombreProvincia: new FormControl(this.localidad.provincia.nombre),
-      nombreLocalidad: new FormControl(this.localidad.nombre, [
-        Validators.required,
-        Validators.minLength(3)
-      ]),
-      codigoPostal: new FormControl(
-        this.localidad.CodigoPostal,
-        Validators.required
-      )
+      nombreLocalidad: new FormControl(this.localidad.nombre, [Validators.required, Validators.minLength(3)]),
+      codigoPostal: new FormControl(this.localidad.CodigoPostal, Validators.required)
     });
     this.localidadForm.controls['nombreProvincia'].disable();
   }
 
   rebuildForm() {
-    this.localidadForm.reset({
-      nombreProvincia: '',
-      nombreLocalidad: '',
-      codigoPostal: ''
-    });
+    this.localidadForm.reset();
     this.localidadForm.markAsPristine();
     this.localidadForm.markAsUntouched();
     this.localidadForm.controls['nombreProvincia'].disable();
@@ -62,10 +52,10 @@ export class LocalidadDetailComponent implements OnInit, OnChanges {
   ngOnChanges(): void {
     this.display = this.displayOption;
     this.titulo = this.tituloOption;
-    this.crearForm();
+    this.rebuildForm();
   }
 
-  hideDialog($event) {
+  hideDialog() {
     this.display = false;
   }
 
@@ -76,17 +66,14 @@ export class LocalidadDetailComponent implements OnInit, OnChanges {
       this.localidad.nombre = this.localidad.nombre.toLocaleUpperCase();
       this.localidad.CodigoPostal = this.localidadForm.get('codigoPostal').value;
 
-      console.log(this.localidad);
-
       if (this.localidad.IdLocalidad === null) {
         this.localidadService.crearLocalidad(this.localidad).
-              subscribe((data: any) => {
-                this.localidadInfo.emit(this.localidad);
-              });
+          subscribe();
       } else {
-        // HACER ESTO
-        this.localidadService.actualizarLocalidad();
+       this.localidadService.actualizarLocalidad(this.localidad).
+          subscribe();
       }
+      this.localidadInfo.emit(this.localidad);
     }
     this.display = false;
     this.rebuildForm();
