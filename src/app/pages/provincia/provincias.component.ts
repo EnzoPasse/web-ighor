@@ -8,8 +8,8 @@ import {Message} from 'primeng/components/common/api';
 
 import * as _swal from 'sweetalert';
 import { SweetAlert } from 'sweetalert/typings/core';
-import { error } from 'util';
 const swal: SweetAlert = _swal as any;
+import { error } from 'util';
 
 @Component({
   selector: 'app-provincias',

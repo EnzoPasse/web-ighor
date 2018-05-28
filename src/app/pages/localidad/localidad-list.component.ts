@@ -5,6 +5,7 @@ import { Localidad } from './localidad.model';
 
 import { ConfirmationService, Message } from 'primeng/components/common/api';
 
+
 @Component({
   selector: 'app-localidad',
   templateUrl: './localidad-list.component.html',
@@ -38,7 +39,14 @@ export class LocalidadListComponent implements OnInit {
       this.localidades = res.localidades;
       this.provinciaSelected = res.provincia;
       this.cargando = false;
-    });
+    }, error => {
+        this.confirmationService.confirm({
+        header: 'ERROR !',
+        message: `${error}`,
+        accept: () => {},
+        reject: () => {}
+     });
+   });
   }
 
   selectLocalidad(localidad: Localidad) {
@@ -53,7 +61,7 @@ export class LocalidadListComponent implements OnInit {
   }
 
   guardarLocalidad(event: Localidad) {
-    if (event.IdLocalidad === null) {
+    if (this.nuevo) {
       // this.localidades.push(event);
       this.localidades = [...this.localidades, event];
       this.msgs = [
@@ -74,9 +82,7 @@ export class LocalidadListComponent implements OnInit {
     }
   }
 
-  actualizarLocalidad(localidad: Localidad) {}
-
-  borrarLocalidad(localidad: Localidad) {
+ borrarLocalidad(localidad: Localidad) {
     this.confirmationService.confirm({
       header: '¿ Estás Seguro ?',
       icon: 'fa-exclamation-circle 2x',
