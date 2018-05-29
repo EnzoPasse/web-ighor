@@ -34,6 +34,11 @@ export class LocalidadService {
   }
 
 
+  buscarPorTexto(texto: string) { // TODO
+    const url = `${URL_SERVICIO}/localidad/provincia/${texto}`;
+  }
+
+
  crearLocalidad(localidad: Localidad) {
 
   const url = `${URL_SERVICIO}/localidad`;

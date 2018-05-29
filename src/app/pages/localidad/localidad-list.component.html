@@ -7,12 +7,23 @@
   <br> Cargando...
 </div>
 
-
-
+<div class=" row ">
+   <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+      <p-autoComplete [suggestions]="results" (completeMethod)="search($event)" field="nombre" 
+                      placeholder="Buscar Provincia..." [size]= "80" [dropdown]="true"
+                      (onSelect)="cargarLocalidades($event)"
+                      emptyMessage="No existen coincidencias con su busqueda">
+      </p-autoComplete>
+      </div>
+    </div>
+  </div> 
+</div>
 
 <div class="row" animated fadeIn *ngIf="!cargando">
   <div class="col-12">
-    <div class="card">
+    <div class="card" *ngIf="provinciaSelected">
       <div class="card-body">
         <div class="text-right">
           <button (click)="newLocalidad()" class="btn btn-success">
@@ -22,7 +33,7 @@
         </div>
 
         <h3 class="card-title">
-          Localidades Registradas :
+          Localidades Registradas en {{ provinciaSelected.nombre }}:
           <span class="badge bg-secondary">
             <strong>{{ dt.totalRecords }} </strong>
           </span>

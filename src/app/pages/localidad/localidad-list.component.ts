@@ -4,6 +4,8 @@ import { LocalidadService } from './localidad.service';
 import { Localidad } from './localidad.model';
 
 import { ConfirmationService, Message } from 'primeng/components/common/api';
+import { ProvinciaService } from '../../services/service.index';
+
 
 
 @Component({
@@ -13,31 +15,62 @@ import { ConfirmationService, Message } from 'primeng/components/common/api';
 })
 export class LocalidadListComponent implements OnInit {
   provinciaSelected: Provincia;
+  provincias: Provincia[];
   localidadSelected: Localidad;
   localidades: Localidad[];
+  results: Provincia[];
   cargando: boolean = false;
   msgs: Message[] = [];
   nuevo: boolean = false;
 
-  prov: Provincia = {
+ /*  prov: Provincia = {
     IdProvincia: '3',
     nombre: 'Catamarca'
-  } as Provincia;
+  } as Provincia; */
 
   constructor(
     public localidadService: LocalidadService,
-    public confirmationService: ConfirmationService
+    public confirmationService: ConfirmationService,
+    public provinciaService: ProvinciaService
   ) {}
 
-  ngOnInit() {
-    this.cargarLocalidades();
+
+  cargarProvincias() {
+    this.provinciaService.cargarProvincias()
+      .subscribe((res: Provincia[]) => {
+         this.provincias = res;
+      });
   }
 
-  cargarLocalidades() {
+
+  search(event) {
+   let query = event.query;
+   let filtrados: any[] = [];
+    for (let i = 0; i < this.provincias.length; i++) {
+      let provin = this.provincias[i];
+      if ( provin.nombre.toLowerCase().indexOf(query.toLowerCase()) === 0) {
+           filtrados.push(provin);
+      }
+   }
+   this.results = filtrados;
+ }
+
+
+
+
+
+
+  ngOnInit() {
+    this.cargarProvincias();
+    // this.cargarLocalidades();
+  }
+
+  cargarLocalidades(event) {
     this.cargando = true;
-    this.localidadService.cargarLocalidades(this.prov).subscribe((res: any) => {
+    this.provinciaSelected = event;
+    this.localidadService.cargarLocalidades(this.provinciaSelected).subscribe((res: any) => {
       this.localidades = res.localidades;
-      this.provinciaSelected = res.provincia;
+     // this.provinciaSelected = res.provincia;
       this.cargando = false;
     }, error => {
         this.confirmationService.confirm({
@@ -51,7 +84,7 @@ export class LocalidadListComponent implements OnInit {
 
   selectLocalidad(localidad: Localidad) {
     this.localidadSelected = localidad;
-    this.localidadSelected.provincia = this.provinciaSelected;
+   // this.localidadSelected.provincia = this.provinciaSelected;
     this.nuevo = false;
   }
 

@@ -5,7 +5,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-
 // prime ng
 import { TableModule } from 'primeng/components/table/table';
 import { DataTableModule } from 'primeng/components/datatable/datatable';
@@ -14,13 +13,16 @@ import { ProgressSpinnerModule } from 'primeng/components/progressspinner/progre
 import { DialogModule } from 'primeng/components/dialog/dialog';
 import { InputTextModule } from 'primeng/components/inputtext/inputtext';
 import { ConfirmDialogModule } from 'primeng/components/confirmdialog/confirmdialog';
+import { GrowlModule } from 'primeng/components/growl/growl';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 
 // core
 import { LocalidadListComponent } from './localidad-list.component';
-import { LocalidadService } from './localidad.service';
 import { LocalidadDetailComponent } from './localidad-detail.component';
+
+// services
+import { LocalidadService } from './localidad.service';
 import { ConfirmationService } from 'primeng/components/common/api';
-import { GrowlModule } from 'primeng/components/growl/growl';
 
 
 @NgModule({
@@ -37,7 +39,8 @@ import { GrowlModule } from 'primeng/components/growl/growl';
     DialogModule,
     InputTextModule,
     ConfirmDialogModule,
-    GrowlModule
+    GrowlModule,
+    AutoCompleteModule
   ],
   declarations: [LocalidadListComponent, LocalidadDetailComponent],
   providers: [LocalidadService, ConfirmationService]
