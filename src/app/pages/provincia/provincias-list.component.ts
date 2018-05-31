@@ -1,7 +1,9 @@
+
+
 import { Component, OnInit } from '@angular/core';
-import { ProvinciaService } from '../../services/service.index';
 import { Observable } from 'rxjs/Observable';
-import { Provincia } from '../../models/provincia.model';
+import { Provincia } from './provincia.model';
+import { ProvinciaService } from './provincia.service';
 
 import {Message} from 'primeng/components/common/api';
 
@@ -13,10 +15,10 @@ import { error } from 'util';
 
 @Component({
   selector: 'app-provincias',
-  templateUrl: './provincias.component.html',
+  templateUrl: './provincias-list.component.html',
   styles: []
 })
-export class ProvinciasComponent implements OnInit {
+export class ProvinciasListComponent implements OnInit {
 
   msgs: Message[] = [];
 

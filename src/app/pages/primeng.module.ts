@@ -1,18 +1,30 @@
+// ANGULAR
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-// componentes primeng
-import { SidebarModule } from 'primeng/components/sidebar/sidebar';
+// PRIME NG COMPONENTS
+
+/* import { MessageModule } from 'primeng/components/message/message';
+import { MessagesModule } from 'primeng/components/messages/messages';
+import { MessageService } from 'primeng/components/common/messageservice';
+ */
+
 import { InputTextModule } from 'primeng/components/inputtext/inputtext';
 import { ButtonModule } from 'primeng/components/button/button';
-import { CheckboxModule } from 'primeng/components/checkbox/checkbox';
-import { MessageModule } from 'primeng/components/message/message';
-import { MessagesModule } from 'primeng/components/messages/messages';
 import { GrowlModule } from 'primeng/components/growl/growl';
-import { RadioButtonModule } from 'primeng/components/radioButton/radioButton';
-import { CardModule } from 'primeng/card';
-import { MessageService } from 'primeng/components/common/messageservice';
 import { DataTableModule } from 'primeng/components/datatable/datatable';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { ProgressSpinnerModule } from 'primeng/components/progressspinner/progressspinner';
+import { DialogModule } from 'primeng/components/dialog/dialog';
+import { ConfirmDialogModule } from 'primeng/components/confirmdialog/confirmdialog';
+import { CheckboxModule } from 'primeng/components/checkbox/checkbox';
+import { TableModule } from 'primeng/components/table/table';
+
+// PRIMENG SERVICES
+
+import { ConfirmationService } from 'primeng/components/common/api';
+
 
 
 
@@ -22,25 +34,25 @@ import { DataTableModule } from 'primeng/components/datatable/datatable';
     CommonModule,
     InputTextModule,
     ButtonModule,
-    CheckboxModule,
-    MessageModule,
-    MessagesModule,
     GrowlModule,
-    RadioButtonModule,
-    CardModule,
-    DataTableModule
+    DataTableModule,
+    AutoCompleteModule,
+    ProgressSpinnerModule,
+    DialogModule,
+    ConfirmDialogModule,
+    CheckboxModule
     ],
   exports: [
     InputTextModule,
     ButtonModule,
-    CheckboxModule,
-    MessageModule,
-    MessagesModule,
     GrowlModule,
-    RadioButtonModule,
-    CardModule,
-    DataTableModule
+    DataTableModule,
+    AutoCompleteModule,
+    ProgressSpinnerModule,
+    DialogModule,
+    ConfirmDialogModule,
+    CheckboxModule
   ],
-  providers: [MessageService]// settingService
+  providers: [ConfirmationService]// settingService
 })
 export class PrimeNgModule {}

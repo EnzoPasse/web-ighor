@@ -25,15 +25,22 @@ ANCHOS
 .ui-inputtext,
 .ui-growl,
 .ui-autocomplete-items,
-.ui-autocomplete-list-item {
+.ui-autocomplete-list-item,
+.ui-autocomplete>.ui-inputtext {
   font-weight: 300;
   font-family: "Montserrat", sans-serif;
 }
 
-.ui-autocomplete {
-  font-weight: 300;
-  font-family: "Montserrat", sans-serif;
+/***************************************
+ AUTOCOMPLETE
+ ****************************************/
+
+.ui-autocomplete-dropdown{
+  width: 16px; 
+  height: 100%;
+  position: absolute;
 }
+
 
 /***************************************
  DATA TABLE

@@ -2,12 +2,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 import { PagesComponent } from './pages.component';
-import { PruebaComponent } from './prueba/prueba.component';
 import { PageNoFoundComponent } from '../shared/page-no-found/page-no-found.component';
 import { HomeComponent } from './home/home.component';
 import { AccountSettingComponent } from './account-setting/account-setting.component';
 import { UsuarioComponent } from './usuario/usuario.component';
-import { ProvinciasComponent } from './provincia/provincias.component';
+import { ProvinciasListComponent } from './provincia/provincias-list.component';
 import { LocalidadListComponent } from './localidad/localidad-list.component';
 
 const pagesRoutes: Routes = [
@@ -16,11 +15,6 @@ const pagesRoutes: Routes = [
     component: PagesComponent,
     children: [
       { path: '', redirectTo: '/home', pathMatch: 'full' },
-      {
-        path: 'prueba',
-        component: PruebaComponent,
-        data: { titulo: 'Pruebas' }
-      },
       { path: 'home',
         component: HomeComponent,
         data: { titulo: 'Home' } },
@@ -36,7 +30,7 @@ const pagesRoutes: Routes = [
       },
       {
         path: 'provincia',
-        component: ProvinciasComponent,
+        component: ProvinciasListComponent,
         data: { titulo: 'Provincias' }
       },
       {

@@ -1,24 +1,39 @@
+<p-growl openTo="body" [value]="msgs" life="1500">
+</p-growl>
 
-<p-growl openTo="body" [value]="msgs" life="1500"></p-growl>
+<div class="row">
+
+  <div class="col-6">
+    <div class="card" style="padding-bottom: 12px">
+      <div class="card-body">
+        <h3 class="card-title"> Provincia </h3>
+        <div class="ui-fluid">
+          <p-autoComplete [suggestions]="results" (completeMethod)="search($event)" field="nombre" placeholder="Buscar Provincia..."
+            [dropdown]="true" (onSelect)="cargarLocalidades($event)" emptyMessage="No existen coincidencias con su busqueda">
+          </p-autoComplete>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-6">
+    <div class="card" style="height: 130px">
+      <div class="card-body">
+        <div class="alert alert-info" role="alert">
+          <small> Busque o Seleccione la provincia a la cual mostrar sus localidades, 
+          o bien cambie su seleccion cuando lo necesite</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
 
 <div class="text-center" *ngIf="cargando">
   <p-progressSpinner>
   </p-progressSpinner>
   <br> Cargando...
-</div>
-
-<div class=" row ">
-   <div class="col-12">
-    <div class="card">
-      <div class="card-body">
-      <p-autoComplete [suggestions]="results" (completeMethod)="search($event)" field="nombre" 
-                      placeholder="Buscar Provincia..." [size]= "80" [dropdown]="true"
-                      (onSelect)="cargarLocalidades($event)"
-                      emptyMessage="No existen coincidencias con su busqueda">
-      </p-autoComplete>
-      </div>
-    </div>
-  </div> 
 </div>
 
 <div class="row" animated fadeIn *ngIf="!cargando">
@@ -33,9 +48,9 @@
         </div>
 
         <h3 class="card-title">
-          Localidades Registradas en {{ provinciaSelected.nombre }}:
+          Localidades Registradas en <strong>{{ provinciaSelected.nombre }}:</strong>
           <span class="badge bg-secondary">
-            <strong>{{ dt.totalRecords }} </strong>
+            <strong>{{ dt.totalRecords? dt.totalRecords : 0 }} </strong>
           </span>
         </h3>
 
@@ -44,10 +59,9 @@
         <br>
 
         <p-dataTable #dt [value]="localidades" [rows]="5" [paginator]="true" [pageLinks]="5" [rowsPerPageOptions]="[5,10,20]" [globalFilter]="gb"
-          [responsive]="true" [emptyMessage]="'No hay registros para mostrar'" resizableColumns="true"
-          rowHover="true" [immutable]="false">
+          [responsive]="true" [emptyMessage]="'No hay registros para mostrar'" rowHover="true" [immutable]="false">
 
-          <p-column field="IdLocalidad" header="ID" [style]="{'width':'70px', 'text-align':'center'}"></p-column>
+          <p-column field="IdLocalidad" header="ID" [style]="{'width':'100px', 'text-align':'center'}"></p-column>
           <p-column field="nombre" header="NOMBRE"></p-column>
           <p-column field="CodigoPostal" header="CODIGO POSTAL" [style]="{'width':'200px', 'text-align':'center'}"></p-column>
           <p-column header="OPCIONES" [style]="{'width':'200px','text-align':'center'}">
@@ -63,15 +77,15 @@
 </div>
 
 <div *ngIf="localidadSelected" class="animated fadeIn">
-  <app-localidad-detail [localidad]="localidadSelected" [displayOption]="true"
-  [tituloOption]= "(nuevo) ? 'Nueva Localidad' : 'Editar Localidad'" (localidadInfo)="guardarLocalidad($event)"></app-localidad-detail>
+  <app-localidad-detail [localidad]="localidadSelected" [displayOption]="true" [tituloOption]="(nuevo) ? 'Nueva Localidad' : 'Editar Localidad'"
+    (localidadInfo)="guardarLocalidad($event)"></app-localidad-detail>
 </div>
 
 <p-confirmDialog #cd [responsive]="true">
   <p-footer>
     <button type="button" pButton icon="fa-check" class="ui-button-success" label="Aceptar" (click)="cd.accept()"></button>
     <button type="button" pButton icon="fa-close" class="ui-button-danger" label="Cancelar" (click)="cd.reject()"></button>
-</p-footer>
+  </p-footer>
 </p-confirmDialog>
 
 

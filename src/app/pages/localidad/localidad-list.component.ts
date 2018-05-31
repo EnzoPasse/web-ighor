@@ -1,10 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { Provincia } from '../../models/provincia.model';
-import { LocalidadService } from './localidad.service';
-import { Localidad } from './localidad.model';
 
+// angular
+import { Component, OnInit } from '@angular/core';
+// core
+import { Localidad } from './localidad.model';
+import { Provincia } from '../provincia/provincia.model';
+// services
+import { LocalidadService } from './localidad.service';
+import { ProvinciaService } from '../provincia/provincia.service';
+// primeng
 import { ConfirmationService, Message } from 'primeng/components/common/api';
-import { ProvinciaService } from '../../services/service.index';
 
 
 
@@ -23,10 +27,6 @@ export class LocalidadListComponent implements OnInit {
   msgs: Message[] = [];
   nuevo: boolean = false;
 
- /*  prov: Provincia = {
-    IdProvincia: '3',
-    nombre: 'Catamarca'
-  } as Provincia; */
 
   constructor(
     public localidadService: LocalidadService,
@@ -56,13 +56,8 @@ export class LocalidadListComponent implements OnInit {
  }
 
 
-
-
-
-
   ngOnInit() {
     this.cargarProvincias();
-    // this.cargarLocalidades();
   }
 
   cargarLocalidades(event) {
@@ -70,7 +65,6 @@ export class LocalidadListComponent implements OnInit {
     this.provinciaSelected = event;
     this.localidadService.cargarLocalidades(this.provinciaSelected).subscribe((res: any) => {
       this.localidades = res.localidades;
-     // this.provinciaSelected = res.provincia;
       this.cargando = false;
     }, error => {
         this.confirmationService.confirm({
@@ -82,9 +76,9 @@ export class LocalidadListComponent implements OnInit {
    });
   }
 
-  selectLocalidad(localidad: Localidad) {
+  selectLocalidad( localidad: Localidad ) {
     this.localidadSelected = localidad;
-   // this.localidadSelected.provincia = this.provinciaSelected;
+    this.localidadSelected.provincia = this.provinciaSelected;
     this.nuevo = false;
   }
 

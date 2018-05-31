@@ -1,4 +1,5 @@
 // ANGULAR
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -6,14 +7,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // CORE
-import { LocalidadListComponent } from './localidad-list.component';
-import { LocalidadDetailComponent } from './localidad-detail.component';
+import { ProvinciaDetailComponent } from './provincia-detail.component';
+import { ProvinciasListComponent } from './provincias-list.component';
 
 // SERVICES
-import { LocalidadService } from './localidad.service';
+import { ProvinciaService } from './provincia.service';
 
 // PRIMENG
 import { PrimeNgModule } from '../primeng.module';
+
 
 
 
@@ -26,7 +28,10 @@ import { PrimeNgModule } from '../primeng.module';
     BrowserAnimationsModule,
     PrimeNgModule
   ],
-  declarations: [LocalidadListComponent, LocalidadDetailComponent],
-  providers: [LocalidadService]
+  declarations: [
+    ProvinciaDetailComponent,
+    ProvinciasListComponent
+  ],
+  providers: [ProvinciaService]
 })
-export class LocalidadModule {}
+export class ProvinciaModule { }
