@@ -34,9 +34,14 @@ export class LocalidadService {
   }
 
 
+  buscarPorTexto(texto: string) { // TODO
+    const url = `${URL_SERVICIO}/localidad/provincia/${texto}`;
+  }
+
+
  crearLocalidad(localidad: Localidad) {
 
-  const url = `${URL_SERVICIO}/localidad/localidad`;
+  const url = `${URL_SERVICIO}/localidad`;
   let body = JSON.stringify(localidad);
 
   return this.http.post(url, body, this.getHttpHeaders())
@@ -45,8 +50,15 @@ export class LocalidadService {
   );
  }
 
- actualizarLocalidad() {
+ actualizarLocalidad(localidad: Localidad) {
 
+  const url = `${URL_SERVICIO}/localidad/${localidad.IdLocalidad}`;
+  let body = JSON.stringify(localidad);
+
+  return this.http.put(url, body, this.getHttpHeaders())
+  .pipe(
+    catchError(this.alert.handleError('cargarLocalidades', ORIGEN))
+  );
  }
 
  borrarLocalidad(localidad: Localidad) {
