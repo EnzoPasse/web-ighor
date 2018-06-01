@@ -58,8 +58,8 @@ export class ProvinciaService {
     );
   }
 
-  borrarProvincia(id: string) {
-    const url = `${URL_SERVICIO}/provincia/${id}`;
+  borrarProvincia(provincia: Provincia) {
+    const url = `${URL_SERVICIO}/provincia/${provincia.IdProvincia}`;
 
     return this.http.delete(url).pipe(
       map(resp => {
