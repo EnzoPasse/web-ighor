@@ -1,5 +1,5 @@
+import { Provincia } from '../provincia/provincia.model';
 
-import { Provincia } from '../../models/provincia.model';
 
 export class Localidad {
 

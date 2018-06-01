@@ -4,13 +4,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 // core
 import { URL_SERVICIO } from '../../config/config';
-import { Provincia } from '../../models/provincia.model';
+import { Localidad } from './localidad.model';
+import { Provincia } from '../provincia/provincia.model';
+import { AlertService } from '../../services/shared/alert.service';
 
 // rxjs
 import { Observable } from 'rxjs/Observable';
 import { catchError, map } from 'rxjs/operators';
-import { AlertService } from '../../services/shared/alert.service';
-import { Localidad } from './localidad.model';
 
 
 const ORIGEN = 'LocalidadService';
@@ -71,8 +71,6 @@ export class LocalidadService {
   );
 
  }
-
-
 
 
   private getHttpHeaders() {

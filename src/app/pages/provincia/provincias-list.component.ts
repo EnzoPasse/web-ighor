@@ -5,13 +5,8 @@ import { Observable } from 'rxjs/Observable';
 import { Provincia } from './provincia.model';
 import { ProvinciaService } from './provincia.service';
 
-import {Message} from 'primeng/components/common/api';
-
-
-import * as _swal from 'sweetalert';
-import { SweetAlert } from 'sweetalert/typings/core';
-const swal: SweetAlert = _swal as any;
-import { error } from 'util';
+// primeng
+import { ConfirmationService, Message } from 'primeng/components/common/api';
 
 @Component({
   selector: 'app-provincias',
@@ -19,116 +14,127 @@ import { error } from 'util';
   styles: []
 })
 export class ProvinciasListComponent implements OnInit {
-
+  provinciaSelected: Provincia;
+  provincias: Provincia[];
+  cargando: boolean = false;
   msgs: Message[] = [];
+  nuevo: boolean = false;
 
-  public provincias: Provincia[];
-  public cargando: boolean = false;
-  public totalRegistros: number = 0;
-  public editProv: Provincia;
 
-  constructor(public _prov: ProvinciaService) {}
+  constructor(
+    public confirmationService: ConfirmationService,
+    public provinciaService: ProvinciaService
+  ) {}
+
 
   ngOnInit() {
     this.cargarProvincias();
   }
 
-edit(prov: Provincia) {
- this.editProv = prov;
-}
-
   cargarProvincias() {
     this.cargando = true;
-    this._prov.cargarProvincias().subscribe(
-      (resp: any) => {
-        console.log(resp);
-        this.provincias = resp;
-        this.cargando = false;
-        this.totalRegistros = resp.length;
-      },
-      error => {
-        swal('Error', error, 'error');
-      }
-    );
+    this.provinciaService.cargarProvincias()
+      .subscribe((res: Provincia[]) => {
+         this.provincias = res;
+         this.cargando = false;
+    }, error => {
+        this.confirmationService.confirm({
+        header: 'ERROR !',
+        message: `${error}`,
+        accept: () => {},
+        reject: () => {}
+     });
+   });
   }
 
-  actualizarProvincia(provincia: Provincia) {
 
-    if (!provincia) {
-      return;
+  /* search(event) {
+   let query = event.query;
+   let filtrados: any[] = [];
+    for (let i = 0; i < this.provincias.length; i++) {
+      let provin = this.provincias[i];
+      if ( provin.nombre.toLowerCase().indexOf(query.toLowerCase()) === 0) {
+           filtrados.push(provin);
+      }
+   }
+   this.results = filtrados;
+ } */
+
+  /* cargarLocalidades(event) {
+    this.cargando = true;
+    this.provinciaSelected = event;
+    this.localidadService.cargarLocalidades(this.provinciaSelected).subscribe((res: any) => {
+      this.localidades = res.localidades;
+      this.cargando = false;
+    }, error => {
+        this.confirmationService.confirm({
+        header: 'ERROR !',
+        message: `${error}`,
+        accept: () => {},
+        reject: () => {}
+     });
+   });
+  } */
+
+  selectProvincia( provincia: Provincia ) {
+    this.provinciaSelected = provincia;
+    this.nuevo = false;
+  }
+
+  newProvincia() {
+    this.provinciaSelected = new Provincia(null, '');
+    this.nuevo = true;
+  }
+
+  guardarProvincia(event: Provincia) {
+    if (this.nuevo) {
+      // this.localidades.push(event);
+      this.provincias = [...this.provincias, event];
+      this.msgs = [
+        {
+          severity: 'success',
+          summary: 'Operación Aceptada',
+          detail: `${event.nombre} Creada!`
+        }
+      ];
+    } else {
+      this.msgs = [
+        {
+          severity: 'success',
+          summary: 'Operación Aceptada',
+          detail: `${event.nombre} Actualizada!`
+        }
+      ];
     }
-
-    let newProv = { ...provincia, nombre: provincia.nombre.toUpperCase() };
-
-    this._prov.actualizarPronvincia(newProv).subscribe(
-      (resp: Provincia) => {
-         const ix = resp ? this.provincias.findIndex(h => h.IdProvincia === resp.IdProvincia) : -1;
-         if (ix > -1) {
-            this.provincias[ix] = resp;
-         }
-         this.msgs = [];
-          this.msgs.push({severity: 'info', summary: 'Provincia Actualizada', detail: `${resp.nombre}`});
-        // this.cargarProvincias();
-      },
-      error => {
-        swal('Error', error, 'error');
-      });
-       this.editProv = undefined;
   }
 
-  crearProvincia() {
-    swal({
-      title: 'Crear hospital',
-      content: {
-        element: 'input',
-        attributes: {
-          placeholder: 'Introduzca el nombre de la provincia'
-        }
+ borrarProvincia(provincia: Provincia) {
+    this.confirmationService.confirm({
+      header: '¿ Estás Seguro ?',
+      icon: 'fa-exclamation-circle 2x',
+      message: `Estás a punto de borrar la Provincia:
+                 "${provincia.nombre}"? `,
+      accept: () => {
+        this.provinciaService.borrarProvincia(provincia)
+          .subscribe((data: any) => {
+            this.provincias = this.provincias.filter(c => c !== provincia);
+            this.msgs = [
+              {
+                severity: 'error',
+                summary: 'Operación Aceptada',
+                detail: `${provincia.nombre} Eliminada!`
+              }
+            ];
+          });
       },
-      icon: 'info',
-      buttons: ['Cancelar', 'Guardar']
-    }).then((valor: string) => {
-      if (!valor || valor.length === 0) {
-        return;
-      }
-      let newProv: Provincia = {nombre: valor.toUpperCase().trim()} as Provincia;
-      this._prov.crearProvincia(newProv).subscribe(
-        resp => {
-          this.msgs = [];
-          this.msgs.push({severity: 'info', summary: 'Provincia Creada', detail: `${resp.nombre}`});
-
-          this.provincias.push(resp);
-          this.totalRegistros += 1;
-          // this.cargarProvincias();
-        },
-        error => {
-          swal('Error', error, 'error');
-        }
-      );
-    });
-  }
-
-  borrarProvincia(provincia: Provincia) {
-    swal({
-      title: '¿ Estás seguro ?',
-      text: `Estás a punto de borrar ${provincia.nombre}`,
-      icon: 'warning',
-      buttons: ['Cancelar', 'Borrar'],
-      dangerMode: true
-    }).then(borrar => {
-      if (borrar) {
-        this._prov.borrarProvincia(provincia.IdProvincia).subscribe(
-          (borrado: Boolean) => {
-            this.provincias = this.provincias.filter(h => h !== provincia);
-            this.totalRegistros -= 1;
-            this.msgs = [];
-            this.msgs.push({severity: 'info', summary: 'Provincia Eliminada', detail: `${provincia.nombre}`});
-            // this.cargarProvincias();
-          },
-          error => {
-            swal('Error', error, 'error');
+      reject: () => {
+        this.msgs = [
+          {
+            severity: 'warn',
+            summary: 'Operación Cancelada',
+            detail: `${provincia.nombre} NO Eliminada!`
           }
-        );
+        ];
       }
     });
   }
