@@ -1,5 +1,3 @@
-
-
 /***************
  CURSOR
  ***************/
@@ -21,10 +19,28 @@ ANCHOS
 /************************************************
  CAMBIANDO LA FUENTE DE LOS COMPONENTES PRIMENG
  ************************************************/
-.ui-datatable,.ui-paginator,.ui-dialog,.ui-inputtext,.ui-growl{
-font-weight: 300;
-font-family: "Montserrat", sans-serif;
+.ui-datatable,
+.ui-paginator,
+.ui-dialog,
+.ui-inputtext,
+.ui-growl,
+.ui-autocomplete-items,
+.ui-autocomplete-list-item,
+.ui-autocomplete>.ui-inputtext {
+  font-weight: 300;
+  font-family: "Montserrat", sans-serif;
 }
+
+/***************************************
+ AUTOCOMPLETE
+ ****************************************/
+
+.ui-autocomplete-dropdown{
+  width: 16px; 
+  height: 100%;
+  position: absolute;
+}
+
 
 /***************************************
  DATA TABLE
@@ -38,7 +54,7 @@ font-family: "Montserrat", sans-serif;
   font-weight: 300;
   font-family: "Montserrat", sans-serif;
 }
-.ui-cell-data	{
+.ui-cell-data {
   padding: 10px;
   border: 10px;
 }
@@ -47,10 +63,11 @@ font-family: "Montserrat", sans-serif;
   VALIDADORES
 *****************/
 
-.ng-valid[required],.ng-valid.required  {
-  border-left: 3px solid #42A948; /* green */
+.ng-valid[required],
+.ng-valid.required {
+  border-left: 3px solid #42a948; /* green */
 }
 
-.ng-invalid:not(form)  {
+.ng-invalid:not(form) {
   border-left: 3px solid #a94442; /* red */
 }

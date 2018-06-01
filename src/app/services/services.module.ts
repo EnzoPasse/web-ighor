@@ -8,14 +8,13 @@ import { PrimeNgModule } from '../pages/primeng.module';
 import {
   SidebarService,
   SettingsService,
-  AlertService,
-  ProvinciaService
+  AlertService
 } from './service.index';
 
 
 @NgModule({
   imports: [CommonModule, HttpClientModule, PrimeNgModule],
-  providers: [SidebarService, SettingsService, AlertService, ProvinciaService],
+  providers: [SidebarService, SettingsService, AlertService],
   declarations: [],
   exports: []
 })
