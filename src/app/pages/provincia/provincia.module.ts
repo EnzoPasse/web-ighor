@@ -14,7 +14,7 @@ import { ProvinciasListComponent } from './provincias-list.component';
 import { ProvinciaService } from './provincia.service';
 
 // PRIMENG
-import { PrimeNgModule } from '../primeng.module';
+ import { PrimeNgModule } from '../primeng.module';
 
 
 

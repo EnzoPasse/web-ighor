@@ -1,34 +1,31 @@
 <p-growl openTo="body" [value]="msgs" life="1500">
 </p-growl>
 
-<div class="row">
-
-  <div class="col-6">
-    <div class="card" style="padding-bottom: 12px">
-      <div class="card-body">
-        <h3 class="card-title"> Provincia </h3>
-        <div class="ui-fluid">
-          <p-autoComplete [suggestions]="results" (completeMethod)="search($event)" field="nombre" placeholder="Buscar Provincia..."
-            [dropdown]="true" (onSelect)="cargarLocalidades($event)" emptyMessage="No existen coincidencias con su busqueda">
-          </p-autoComplete>
+  <div class="row">
+    <div class="col-6">
+      <div class="card" style="padding-bottom: 12px">
+        <div class="card-body">
+          <h3 class="card-title"> Provincia </h3>
+          <div class="ui-fluid">
+            <p-autoComplete [suggestions]="results" (completeMethod)="search($event)" field="nombre" placeholder="Buscar Provincia..."
+              [dropdown]="true" (onSelect)="cargarLocalidades($event)" emptyMessage="No existen coincidencias con su busqueda">
+            </p-autoComplete>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="col-6">
-    <div class="card" style="height: 130px">
-      <div class="card-body">
-        <div class="alert alert-info" role="alert">
-          <small> Busque o Seleccione la provincia a la cual mostrar sus localidades, 
-          o bien cambie su seleccion cuando lo necesite</small>
+    <div class="col-6">
+      <div class="card" style="height: 130px">
+        <div class="card-body">
+          <div class="alert alert-info" role="alert">
+            <small> Busque o Seleccione la provincia a la cual mostrar sus localidades, o bien cambie su seleccion cuando lo necesite</small>
+          </div>
         </div>
       </div>
     </div>
+
   </div>
-
-</div>
-
 
 <div class="text-center" *ngIf="cargando">
   <p-progressSpinner>
@@ -36,7 +33,7 @@
   <br> Cargando...
 </div>
 
-<div class="row" animated fadeIn *ngIf="!cargando">
+<div class="row" *ngIf="!cargando">
   <div class="col-12">
     <div class="card" *ngIf="provinciaSelected">
       <div class="card-body">
@@ -48,7 +45,8 @@
         </div>
 
         <h3 class="card-title">
-          Localidades Registradas en <strong>{{ provinciaSelected.nombre }}:</strong>
+          Localidades Registradas en
+          <strong>{{ provinciaSelected.nombre }}:</strong>
           <span class="badge bg-secondary">
             <strong>{{ dt.totalRecords? dt.totalRecords : 0 }} </strong>
           </span>
@@ -88,72 +86,3 @@
   </p-footer>
 </p-confirmDialog>
 
-
-<!-- <app-cargando *ngIf="cargando"></app-cargando>
-
-<div class="row" animated fadeIn *ngIf="!cargando">
-  <div class="col-12">
-    <div class="card">
-      <div class="card-body">
-        <div class="text-right">
-          <button (click)="crearLocalidad()" class="btn btn-success">
-            Crear Localidad
-            <i class="fa fa-plus"></i>
-          </button>
-        </div>
-        <h3 class="card-title">
-          Localidades Registradas :
-          <span class="badge bg-secondary">
-            <strong>{{totalRegistros}} </strong>
-          </span>
-        </h3>
-
-        <div [hidden]="!localidades">
-
-          <input  #input type="text" #filtro
-          (keyup)="filtrarTabla(filtro.value)" class="form-control" placeholder=" Buscar Localidad ...">
-          <br>
-
-          <table class="table table-hover">
-            <thead class="thead-dark">
-              <tr>
-                <th class="w150">
-                  <i class="fa fa-key"></i> Id</th>
-                <th>
-                  <i class="fa fa-list-alt"></i> Localidad</th>
-                <th>
-                  <i class="fa fa-ellipsis-h"></i> Opciones</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let item of tablaFiltrada| paginate: {itemsPerPage: 5, currentPage:page, id: '1'} ;let i= index; let l = count">
-                <td>
-                  {{ item.IdLocalidad }}
-                </td>
-                <td>
-                  <span>{{ item.nombre}} </span>
-                </td>
-                <td>
-                  <button (click)="actualizarLocalidad(item)" class="btn btn-primary">
-                    <i class="fa fa-save"></i>
-                  </button>
-                  <button (click)="borrarLocalidad(item)" class="btn btn-danger">
-                    <i class="fa fa-trash-o"></i>
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="text-center">
-            <pagination-controls (pageChange)="page = $event" id="1" maxSize="5" directionLinks="true" autoHide="true" previousLabel=""
-              nextLabel="">
-            </pagination-controls>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</div>
- -->

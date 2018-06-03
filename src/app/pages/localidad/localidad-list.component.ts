@@ -95,7 +95,7 @@ export class LocalidadListComponent implements OnInit {
         {
           severity: 'success',
           summary: 'Operación Aceptada',
-          detail: `${event.nombre} Creada!`
+          detail: `${event.nombre} Creada.`
         }
       ];
     } else {
@@ -103,7 +103,7 @@ export class LocalidadListComponent implements OnInit {
         {
           severity: 'success',
           summary: 'Operación Aceptada',
-          detail: `${event.nombre} Actualizada!`
+          detail: `${event.nombre} Actualizada.`
         }
       ];
     }
@@ -124,19 +124,19 @@ export class LocalidadListComponent implements OnInit {
               {
                 severity: 'error',
                 summary: 'Operación Aceptada',
-                detail: `${localidad.nombre} Eliminada!`
+                detail: `${localidad.nombre} Eliminada.`
               }
             ];
           });
       },
       reject: () => {
-        this.msgs = [
+       /*  this.msgs = [
           {
             severity: 'warn',
             summary: 'Operación Cancelada',
-            detail: `${localidad.nombre} NO Eliminada!`
+            detail: `${localidad.nombre} NO Eliminada.`
           }
-        ];
+        ]; */
       }
     });
   }

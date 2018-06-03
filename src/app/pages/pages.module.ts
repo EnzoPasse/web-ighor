@@ -9,7 +9,6 @@ import { PagesRoutes } from './pages.routes';
 
 // MODULOS
 import { SharedModule } from '../shared/shared.module';
-import { NgxPaginationModule } from 'ngx-pagination';
 
 
 // PAGINAS
@@ -18,7 +17,6 @@ import { HomeComponent } from './home/home.component';
 import { AccountSettingComponent } from './account-setting/account-setting.component';
 import { UsuarioComponent } from './usuario/usuario.component';
 
-import { CargandoComponent } from '../components/cargando/cargando.component';
 
 import { LocalidadModule } from './localidad/localidad.module';
 import { ProvinciaModule } from './provincia/provincia.module';
@@ -29,21 +27,18 @@ import { ProvinciaModule } from './provincia/provincia.module';
     PagesComponent,
     HomeComponent,
     AccountSettingComponent,
-    UsuarioComponent,
-    CargandoComponent
+    UsuarioComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     SharedModule,
     PagesRoutes,
-    NgxPaginationModule,
     ProvinciaModule,
     LocalidadModule
   ],
   exports: [
-    // PagesComponent,
-
+     PagesComponent
   ],
   providers: []
 })

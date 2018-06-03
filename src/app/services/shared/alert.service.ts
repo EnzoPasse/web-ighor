@@ -8,18 +8,6 @@ export class AlertService {
 
   constructor() { }
 
-
-  public msjAvisoFugaz(titulo: string) {
-    swal({
-      title: `${titulo}`,
-      text: ' ',
-      icon: 'success',
-      buttons: [false],
-      timer: 1100
-    });
-  }
-
-
   public handleError(operation: string, origen: string) {
 
     return (err: any) => {

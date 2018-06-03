@@ -7,7 +7,7 @@
 
     <form [formGroup]="localidadForm">
 
-     
+
       <div class="form-group">
         <div class="ui-inputgroup">
           <span class="ui-float-label">
@@ -19,9 +19,9 @@
             </span>
           </div>
         </div>
-     
 
-     
+
+
       <div class="form-group">
         <div class="ui-inputgroup">
           <span class="ui-float-label">
@@ -32,7 +32,7 @@
             <i class="fa fa-tasks"></i>
           </span>
         </div>
-     
+
 
         <small *ngIf="nombreLocalidad.invalid && (nombreLocalidad.dirty || nombreLocalidad.touched)" class="text-danger">
           <div *ngIf="nombreLocalidad?.errors['required'] " class="text-center">
@@ -45,7 +45,7 @@
 
       </div>
 
-     
+
       <div class="form-group">
         <div class="ui-inputgroup">
           <span class="ui-float-label">
@@ -56,7 +56,7 @@
             <i class="fa fa-key"></i>
           </span>
         </div>
-     
+
 
         <small *ngIf="codigoPostal.invalid && (codigoPostal.dirty || codigoPostal.touched)" class="text-danger">
           <div *ngIf="codigoPostal.errors['required']" class="text-center">

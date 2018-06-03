@@ -47,35 +47,6 @@ export class ProvinciasListComponent implements OnInit {
    });
   }
 
-
-  /* search(event) {
-   let query = event.query;
-   let filtrados: any[] = [];
-    for (let i = 0; i < this.provincias.length; i++) {
-      let provin = this.provincias[i];
-      if ( provin.nombre.toLowerCase().indexOf(query.toLowerCase()) === 0) {
-           filtrados.push(provin);
-      }
-   }
-   this.results = filtrados;
- } */
-
-  /* cargarLocalidades(event) {
-    this.cargando = true;
-    this.provinciaSelected = event;
-    this.localidadService.cargarLocalidades(this.provinciaSelected).subscribe((res: any) => {
-      this.localidades = res.localidades;
-      this.cargando = false;
-    }, error => {
-        this.confirmationService.confirm({
-        header: 'ERROR !',
-        message: `${error}`,
-        accept: () => {},
-        reject: () => {}
-     });
-   });
-  } */
-
   selectProvincia( provincia: Provincia ) {
     this.provinciaSelected = provincia;
     this.nuevo = false;
@@ -94,7 +65,7 @@ export class ProvinciasListComponent implements OnInit {
         {
           severity: 'success',
           summary: 'Operación Aceptada',
-          detail: `${event.nombre} Creada!`
+          detail: `${event.nombre} Creada.`
         }
       ];
     } else {
@@ -102,7 +73,7 @@ export class ProvinciasListComponent implements OnInit {
         {
           severity: 'success',
           summary: 'Operación Aceptada',
-          detail: `${event.nombre} Actualizada!`
+          detail: `${event.nombre} Actualizada.`
         }
       ];
     }
@@ -122,7 +93,7 @@ export class ProvinciasListComponent implements OnInit {
               {
                 severity: 'error',
                 summary: 'Operación Aceptada',
-                detail: `${provincia.nombre} Eliminada!`
+                detail: `${provincia.nombre} Eliminada.`
               }
             ];
           });
@@ -132,7 +103,7 @@ export class ProvinciasListComponent implements OnInit {
           {
             severity: 'warn',
             summary: 'Operación Cancelada',
-            detail: `${provincia.nombre} NO Eliminada!`
+            detail: `${provincia.nombre} NO Eliminada.`
           }
         ];
       }
