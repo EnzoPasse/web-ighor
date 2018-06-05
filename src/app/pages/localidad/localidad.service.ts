@@ -35,8 +35,11 @@ export class LocalidadService {
   }
 
 
-  buscarPorTexto(texto: string) { // TODO
-    const url = `${URL_SERVICIO}/localidad/provincia/${texto}`;
+  buscarLocalidadesPorTexto(texto: string) { // TODO
+    const url = `${URL_SERVICIO}/localidad/buscar/${texto}`;
+
+    return this.http.get(url)
+    .pipe( catchError(this.alert.handleError('buscarLocalidadTexto', ORIGEN)));
   }
 
 
@@ -47,7 +50,7 @@ export class LocalidadService {
 
   return this.http.post(url, body, this.getHttpHeaders())
   .pipe(
-    catchError(this.alert.handleError('cargarLocalidades', ORIGEN))
+    catchError(this.alert.handleError('crearLocalidades', ORIGEN))
   );
  }
 
@@ -58,7 +61,7 @@ export class LocalidadService {
 
   return this.http.put(url, body, this.getHttpHeaders())
   .pipe(
-    catchError(this.alert.handleError('cargarLocalidades', ORIGEN))
+    catchError(this.alert.handleError('actualizarLocalidades', ORIGEN))
   );
  }
 

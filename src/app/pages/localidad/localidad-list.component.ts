@@ -1,4 +1,3 @@
-
 // angular
 import { Component, OnInit } from '@angular/core';
 // core
@@ -9,8 +8,6 @@ import { LocalidadService } from './localidad.service';
 import { ProvinciaService } from '../provincia/provincia.service';
 // primeng
 import { ConfirmationService, Message } from 'primeng/components/common/api';
-
-
 
 @Component({
   selector: 'app-localidad',
@@ -27,34 +24,31 @@ export class LocalidadListComponent implements OnInit {
   msgs: Message[] = [];
   nuevo: boolean = false;
 
-
   constructor(
     public localidadService: LocalidadService,
     public confirmationService: ConfirmationService,
     public provinciaService: ProvinciaService
   ) {}
 
-
   cargarProvincias() {
-    this.provinciaService.cargarProvincias()
-      .subscribe((res: Provincia[]) => {
-         this.provincias = res;
-      });
+    this.provinciaService.cargarProvincias().subscribe((res: Provincia[]) => {
+      this.provincias = res;
+    });
   }
 
-
   search(event) {
-   let query = event.query;
-   let filtrados: any[] = [];
-    for (let i = 0; i < this.provincias.length; i++) {
-      let provin = this.provincias[i];
-      if ( provin.nombre.toLowerCase().indexOf(query.toLowerCase()) === 0) {
-           filtrados.push(provin);
+    let query = event.query;
+    let filtrados: any[] = [];
+    if (this.provincias) {
+      for (let i = 0; i < this.provincias.length; i++) {
+        let provin = this.provincias[i];
+        if (provin.nombre.toLowerCase().indexOf(query.toLowerCase()) === 0) {
+          filtrados.push(provin);
+        }
       }
-   }
-   this.results = filtrados;
- }
-
+    }
+    this.results = filtrados;
+  }
 
   ngOnInit() {
     this.cargarProvincias();
@@ -63,27 +57,35 @@ export class LocalidadListComponent implements OnInit {
   cargarLocalidades(event) {
     this.cargando = true;
     this.provinciaSelected = event;
-    this.localidadService.cargarLocalidades(this.provinciaSelected).subscribe((res: any) => {
-      this.localidades = res.localidades;
-      this.cargando = false;
-    }, error => {
+    this.localidadService.cargarLocalidades(this.provinciaSelected).subscribe(
+      (res: any) => {
+        this.localidades = res.localidades;
+        this.cargando = false;
+      },
+      error => {
         this.confirmationService.confirm({
-        header: 'ERROR !',
-        message: `${error}`,
-        accept: () => {},
-        reject: () => {}
-     });
-   });
+          header: 'ERROR !',
+          message: `${error}`,
+          accept: () => {},
+          reject: () => {}
+        });
+      }
+    );
   }
 
-  selectLocalidad( localidad: Localidad ) {
+  selectLocalidad(localidad: Localidad) {
     this.localidadSelected = localidad;
     this.localidadSelected.provincia = this.provinciaSelected;
     this.nuevo = false;
   }
 
   newLocalidad() {
-    this.localidadSelected = new Localidad(null, '', null, this.provinciaSelected);
+    this.localidadSelected = new Localidad(
+      null,
+      '',
+      null,
+      this.provinciaSelected
+    );
     this.nuevo = true;
   }
 
@@ -109,7 +111,7 @@ export class LocalidadListComponent implements OnInit {
     }
   }
 
- borrarLocalidad(localidad: Localidad) {
+  borrarLocalidad(localidad: Localidad) {
     this.confirmationService.confirm({
       header: '¿ Estás Seguro ?',
       icon: 'fa-exclamation-circle 2x',
@@ -130,7 +132,7 @@ export class LocalidadListComponent implements OnInit {
           });
       },
       reject: () => {
-       /*  this.msgs = [
+        /*  this.msgs = [
           {
             severity: 'warn',
             summary: 'Operación Cancelada',

@@ -1,3 +1,79 @@
-<p>
-  sector-detail works!
-</p>
+<div class="row" *ngIf="!cargando">
+
+
+  <p-dialog header= {{titulo}} [(visible)]="display" modal="true" [responsive]="true" [resizable]="true" [minWidth]="300" appendTo="body">
+
+    <br>
+
+    <form [formGroup]="localidadForm">
+
+
+      <div class="form-group">
+        <div class="ui-inputgroup">
+          <span class="ui-float-label">
+              <input id="prov" type="text" pInputText formControlName="nombreProvincia" name="prov" size="40">
+              <label for="prov">Provincia</label>
+            </span>
+            <span class="ui-inputgroup-addon">
+              <i class="fa fa-tasks"></i>
+            </span>
+          </div>
+        </div>
+
+
+
+      <div class="form-group">
+        <div class="ui-inputgroup">
+          <span class="ui-float-label">
+            <input id="nombre" type="text" pInputText formControlName="nombreLocalidad" class="form-control" name="nombreLocalidad" size="40">
+            <label for="nombre">Localidad</label>
+          </span>
+          <span class="ui-inputgroup-addon">
+            <i class="fa fa-tasks"></i>
+          </span>
+        </div>
+
+
+        <small *ngIf="nombreLocalidad.invalid && (nombreLocalidad.dirty || nombreLocalidad.touched)" class="text-danger">
+          <div *ngIf="nombreLocalidad?.errors['required'] " class="text-center">
+            Localidad Requerido!.
+          </div>
+          <div *ngIf="nombreLocalidad?.errors['minlength']" class=" text-center">
+            Al menos 3 letras.
+          </div>
+        </small>
+
+      </div>
+
+
+      <div class="form-group">
+        <div class="ui-inputgroup">
+          <span class="ui-float-label">
+            <input id="cod" type="text" pInputText formControlName="codigoPostal" name="codigoPostal" size="40">
+            <label for="cod">Codigo Postal</label>
+          </span>
+          <span class="ui-inputgroup-addon">
+            <i class="fa fa-key"></i>
+          </span>
+        </div>
+
+
+        <small *ngIf="codigoPostal.invalid && (codigoPostal.dirty || codigoPostal.touched)" class="text-danger">
+          <div *ngIf="codigoPostal.errors['required']" class="text-center">
+            Cod.Postal Requerido!.
+          </div>
+        </small>
+
+      </div>
+
+    </form>
+
+    <p-footer>
+      <button [disabled]="localidadForm.invalid" type="submit" pButton icon="fa-check" (click)="saveLocalidad(localidadForm.value)" label="Guardar"
+        class="ui-button-success ui-state-hover"></button>
+      <button type="button" pButton icon="fa-close" class="ui-button-danger" (click)=" hideDialog()"  label="Cancelar"></button>
+    </p-footer>
+
+  </p-dialog>
+
+</div>

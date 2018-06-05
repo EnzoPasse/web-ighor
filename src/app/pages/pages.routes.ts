@@ -8,6 +8,7 @@ import { AccountSettingComponent } from './account-setting/account-setting.compo
 import { UsuarioComponent } from './usuario/usuario.component';
 import { ProvinciasListComponent } from './provincia/provincias-list.component';
 import { LocalidadListComponent } from './localidad/localidad-list.component';
+import { SectorListComponent } from './sector/sector-list.component';
 
 const pagesRoutes: Routes = [
   {
@@ -37,6 +38,11 @@ const pagesRoutes: Routes = [
         path: 'localidad',
         component: LocalidadListComponent,
         data: { titulo: 'Localidades' }
+      },
+      {
+        path: 'sector',
+        component: SectorListComponent,
+        data: { titulo: 'Sectores' }
       },
       { path: '**', component: PageNoFoundComponent }
     ]

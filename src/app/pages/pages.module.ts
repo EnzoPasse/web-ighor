@@ -20,6 +20,7 @@ import { UsuarioComponent } from './usuario/usuario.component';
 
 import { LocalidadModule } from './localidad/localidad.module';
 import { ProvinciaModule } from './provincia/provincia.module';
+import { SectorModule } from './sector/sector.module';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { ProvinciaModule } from './provincia/provincia.module';
     SharedModule,
     PagesRoutes,
     ProvinciaModule,
-    LocalidadModule
+    LocalidadModule,
+    SectorModule
   ],
   exports: [
      PagesComponent

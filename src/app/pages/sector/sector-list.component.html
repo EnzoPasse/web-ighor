@@ -1,3 +1,89 @@
-<p>
-  sector-list works!
-</p>
+<p-growl openTo="body" [value]="msgs" life="1500">
+</p-growl>
+
+  <div class="row">
+    <div class="col-6">
+      <div class="card" style="padding-bottom: 12px">
+        <div class="card-body">
+          <h3 class="card-title"> Sector </h3>
+          <div class="ui-fluid">
+            <p-autoComplete [suggestions]="results" (completeMethod)="cargarLocalidades($event)" field="provincia.nombre" placeholder="Buscar Localidad..."
+              [dropdown]="true"  [minLength]="3"
+              (onSelect)="cargarSectores($event)" emptyMessage="No existen coincidencias con su busqueda">
+            </p-autoComplete>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-6">
+      <div class="card" style="height: 130px">
+        <div class="card-body">
+          <div class="alert alert-info" role="alert">
+            <small> Busque o Seleccione la <strong>Localiadad</strong> para mostrar sus Sectores, o bien cambie su seleccion cuando lo necesite</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+<div class="text-center" *ngIf="cargando">
+  <p-progressSpinner>
+  </p-progressSpinner>
+  <br> Cargando...
+</div>
+
+<div class="row" *ngIf="!cargando">
+  <div class="col-12">
+    <div class="card" *ngIf="localiadadSelected">
+      <div class="card-body">
+        <div class="text-right">
+          <button (click)="newSector()" class="btn btn-success">
+            Crear Sector
+            <i class="fa fa-plus"></i>
+          </button>
+        </div>
+
+        <h3 class="card-title">
+          Sectores Registradas en
+          <strong>{{ localidadSelected.nombre }}:</strong>
+          <span class="badge bg-secondary">
+            <strong>{{ dt.totalRecords? dt.totalRecords : 0 }} </strong>
+          </span>
+        </h3>
+
+        <input #gb type="text" class="form-control" placeholder=" Buscar Sector ...">
+        <br>
+        <br>
+
+        <p-dataTable #dt [value]="sectores" [rows]="5" [paginator]="true" [pageLinks]="5" [rowsPerPageOptions]="[5,10,20]" [globalFilter]="gb"
+          [responsive]="true" [emptyMessage]="'No hay registros para mostrar'" rowHover="true" [immutable]="false">
+
+          <p-column field="IdCuadrante" header="ID" [style]="{'width':'100px', 'text-align':'center'}"></p-column>
+          <p-column field="nombre" header="NOMBRE"></p-column>
+          <!-- <p-column field="CodigoPostal" header="CODIGO POSTAL" [style]="{'width':'200px', 'text-align':'center'}"></p-column> -->
+          <p-column header="OPCIONES" [style]="{'width':'200px','text-align':'center'}">
+            <ng-template let-sector="rowData" pTemplate="body">
+              <button type="button" pButton icon="fa-pencil" class="ui-button-success" (click)="selectSector(sector)"></button>
+              <button type="button" pButton icon="fa-trash" class="ui-button-danger" (click)="borrarSector(sector)"></button>
+            </ng-template>
+          </p-column>
+        </p-dataTable>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div *ngIf="sectorSelected" class="animated fadeIn">
+  <app-sector-detail [sector]="sectorSelected" [displayOption]="true" [tituloOption]="(nuevo) ? 'Nuevo Sector' : 'Editar Sector'"
+    (sectorInfo)="guardarSector($event)"></app-sector-detail>
+</div> -->
+
+<p-confirmDialog #cd [responsive]="true">
+  <p-footer>
+    <button type="button" pButton icon="fa-check" class="ui-button-success" label="Aceptar" (click)="cd.accept()"></button>
+    <button type="button" pButton icon="fa-close" class="ui-button-danger" label="Cancelar" (click)="cd.reject()"></button>
+  </p-footer>
+</p-confirmDialog>
+

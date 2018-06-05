@@ -11,7 +11,8 @@ export class SidebarService {
        { titulo: 'Home', url: '/home' },
        { titulo: 'Usuarios', url: '/usuario' },
        { titulo: 'Provincias', url: '/provincia' },
-       { titulo: 'Localidades', url: '/localidad' }
+       { titulo: 'Localidades', url: '/localidad' },
+       { titulo: 'Sectores', url: '/sector' }
      ]
   }
   ];
