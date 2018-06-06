@@ -28,9 +28,8 @@ export class SectorListComponent implements OnInit {
     public localidadService: LocalidadService
   ) {}
 
-  cargarLocalidades(event) {
+  buscarLocalidades(event) {
     console.log(event);
-
     this.localidadService.buscarLocalidadesPorTexto(event.query).subscribe((res: Localidad[]) => {
       this.results = res;
       console.log(res);

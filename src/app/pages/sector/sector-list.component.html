@@ -5,11 +5,13 @@
     <div class="col-6">
       <div class="card" style="padding-bottom: 12px">
         <div class="card-body">
-          <h3 class="card-title"> Sector </h3>
+          <h3 class="card-title"> Localidad </h3>
           <div class="ui-fluid">
-            <p-autoComplete [suggestions]="results" (completeMethod)="cargarLocalidades($event)" field="provincia.nombre" placeholder="Buscar Localidad..."
-              [dropdown]="true"  [minLength]="3"
-              (onSelect)="cargarSectores($event)" emptyMessage="No existen coincidencias con su busqueda">
+            <p-autoComplete [suggestions]="results" (completeMethod)="buscarLocalidades($event)" field="nombre" placeholder="Buscar Localidad..."
+              [minLength]="3" (onSelect)="cargarSectores($event)" emptyMessage="No existen coincidencias con su busqueda">
+              <ng-template let-local pTemplate="SelectedItem">
+                 {{local.nombre | lowercase}} - <strong>{{local.provincia.nombre}}</strong>
+              </ng-template>
             </p-autoComplete>
           </div>
         </div>
