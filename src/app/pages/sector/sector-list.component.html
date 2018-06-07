@@ -38,7 +38,7 @@
 
 <div class="row" *ngIf="!cargando">
   <div class="col-12">
-    <div class="card" *ngIf="localiadadSelected">
+    <div class="card" *ngIf="localidadSelected">
       <div class="card-body">
         <div class="text-right">
           <button (click)="newSector()" class="btn btn-success">
@@ -49,7 +49,7 @@
 
         <h3 class="card-title">
           Sectores Registradas en
-          <strong>{{ localidadSelected.nombre }}:</strong>
+         <small> <strong>{{ localidadSelected.nombre }}-{{localidadSelected.provincia.nombre}}:</strong></small>
           <span class="badge bg-secondary">
             <strong>{{ dt.totalRecords? dt.totalRecords : 0 }} </strong>
           </span>

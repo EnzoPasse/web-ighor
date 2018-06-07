@@ -58,9 +58,13 @@ export class SectorListComponent implements OnInit {
   cargarSectores(event) {
     this.cargando = true;
     this.localidadSelected = event;
+    console.log(event);
+
     this.sectorService.cargarSectores(this.localidadSelected).subscribe(
       (res: any) => {
-        this.sectores = res.sectores;
+        this.sectores = res.cuadrantes;
+        console.log(res);
+
         this.cargando = false;
       },
       error => {
