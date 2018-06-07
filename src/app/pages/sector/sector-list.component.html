@@ -22,7 +22,7 @@
       <div class="card" style="height: 130px">
         <div class="card-body">
           <div class="alert alert-info" role="alert">
-            <small> Busque o Seleccione la <strong>Localiadad</strong> para mostrar sus Sectores, o bien cambie su seleccion cuando lo necesite</small>
+              <small> Busque o Seleccione la <strong>Localiadad</strong> para mostrar sus Sectores, o bien cambie su seleccion cuando lo necesite</small>
           </div>
         </div>
       </div>
@@ -49,7 +49,7 @@
 
         <h3 class="card-title">
           Sectores Registradas en
-         <small> <strong>{{ localidadSelected.nombre }}-{{localidadSelected.provincia.nombre}}:</strong></small>
+         <strong>{{ localidadSelected.nombre }} - {{localidadSelected.provincia.nombre}}:</strong>
           <span class="badge bg-secondary">
             <strong>{{ dt.totalRecords? dt.totalRecords : 0 }} </strong>
           </span>
@@ -77,10 +77,10 @@
   </div>
 </div>
 
-<!-- <div *ngIf="sectorSelected" class="animated fadeIn">
+<div *ngIf="sectorSelected" class="animated fadeIn">
   <app-sector-detail [sector]="sectorSelected" [displayOption]="true" [tituloOption]="(nuevo) ? 'Nuevo Sector' : 'Editar Sector'"
     (sectorInfo)="guardarSector($event)"></app-sector-detail>
-</div> -->
+</div>
 
 <p-confirmDialog #cd [responsive]="true">
   <p-footer>

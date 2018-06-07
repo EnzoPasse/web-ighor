@@ -28,37 +28,19 @@ export class SectorListComponent implements OnInit {
     public localidadService: LocalidadService
   ) {}
 
+  ngOnInit() {}
+
   buscarLocalidades(event) {
     console.log(event);
     this.localidadService.buscarLocalidadesPorTexto(event.query).subscribe((res: Localidad[]) => {
       this.results = res;
-      console.log(res);
     });
-  }
-
-/*
-  search(event) {
-    let query = event.query;
-    let filtrados: any[] = [];
-    if (this.localidades) {
-      for (let i = 0; i < this.localidades.length; i++) {
-        let provin = this.localidades[i];
-        if (provin.nombre.toLowerCase().indexOf(query.toLowerCase()) === 0) {
-          filtrados.push(provin);
-        }
-      }
-    }
-    this.results = filtrados;
-  } */
-
-  ngOnInit() {
-   // this.cargarLocalidades();
   }
 
   cargarSectores(event) {
     this.cargando = true;
     this.localidadSelected = event;
-    console.log(event);
+    console.log('SELECTED' + this.localidadSelected);
 
     this.sectorService.cargarSectores(this.localidadSelected).subscribe(
       (res: any) => {
@@ -86,6 +68,7 @@ export class SectorListComponent implements OnInit {
 
   newSector() {
     this.sectorSelected = new Sector(null, '', this.localidadSelected );
+    console.log('Sector SELECTED:' + JSON.stringify(this.sectorSelected));
     this.nuevo = true;
   }
 
@@ -97,7 +80,7 @@ export class SectorListComponent implements OnInit {
         {
           severity: 'success',
           summary: 'Operación Aceptada',
-          detail: `${event.nombre} Creada.`
+          detail: `${event.nombre} Creado.`
         }
       ];
     } else {
@@ -105,7 +88,7 @@ export class SectorListComponent implements OnInit {
         {
           severity: 'success',
           summary: 'Operación Aceptada',
-          detail: `${event.nombre} Actualizada.`
+          detail: `${event.nombre} Actualizado.`
         }
       ];
     }
