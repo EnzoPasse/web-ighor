@@ -36,6 +36,8 @@ export class SectorService {
   crearSector(sector: Sector) {
     const url = `${URL_SERVICIO}/cuadrante`;
     let body = JSON.stringify(sector);
+    console.log('body' + body);
+    
 
     return this.http
       .post(url, body, this.getHttpHeaders())
@@ -43,7 +45,7 @@ export class SectorService {
   }
 
   actualizarSector(sector: Sector) {
-    const url = `${URL_SERVICIO}/sector/${sector.IdCuadrante}`;
+    const url = `${URL_SERVICIO}/cuadrante/${sector.IdCuadrante}`;
     let body = JSON.stringify(sector);
 
     return this.http
@@ -52,7 +54,7 @@ export class SectorService {
   }
 
   borrarSector(sector: Sector) {
-    const url = `${URL_SERVICIO}/sector/${sector.IdCuadrante}`;
+    const url = `${URL_SERVICIO}/cuadrante/${sector.IdCuadrante}`;
     let body = JSON.stringify(sector);
 
     return this.http

@@ -35,8 +35,8 @@ export class SectorDetailComponent implements OnInit, OnChanges {
       nombreLocalidad: new FormControl(''),
       nombreSector: new FormControl('', [Validators.required, Validators.minLength(3)])
     });
-    this.sectorForm.controls['nombreProvincia'].disable();
     this.sectorForm.controls['nombreLocalidad'].disable();
+    this.sectorForm.controls['nombreProvincia'].disable();
     this.cargarDatos();
   }
 
@@ -72,7 +72,7 @@ export class SectorDetailComponent implements OnInit, OnChanges {
     this.rebuildForm();
   }
 
-  saveLocalidad(secto: Sector) {
+  saveSector(secto: Sector) {
     if (this.sectorForm.valid) {
       this.sectorForm.controls['nombreProvincia'].enable();
       this.sectorForm.controls['nombreLocalidad'].enable();
@@ -112,10 +112,7 @@ export class SectorDetailComponent implements OnInit, OnChanges {
   }
 
   // para ponerlo como propiedad del Component y poder hacer el binding con el HTML
-  get nombreLocalidad() {
-    return this.sectorForm.get('nombreLocalidad');
-  }
-  get codigoPostal() {
-    return this.sectorForm.get('codigoPostal');
+  get nombreSector() {
+    return this.sectorForm.get('nombreSector');
   }
 }

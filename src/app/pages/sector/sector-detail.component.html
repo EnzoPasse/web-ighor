@@ -46,14 +46,14 @@
           </span>
         </div>
 
-        <!-- <small *ngIf="nombreSector.invalid && (nombreSector.dirty || nombreSector.touched)" class="text-danger">
+        <small *ngIf="nombreSector.invalid && (nombreSector.dirty || nombreSector.touched)" class="text-danger">
           <div *ngIf="nombreSector?.errors['required'] " class="text-center">
             Sector Requerido!.
           </div>
           <div *ngIf="nombreSector?.errors['minlength']" class=" text-center">
             Al menos 3 letras.
           </div>
-        </small> -->
+        </small>
       </div>
 
       
@@ -61,7 +61,7 @@
     </form>
 
     <p-footer>
-      <button [disabled]="localidadForm.invalid" type="submit" pButton icon="fa-check" (click)="saveLocalidad(localidadForm.value)" label="Guardar"
+      <button [disabled]="sectorForm.invalid" type="submit" pButton icon="fa-check" (click)="saveSector(sectorForm.value)" label="Guardar"
         class="ui-button-success ui-state-hover"></button>
       <button type="button" pButton icon="fa-close" class="ui-button-danger" (click)=" hideDialog()"  label="Cancelar"></button>
     </p-footer>
