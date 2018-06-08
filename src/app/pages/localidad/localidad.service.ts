@@ -44,7 +44,6 @@ export class LocalidadService {
 
 
  crearLocalidad(localidad: Localidad) {
-
   const url = `${URL_SERVICIO}/localidad`;
   let body = JSON.stringify(localidad);
 
@@ -55,7 +54,6 @@ export class LocalidadService {
  }
 
  actualizarLocalidad(localidad: Localidad) {
-
   const url = `${URL_SERVICIO}/localidad/${localidad.IdLocalidad}`;
   let body = JSON.stringify(localidad);
 

@@ -37,7 +37,6 @@ export class SectorService {
     const url = `${URL_SERVICIO}/cuadrante`;
     let body = JSON.stringify(sector);
     console.log('body' + body);
-    
 
     return this.http
       .post(url, body, this.getHttpHeaders())
@@ -47,10 +46,11 @@ export class SectorService {
   actualizarSector(sector: Sector) {
     const url = `${URL_SERVICIO}/cuadrante/${sector.IdCuadrante}`;
     let body = JSON.stringify(sector);
+    console.log('body' + body);
 
     return this.http
       .put(url, body, this.getHttpHeaders())
-      .pipe(catchError(this.alert.handleError('cargarLocalidades', ORIGEN)));
+      .pipe(catchError(this.alert.handleError('actualizarSectores', ORIGEN)));
   }
 
   borrarSector(sector: Sector) {

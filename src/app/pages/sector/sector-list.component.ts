@@ -39,7 +39,7 @@ export class SectorListComponent implements OnInit {
   cargarSectores(event) {
     this.cargando = true;
     this.localidadSelected = event;
-    
+
     this.sectorService.cargarSectores(this.localidadSelected).subscribe(
       (res: any) => {
         this.sectores = res.cuadrantes;
@@ -58,7 +58,8 @@ export class SectorListComponent implements OnInit {
 
   selectSector(sector: Sector) {
     this.sectorSelected = sector;
-    // this.localidadSelected.provincia = this.provinciaSelected;
+    this.sectorSelected.localidad = this.localidadSelected;
+    console.log('SELECT :' + JSON.stringify(this.sectorSelected));
     this.nuevo = false;
   }
 
