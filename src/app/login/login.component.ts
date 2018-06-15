@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
+import { Usuario } from '../models/usuario.model';
+import { UsuarioService } from '../services/service.index';
 
 
 // llamda a un script fuera de angular
@@ -15,14 +18,35 @@ declare function init_plugins();
 })
 export class LoginComponent implements OnInit {
 
-  constructor(public router: Router) { }
+  email: string;
+  recuerdame: boolean = false;
+
+
+  constructor(public usuarioService: UsuarioService,
+              public router: Router) { }
 
   ngOnInit() {
     init_plugins();
+
+    this.email = localStorage.getItem('email') || '';
+    if (this.email.length > 3) {
+      this.recuerdame = true;
+    }
   }
 
-  ingresar() {
-    this.router.navigate(['/home']);
+  ingresar(forma: NgForm) {
+
+    if (forma.invalid) {
+      return;
+    }
+    let usuario = new Usuario(null, forma.value.email, forma.value.password);
+    let aceptado: boolean = false;
+    aceptado = this.usuarioService.login(usuario, this.recuerdame);
+    // .subscribe(correcto => this.router.navigate(['/home']));
+
+    if (aceptado) {
+      this.router.navigate(['/home']);
+    }
   }
 
 }
