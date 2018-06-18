@@ -1,8 +1,9 @@
 
 
-// core
+// guards
+export { LoginGuard } from './guards/login.guard';
 
-// util
+// services
 export { SettingsService } from './settings/settings.service';
 export { SidebarService } from './shared/sidebar.service';
 export { AlertService } from './shared/alert.service';

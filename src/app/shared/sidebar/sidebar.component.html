@@ -20,7 +20,7 @@
               <a routerLinkActive="active" routerLink="/account-setting">Configuracion de Cuenta</a>
             </li>
             <li>
-              <a routerLink="/login">Cerrar Sesión </a>
+              <a (click)="usuarioService.logout()" class="pointer"> Cerrar Sesión </a>
             </li>
           </ul>
         </li>

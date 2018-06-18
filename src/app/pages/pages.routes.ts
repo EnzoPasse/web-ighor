@@ -9,6 +9,7 @@ import { UsuarioComponent } from './usuario/usuario.component';
 import { ProvinciasListComponent } from './provincia/provincias-list.component';
 import { LocalidadListComponent } from './localidad/localidad-list.component';
 import { SectorListComponent } from './sector/sector-list.component';
+import { LoginGuard } from '../services/service.index';
 
 const pagesRoutes: Routes = [
   {
@@ -18,6 +19,7 @@ const pagesRoutes: Routes = [
       { path: '', redirectTo: '/home', pathMatch: 'full' },
       { path: 'home',
         component: HomeComponent,
+        canActivate: [LoginGuard],
         data: { titulo: 'Home' } },
       {
         path: 'account-setting',

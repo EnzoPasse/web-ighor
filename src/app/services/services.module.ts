@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 
 import { PrimeNgModule } from '../pages/primeng.module';
+import { LoginGuard } from './guards/login.guard';
 
 import {
   SidebarService,
@@ -15,7 +16,7 @@ import {
 
 @NgModule({
   imports: [CommonModule, HttpClientModule, PrimeNgModule],
-  providers: [SidebarService, SettingsService, AlertService, UsuarioService],
+  providers: [SidebarService, SettingsService, AlertService, UsuarioService, LoginGuard],
   declarations: [],
   exports: []
 })
