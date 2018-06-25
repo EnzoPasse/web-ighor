@@ -39,9 +39,7 @@ import { SectorModule } from './sector/sector.module';
     LocalidadModule,
     SectorModule
   ],
-  exports: [
-     PagesComponent
-  ],
+  exports: [],
   providers: []
 })
 export class PagesModule {}

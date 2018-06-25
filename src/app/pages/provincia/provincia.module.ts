@@ -24,8 +24,6 @@ import { ProvinciaService } from './provincia.service';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserModule,
-    BrowserAnimationsModule,
     PrimeNgModule
   ],
   declarations: [

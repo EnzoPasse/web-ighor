@@ -10,13 +10,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutes } from './app.routes';
 
 // MODULOS
-import { PagesModule } from './pages/pages.module';
+
 import { ServicesModule } from './services/services.module';
+import { SharedModule } from './shared/shared.module';
 
 
 // COMPONENTES
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
+// import { PagesComponent } from './pages/pages.component';
+// import { PagesModule } from './pages/pages.module';
 
 
 // SERVICIOS
@@ -25,6 +28,7 @@ import { LoginComponent } from './login/login.component';
 @NgModule({
   declarations: [
     AppComponent,
+   // PagesComponent,
     LoginComponent
   ],
   imports: [
@@ -33,8 +37,9 @@ import { LoginComponent } from './login/login.component';
     FormsModule,
     ReactiveFormsModule,
     AppRoutes, // siempre importar primero las rutas y luego el modulo
-    PagesModule,
-    ServicesModule
+    // PagesModule,
+    ServicesModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

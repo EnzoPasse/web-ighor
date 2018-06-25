@@ -22,8 +22,6 @@ import { PrimeNgModule } from '../primeng.module';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserModule,
-    BrowserAnimationsModule,
     PrimeNgModule
   ],
   declarations: [LocalidadListComponent, LocalidadDetailComponent],

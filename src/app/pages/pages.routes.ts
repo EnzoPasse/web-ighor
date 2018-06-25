@@ -15,11 +15,11 @@ const pagesRoutes: Routes = [
   {
     path: '',
     component: PagesComponent,
+    canActivate: [LoginGuard],
     children: [
       { path: '', redirectTo: '/home', pathMatch: 'full' },
       { path: 'home',
         component: HomeComponent,
-        canActivate: [LoginGuard],
         data: { titulo: 'Home' } },
       {
         path: 'account-setting',
