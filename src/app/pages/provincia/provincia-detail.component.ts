@@ -84,7 +84,7 @@ export class ProvinciaDetailComponent implements OnInit, OnChanges {
       this.provincia.nombre = this.provinciaForm.get('nombreProvincia').value;
       this.provincia.nombre = this.provincia.nombre.toLocaleUpperCase();
 
-      if (this.provincia.IdProvincia === null) {
+      if (this.provincia.id === null) {
         this.provinciaService.crearProvincia(this.provincia).subscribe(
           (res: Provincia) => {
             this.provinciaInfo.emit(res);

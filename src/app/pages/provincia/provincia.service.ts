@@ -23,13 +23,12 @@ export class ProvinciaService {
               public alert: AlertService ) {}
 
   cargarProvincias() {
-    const url = `${URL_SERVICIO}/provincia`;
+    const url = `${URL_SERVICIO}/provincia/`;
     return this.http
       .get(url)
       .pipe(
-       // map((res: any) => res),
-        map((res: any) => res.provincias),
-        catchError(this.alert.handleError('cargarProvincias', ORIGEN))
+           map((res: any) => res.provincias),
+           catchError(this.alert.handleError('cargarProvincias', ORIGEN))
       );
   }
 
@@ -47,8 +46,10 @@ export class ProvinciaService {
   }
 
   actualizarPronvincia(data: Provincia) {
-    const url = `${URL_SERVICIO}/provincia/${data.IdProvincia}/`;
-    let body = JSON.stringify(data);
+    const url = `${URL_SERVICIO}/provincia/${data.id}/`;
+    let body = {
+      nombre: JSON.stringify(data.nombre)
+    };
 
     return this.http.put(url, body, this.getHttpHeaders()).pipe(
       map((resp: Provincia) => {
@@ -60,7 +61,7 @@ export class ProvinciaService {
   }
 
   borrarProvincia(provincia: Provincia) {
-    const url = `${URL_SERVICIO}/provincia/${provincia.IdProvincia}/`;
+    const url = `${URL_SERVICIO}/provincia/${provincia.id}/`;
 
     return this.http.delete(url).pipe(
       map(resp => {

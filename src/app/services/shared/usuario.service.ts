@@ -2,11 +2,9 @@ import { Injectable } from '@angular/core';
 import { Usuario } from '../../models/usuario.model';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { LoginComponent } from '../../login/login.component';
 import { URL_SERVICIO } from '../../config/config';
 import { map, catchError } from 'rxjs/operators';
 import { AlertService } from './alert.service';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 
 const ORIGEN = 'UsuarioService';
@@ -16,14 +14,6 @@ export class UsuarioService {
 
   usuario: Usuario;
 
-  USUARIOS = [
-    new Usuario(null, 'enzo.passetti@gmail.com', '123', 'ADMIN_ROLE'),
-    new Usuario(null, 'test1@test', '123', 'USER_ROLE'),
-    new Usuario(null, 'test2@test', '123', 'USER_ROLE'),
-    new Usuario(null, 'test3@test', '123', 'USER_ROLE'),
-    new Usuario(null, 'test4@test', '123', 'USER_ROLE'),
-    new Usuario(null, 'test5@test', '123', 'USER_ROLE'),
-  ];
 
   constructor(public http: HttpClient,
               public router: Router,
@@ -37,21 +27,6 @@ export class UsuarioService {
     } else {
       localStorage.removeItem('email');
     }
-    // TODO: quitar esto y llamar al servicio
-    /* let usuariotest: Usuario[] = null;
-    usuariotest = this.USUARIOS.filter(c => c.email === usuario.email);
-
-    if (usuariotest.length > 0) {
-      this.guardarStorage(usuariotest[0]);
-
-      // console.log('usuarioStorage' + JSON.stringify(usuariotest[0]));
-
-      return true;
-    } else {
-      this.alert.handleError('borrarLocalidades', ORIGEN);
-      return false;
-    } */
-    // fin todo
 
      let url = URL_SERVICIO + '/auth/';
      let usuarioDTO = {
@@ -73,6 +48,7 @@ export class UsuarioService {
   logout() {
 
     localStorage.removeItem('usuario');
+    localStorage.removeItem('token');
     this.usuario = null;
     this.router.navigate(['/login']);
   }

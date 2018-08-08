@@ -41,16 +41,9 @@ export class LoginComponent implements OnInit {
     }
 
     let usuario = new Usuario(null, null, forma.value.email, forma.value.password, null);
-    let aceptado: boolean = false;
     this.usuarioService.login(usuario, this.recuerdame)
      .subscribe(correcto => this.router.navigate(['/home']));
 
-    // console.log('ADENTRO - ACEPTADO:' + aceptado);
-    // console.log('USUARIO:' + JSON.stringify(usuario));
-
-    /* if (aceptado) {
-      this.router.navigate(['/home']);
-    } */
   }
 
 }

@@ -62,7 +62,7 @@
         <p-dataTable #dt [value]="provincias" [rows]="5" [paginator]="true" [pageLinks]="5" [rowsPerPageOptions]="[5,10,20]" [globalFilter]="gb"
           [responsive]="true" [emptyMessage]="'No hay registros para mostrar'" rowHover="true" [immutable]="false">
 
-          <p-column field="IdProvincia" header="ID" [style]="{'width':'100px', 'text-align':'center'}"></p-column>
+          <p-column field="id" header="ID" [style]="{'width':'100px', 'text-align':'center'}"></p-column>
           <p-column field="nombre" header="NOMBRE"></p-column>
           <p-column header="OPCIONES" [style]="{'width':'200px','text-align':'center'}">
             <ng-template let-provincia="rowData" pTemplate="body">
