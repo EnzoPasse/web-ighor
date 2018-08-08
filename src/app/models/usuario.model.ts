@@ -2,12 +2,19 @@
 export class Usuario {
 
   constructor(
-      public nombre: string,
+      public first_name: string,
+      public last_name: string,
       public email: string,
-      public password: string,
-      public role?: string,
-      public img?: string,
-      public _id?: string
+      public password?: string,
+      public token?: string,
+      public role?: Rol,
   ) { }
 
+}
+
+export class Rol {
+  constructor(
+    public iso: string,
+    public name: string
+  ) { }
 }

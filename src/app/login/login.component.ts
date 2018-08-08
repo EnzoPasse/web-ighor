@@ -40,17 +40,17 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    let usuario = new Usuario(null, forma.value.email, forma.value.password);
+    let usuario = new Usuario(null, null, forma.value.email, forma.value.password, null);
     let aceptado: boolean = false;
-    aceptado = this.usuarioService.login(usuario, this.recuerdame);
-    // .subscribe(correcto => this.router.navigate(['/home']));
+    this.usuarioService.login(usuario, this.recuerdame)
+     .subscribe(correcto => this.router.navigate(['/home']));
 
     // console.log('ADENTRO - ACEPTADO:' + aceptado);
     // console.log('USUARIO:' + JSON.stringify(usuario));
 
-    if (aceptado) {
+    /* if (aceptado) {
       this.router.navigate(['/home']);
-    }
+    } */
   }
 
 }

@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { LoginComponent } from '../../login/login.component';
 import { URL_SERVICIO } from '../../config/config';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import { AlertService } from './alert.service';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
@@ -38,7 +38,7 @@ export class UsuarioService {
       localStorage.removeItem('email');
     }
     // TODO: quitar esto y llamar al servicio
-    let usuariotest: Usuario[] = null;
+    /* let usuariotest: Usuario[] = null;
     usuariotest = this.USUARIOS.filter(c => c.email === usuario.email);
 
     if (usuariotest.length > 0) {
@@ -50,18 +50,24 @@ export class UsuarioService {
     } else {
       this.alert.handleError('borrarLocalidades', ORIGEN);
       return false;
-    }
+    } */
     // fin todo
 
-    /* let url = URL_SERVICIO + '/login';
-    return this.http.post(url, usuario).pipe(
+     let url = URL_SERVICIO + '/auth/';
+     let usuarioDTO = {
+       username: usuario.email,
+       password: usuario.password
+     };
+     console.log(usuarioDTO);
+
+    return this.http.post(url, usuarioDTO).pipe(
       map((response: any) => {
-        this.guardarStorage(response.usuario);
+        this.guardarStorage(response);
         return true;
       }),
        catchError(this.alert.handleError('loginUsuario', ORIGEN))
 
-    ); */
+    );
   }
 
   logout() {
@@ -74,6 +80,7 @@ export class UsuarioService {
   guardarStorage(usuario: Usuario) {
 
     localStorage.setItem('usuario', JSON.stringify(usuario));
+    localStorage.setItem('token', JSON.stringify(usuario.token));
     this.usuario = usuario;
 
   }

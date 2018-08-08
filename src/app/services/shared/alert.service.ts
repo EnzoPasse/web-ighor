@@ -5,11 +5,9 @@ import 'rxjs/add/observable/throw';
 
 @Injectable()
 export class AlertService {
-
-  constructor() { }
+  constructor() {}
 
   public handleError(operation: string, origen: string) {
-
     return (err: any) => {
       let errMsg = `Operacion: ${origen}=>${operation}()`;
       console.log(`${errMsg}:`, err);
@@ -21,27 +19,30 @@ export class AlertService {
                     Estado: ${err.statusText}
                     Ubicacion: ${err.url}
                     Detalle: ${err.error.error} `; */
-          switch (err.status) {
-            case 0:
-                errMsg = ` Mensaje: Servidor Inactivo
-                          Estado: ${err.statusText}` ;
-                break;
-            case 400:
-               errMsg = `Motivo: ${err.error.error}
+        switch (err.status) {
+          case 0:
+            errMsg = ` Mensaje: Servidor Inactivo
+                          Estado: ${err.statusText}`;
+            break;
+          case 400:
+            errMsg = `Motivo: ${err.error.error}
                          Mensaje: ${JSON.stringify(err.error.message)}
-                         Origen: ${err.error.path}` ;
-               break;
-            default:
-                    errMsg = `Mensaje: ${ err.error.mensaje }
+                         Origen: ${err.error.path}`;
+            break;
+          case 401:
+            errMsg = `Motivo: ${err.statusText}
+                      Mensaje: ${err.error.detail}`;
+            break;
+          default:
+            errMsg = `Mensaje: ${err.error.mensaje}
                               Estado: ${err.statusText}`;
-          }
+        }
       }
       return Observable.throw(errMsg);
     };
   }
 
-
-   /*
+  /*
 private handleError<T> (operation = 'operation', result?: T) {
   return (error: any): Observable<T> => {
 
@@ -56,6 +57,4 @@ private handleError<T> (operation = 'operation', result?: T) {
   };
 }
  */
-
-
 }

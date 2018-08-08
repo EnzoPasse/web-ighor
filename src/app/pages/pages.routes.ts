@@ -10,6 +10,7 @@ import { ProvinciasListComponent } from './provincia/provincias-list.component';
 import { LocalidadListComponent } from './localidad/localidad-list.component';
 import { SectorListComponent } from './sector/sector-list.component';
 import { LoginGuard } from '../services/service.index';
+import { BarrioListComponent } from './barrio/barrio-list.component';
 
 const pagesRoutes: Routes = [
   {
@@ -45,6 +46,11 @@ const pagesRoutes: Routes = [
         path: 'sector',
         component: SectorListComponent,
         data: { titulo: 'Sectores' }
+      },
+      {
+        path: 'barrio',
+        component: BarrioListComponent,
+        data: { titulo: 'Barrios' }
       },
       { path: '**', component: PageNoFoundComponent }
     ]

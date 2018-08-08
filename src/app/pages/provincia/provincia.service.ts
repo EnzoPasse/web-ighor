@@ -34,7 +34,7 @@ export class ProvinciaService {
   }
 
   crearProvincia(data: Provincia): Observable<Provincia> {
-    const url = `${URL_SERVICIO}/provincia`;
+    const url = `${URL_SERVICIO}/provincia/`;
     let body = JSON.stringify(data);
 
     return this.http.post(url, body, this.getHttpHeaders()).pipe(
@@ -47,7 +47,7 @@ export class ProvinciaService {
   }
 
   actualizarPronvincia(data: Provincia) {
-    const url = `${URL_SERVICIO}/provincia/${data.IdProvincia}`;
+    const url = `${URL_SERVICIO}/provincia/${data.IdProvincia}/`;
     let body = JSON.stringify(data);
 
     return this.http.put(url, body, this.getHttpHeaders()).pipe(
@@ -60,7 +60,7 @@ export class ProvinciaService {
   }
 
   borrarProvincia(provincia: Provincia) {
-    const url = `${URL_SERVICIO}/provincia/${provincia.IdProvincia}`;
+    const url = `${URL_SERVICIO}/provincia/${provincia.IdProvincia}/`;
 
     return this.http.delete(url).pipe(
       map(resp => {

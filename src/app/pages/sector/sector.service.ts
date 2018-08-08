@@ -17,7 +17,15 @@ const ORIGEN = 'SectorService';
 
 @Injectable()
 export class SectorService {
+
   constructor(private http: HttpClient, private alert: AlertService) {}
+  sector = [new Sector('1', 'Sur', new Localidad('1', 'Cordoba', 5014, new Provincia('1', 'Cordoba')))];
+
+
+
+  buscarSectoresPorTexto(arg0: any): any {
+     return Observable.of(this.sector);  }
+
 
   cargarSectores(locali: Localidad) {
     const url = `${URL_SERVICIO}/cuadrante/localidad/${locali.IdLocalidad}`;
