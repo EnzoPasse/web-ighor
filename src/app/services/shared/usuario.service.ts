@@ -13,6 +13,8 @@ const ORIGEN = 'UsuarioService';
 export class UsuarioService {
 
   usuario: Usuario;
+  logueado: boolean = false;
+  token: any;
 
 
   constructor(public http: HttpClient,
@@ -33,11 +35,11 @@ export class UsuarioService {
        username: usuario.email,
        password: usuario.password
      };
-     console.log(usuarioDTO);
 
     return this.http.post(url, usuarioDTO).pipe(
       map((response: any) => {
         this.guardarStorage(response);
+       // this.logueado = false;
         return true;
       }),
        catchError(this.alert.handleError('loginUsuario', ORIGEN))
@@ -50,6 +52,7 @@ export class UsuarioService {
     localStorage.removeItem('usuario');
     localStorage.removeItem('token');
     this.usuario = null;
+    this.token = null;
     this.router.navigate(['/login']);
   }
 
@@ -58,6 +61,7 @@ export class UsuarioService {
     localStorage.setItem('usuario', JSON.stringify(usuario));
     localStorage.setItem('token', JSON.stringify(usuario.token));
     this.usuario = usuario;
+    this.token = usuario.token;
 
   }
 

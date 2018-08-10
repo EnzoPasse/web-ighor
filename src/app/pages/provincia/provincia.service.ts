@@ -35,6 +35,8 @@ export class ProvinciaService {
   crearProvincia(data: Provincia): Observable<Provincia> {
     const url = `${URL_SERVICIO}/provincia/`;
     let body = JSON.stringify(data);
+    console.log('bodyyyy' + body);
+
 
     return this.http.post(url, body, this.getHttpHeaders()).pipe(
       map((resp: Provincia) => {
@@ -48,7 +50,7 @@ export class ProvinciaService {
   actualizarPronvincia(data: Provincia) {
     const url = `${URL_SERVICIO}/provincia/${data.id}/`;
     let body = {
-      nombre: JSON.stringify(data.nombre)
+      nombre: data.nombre
     };
 
     return this.http.put(url, body, this.getHttpHeaders()).pipe(
