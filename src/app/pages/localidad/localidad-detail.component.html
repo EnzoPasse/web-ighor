@@ -59,8 +59,11 @@
 
 
         <small *ngIf="codigoPostal.invalid && (codigoPostal.dirty || codigoPostal.touched)" class="text-danger">
-          <div *ngIf="codigoPostal.errors['required']" class="text-center">
-            Cod.Postal Requerido!.
+          <div *ngIf="codigoPostal?.errors['required']" class="text-center">
+            Codigo Postal Requerido!.
+          </div>
+          <div *ngIf="codigoPostal?.errors['maxlength']" class="text-center">
+            Máximo 10 dígitos.
           </div>
         </small>
 

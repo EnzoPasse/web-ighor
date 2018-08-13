@@ -59,9 +59,9 @@
         <p-dataTable #dt [value]="localidades" [rows]="5" [paginator]="true" [pageLinks]="5" [rowsPerPageOptions]="[5,10,20]" [globalFilter]="gb"
           [responsive]="true" [emptyMessage]="'No hay registros para mostrar'" rowHover="true" [immutable]="false">
 
-          <p-column field="IdLocalidad" header="ID" [style]="{'width':'100px', 'text-align':'center'}"></p-column>
+          <p-column field="id" header="ID" [style]="{'width':'100px', 'text-align':'center'}"></p-column>
           <p-column field="nombre" header="NOMBRE"></p-column>
-          <p-column field="CodigoPostal" header="CODIGO POSTAL" [style]="{'width':'200px', 'text-align':'center'}"></p-column>
+          <p-column field="codigo_postal" header="CODIGO POSTAL" [style]="{'width':'200px', 'text-align':'center'}"></p-column>
           <p-column header="OPCIONES" [style]="{'width':'200px','text-align':'center'}">
             <ng-template let-localidad="rowData" pTemplate="body">
               <button type="button" pButton icon="fa-pencil" class="ui-button-success" (click)="selectLocalidad(localidad)"></button>

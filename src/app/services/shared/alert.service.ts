@@ -24,7 +24,7 @@ export class AlertService {
             errMsg = ` Mensaje: Servidor Inactivo
                           Estado: ${err.statusText}`;
             break;
-          case 400:
+           case 400:
             errMsg = `Motivo: ${err.error.error}
                          Mensaje: ${JSON.stringify(err.error.message)}
                          Origen: ${err.error.path}`;

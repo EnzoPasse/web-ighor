@@ -79,7 +79,7 @@ export class SectorDetailComponent implements OnInit, OnChanges {
       this.sector.nombre = this.sectorForm.get('nombreSector').value;
       this.sector.nombre = this.sector.nombre.toLocaleUpperCase();
 
-      if (this.sector.IdCuadrante === null) {
+      if (this.sector.id === null) {
         this.sectorService.crearSector(this.sector).subscribe(
           (res: Sector) => {
             this.sectorInfo.emit(res);

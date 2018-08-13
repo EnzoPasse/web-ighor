@@ -31,8 +31,10 @@ export class SectorListComponent implements OnInit {
   ngOnInit() {}
 
   buscarLocalidades(event) {
-      this.localidadService.buscarLocalidadesPorTexto(event.query).subscribe((res: Localidad[]) => {
-      this.results = res;
+      this.localidadService.buscarLocalidadesPorTexto(event.query).subscribe((res: any) => {
+      console.log(res);
+      console.log(res.localidades);
+      this.results = res.localidades;
     });
   }
 
@@ -40,7 +42,7 @@ export class SectorListComponent implements OnInit {
     this.cargando = true;
     this.localidadSelected = event;
 
-    this.sectorService.cargarSectores(this.localidadSelected).subscribe(
+    this.localidadService.cargarSectores(this.localidadSelected).subscribe(
       (res: any) => {
         this.sectores = res.cuadrantes;
         this.cargando = false;

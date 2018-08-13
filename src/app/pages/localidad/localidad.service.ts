@@ -36,7 +36,7 @@ export class LocalidadService {
 
 
   buscarLocalidadesPorTexto(texto: string) { // TODO
-    const url = `${URL_SERVICIO}/localidad/buscar/${texto}`;
+    const url = `${URL_SERVICIO}/localidad/?search=${texto}`;
 
     return this.http.get(url)
     .pipe( catchError(this.alert.handleError('buscarLocalidadTexto', ORIGEN)));
@@ -53,10 +53,24 @@ export class LocalidadService {
   );
  }
 
- actualizarLocalidad(localidad: Localidad) {
-  const url = `${URL_SERVICIO}/localidad/${localidad.IdLocalidad}/`;
+
+/** Creando la DOCS
+ * @param localidad de tipo Localidad
+ * @returns un Observable con la instancia Localidad actualizada
+ */
+
+ actualizarLocalidad(localidad: Localidad): Observable<Localidad> {
+  const url = `${URL_SERVICIO}/localidad/${localidad.id}/`;
+  // elimino del objeto el atributo id, por que el back no lo necesita
+  delete localidad.id;
   let body = JSON.stringify(localidad);
 
+/* let body = {
+  codigo_postal: localidad.codigo_postal,
+  nombre: localidad.nombre,
+  provincia: {}
+};
+ */
   return this.http.put(url, body, this.getHttpHeaders())
   .pipe(
     catchError(this.alert.handleError('actualizarLocalidades', ORIGEN))
@@ -64,7 +78,7 @@ export class LocalidadService {
  }
 
  borrarLocalidad(localidad: Localidad) {
-  const url = `${URL_SERVICIO}/localidad/${localidad.IdLocalidad}/`;
+  const url = `${URL_SERVICIO}/localidad/${localidad.id}/`;
   let body = JSON.stringify(localidad);
 
   return this.http.delete(url, this.getHttpHeaders())
@@ -73,6 +87,16 @@ export class LocalidadService {
   );
 
  }
+
+
+ cargarSectores(locali: Localidad) {
+  const url = `${URL_SERVICIO}/localidad/${locali.id}/cuadrantes/`;
+
+  return this.http.get(url).pipe(
+    // map((res: any) => res.localidades),
+    catchError(this.alert.handleError('cargarSectores', ORIGEN))
+  );
+}
 
 
   private getHttpHeaders() {

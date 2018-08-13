@@ -74,6 +74,16 @@ export class ProvinciaService {
     );
   }
 
+  cargarLocalidades(prov: Provincia) {
+    const url = `${URL_SERVICIO}/provincia/${prov.id}/localidades/`;
+
+    return this.http.get(url)
+    .pipe(
+      // map((res: any) => res.localidades),
+      catchError(this.alert.handleError('cargarLocalidades', ORIGEN))
+    );
+  }
+
   private getHttpHeaders() {
     const httpOptions = {
       headers: new HttpHeaders({

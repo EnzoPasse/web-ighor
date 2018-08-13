@@ -26,23 +26,13 @@ export class SectorService {
   buscarSectoresPorTexto(arg0: any): any {
      return Observable.of(this.sector);  }
 
-
-  cargarSectores(locali: Localidad) {
-    const url = `${URL_SERVICIO}/cuadrante/localidad/${locali.IdLocalidad}`;
-
-    return this.http.get(url).pipe(
-      // map((res: any) => res.localidades),
-      catchError(this.alert.handleError('cargarSectores', ORIGEN))
-    );
-  }
-
   /* buscarPorTexto(texto: string) {
     // TODO
     const url = `${URL_SERVICIO}/localidad/buscar/${texto}`;
   } */
 
   crearSector(sector: Sector) {
-    const url = `${URL_SERVICIO}/cuadrante`;
+    const url = `${URL_SERVICIO}/cuadrante/`;
     let body = JSON.stringify(sector);
     console.log('body' + body);
 
@@ -52,7 +42,7 @@ export class SectorService {
   }
 
   actualizarSector(sector: Sector) {
-    const url = `${URL_SERVICIO}/cuadrante/${sector.IdCuadrante}`;
+    const url = `${URL_SERVICIO}/cuadrante/${sector.id}/`;
     let body = JSON.stringify(sector);
     console.log('body' + body);
 
@@ -62,7 +52,7 @@ export class SectorService {
   }
 
   borrarSector(sector: Sector) {
-    const url = `${URL_SERVICIO}/cuadrante/${sector.IdCuadrante}`;
+    const url = `${URL_SERVICIO}/cuadrante/${sector.id}/`;
     let body = JSON.stringify(sector);
 
     return this.http

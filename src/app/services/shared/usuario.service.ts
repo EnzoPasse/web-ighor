@@ -25,6 +25,9 @@ export class UsuarioService {
 
   login(usuario: Usuario, recordar: boolean = false) {
 
+
+
+
     if (recordar) {
       localStorage.setItem('email', usuario.email);
     } else {
@@ -37,6 +40,9 @@ export class UsuarioService {
        username: usuario.email,
        password: usuario.password
      };
+
+     this.intento = true;
+     this.logueado = false;
 
     return this.http.post(url, usuarioDTO).pipe(
       map((response: any) => {

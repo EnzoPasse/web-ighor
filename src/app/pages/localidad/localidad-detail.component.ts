@@ -47,7 +47,7 @@ export class LocalidadDetailComponent implements OnInit, OnChanges {
     this.localidadForm = this.fb.group({
       nombreProvincia: new FormControl(''),
       nombreLocalidad: new FormControl('', [Validators.required, Validators.minLength(3)]),
-      codigoPostal: new FormControl('', Validators.required)
+      codigoPostal: new FormControl('', [Validators.required, Validators.maxLength(10)])
     });
     this.localidadForm.controls['nombreProvincia'].disable();
     this.cargarDatos();
@@ -57,7 +57,7 @@ export class LocalidadDetailComponent implements OnInit, OnChanges {
     this.localidadForm.setValue({
       nombreProvincia: this.localidad.provincia.nombre,
       nombreLocalidad: this.localidad.nombre,
-      codigoPostal: this.localidad.CodigoPostal
+      codigoPostal: this.localidad.codigo_postal
     });
   }
 
@@ -87,9 +87,9 @@ export class LocalidadDetailComponent implements OnInit, OnChanges {
       this.localidadForm.controls['nombreProvincia'].enable();
       this.localidad.nombre = this.localidadForm.get('nombreLocalidad').value;
       this.localidad.nombre = this.localidad.nombre.toLocaleUpperCase();
-      this.localidad.CodigoPostal = this.localidadForm.get('codigoPostal').value;
+      this.localidad.codigo_postal = this.localidadForm.get('codigoPostal').value;
 
-      if (this.localidad.IdLocalidad === null) {
+      if (this.localidad.id === null) {
         this.localidadService.crearLocalidad(this.localidad).subscribe(
           (res: Localidad) => {
             this.localidadInfo.emit(res);
