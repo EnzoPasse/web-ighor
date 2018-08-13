@@ -13,7 +13,8 @@ const ORIGEN = 'UsuarioService';
 export class UsuarioService {
 
   usuario: Usuario;
-  logueado: boolean = false;
+  logueado: boolean = true;
+  intento: boolean = false;
   token: any;
 
 
@@ -29,7 +30,8 @@ export class UsuarioService {
     } else {
       localStorage.removeItem('email');
     }
-
+    this.logueado = false;
+    this.intento = true;
      let url = URL_SERVICIO + '/auth/';
      let usuarioDTO = {
        username: usuario.email,
@@ -39,7 +41,7 @@ export class UsuarioService {
     return this.http.post(url, usuarioDTO).pipe(
       map((response: any) => {
         this.guardarStorage(response);
-       // this.logueado = false;
+        this.logueado = true;
         return true;
       }),
        catchError(this.alert.handleError('loginUsuario', ORIGEN))

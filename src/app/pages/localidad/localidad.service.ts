@@ -25,7 +25,7 @@ export class LocalidadService {
               private alert: AlertService) { }
 
   cargarLocalidades(prov: Provincia) {
-    const url = `${URL_SERVICIO}/localidad/provincia/${prov.IdProvincia}`;
+    const url = `${URL_SERVICIO}/localidad/provincia/${prov.id}/`;
 
     return this.http.get(url)
     .pipe(
@@ -44,7 +44,7 @@ export class LocalidadService {
 
 
  crearLocalidad(localidad: Localidad) {
-  const url = `${URL_SERVICIO}/localidad`;
+  const url = `${URL_SERVICIO}/localidad/`;
   let body = JSON.stringify(localidad);
 
   return this.http.post(url, body, this.getHttpHeaders())
@@ -54,7 +54,7 @@ export class LocalidadService {
  }
 
  actualizarLocalidad(localidad: Localidad) {
-  const url = `${URL_SERVICIO}/localidad/${localidad.IdLocalidad}`;
+  const url = `${URL_SERVICIO}/localidad/${localidad.IdLocalidad}/`;
   let body = JSON.stringify(localidad);
 
   return this.http.put(url, body, this.getHttpHeaders())
@@ -64,7 +64,7 @@ export class LocalidadService {
  }
 
  borrarLocalidad(localidad: Localidad) {
-  const url = `${URL_SERVICIO}/localidad/${localidad.IdLocalidad}`;
+  const url = `${URL_SERVICIO}/localidad/${localidad.IdLocalidad}/`;
   let body = JSON.stringify(localidad);
 
   return this.http.delete(url, this.getHttpHeaders())
