@@ -13,7 +13,8 @@ const ORIGEN = 'UsuarioService';
 export class UsuarioService {
 
   usuario: Usuario;
-  logueado: boolean = false;
+  logueado: boolean = true;
+  intento: boolean = false;
   token: any;
 
 
@@ -23,6 +24,9 @@ export class UsuarioService {
 
 
   login(usuario: Usuario, recordar: boolean = false) {
+
+
+
 
     if (recordar) {
       localStorage.setItem('email', usuario.email);
@@ -36,10 +40,13 @@ export class UsuarioService {
        password: usuario.password
      };
 
+     this.intento = true;
+     this.logueado = false;
+
     return this.http.post(url, usuarioDTO).pipe(
       map((response: any) => {
         this.guardarStorage(response);
-       // this.logueado = false;
+        this.logueado = true;
         return true;
       }),
        catchError(this.alert.handleError('loginUsuario', ORIGEN))

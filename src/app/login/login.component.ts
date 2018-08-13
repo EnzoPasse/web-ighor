@@ -4,7 +4,6 @@ import { NgForm } from '@angular/forms';
 import { Usuario } from '../models/usuario.model';
 import { UsuarioService } from '../services/service.index';
 
-
 // llamda a un script fuera de angular
 // esa funcion se encutra dentro de custom.js
 // esa funcion inicializa los plugins del template
@@ -17,13 +16,11 @@ declare function init_plugins();
   styleUrls: ['./login.components.css']
 })
 export class LoginComponent implements OnInit {
-
   email: string;
   recuerdame: boolean = false;
+  mensajes: any;
 
-
-  constructor(public usuarioService: UsuarioService,
-              public router: Router) { }
+  constructor(public usuarioService: UsuarioService, public router: Router) {}
 
   ngOnInit() {
     init_plugins();
@@ -35,15 +32,20 @@ export class LoginComponent implements OnInit {
   }
 
   ingresar(forma: NgForm) {
-
     if (forma.invalid) {
       return;
     }
 
-    let usuario = new Usuario(null, null, forma.value.email, forma.value.password, null);
+    let usuario = new Usuario(
+      null,
+      null,
+      forma.value.email,
+      forma.value.password,
+      null
+    );
     this.usuarioService.login(usuario, this.recuerdame)
-     .subscribe(correcto => this.router.navigate(['/home']));
-
+      .subscribe((correcto: any) => {
+        this.router.navigate(['/home']);
+      });
   }
-
 }

@@ -4,9 +4,9 @@ import { Provincia } from '../provincia/provincia.model';
 export class Localidad {
 
   constructor(
-    public IdLocalidad: string,
+    public id: string,
     public nombre: string,
-    public CodigoPostal: number,
+    public codigo_postal: number,
     public provincia: Provincia
   ) {}
 

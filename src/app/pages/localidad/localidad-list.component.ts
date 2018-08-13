@@ -57,7 +57,7 @@ export class LocalidadListComponent implements OnInit {
   cargarLocalidades(event) {
     this.cargando = true;
     this.provinciaSelected = event;
-    this.localidadService.cargarLocalidades(this.provinciaSelected).subscribe(
+    this.provinciaService.cargarLocalidades(this.provinciaSelected).subscribe(
       (res: any) => {
         this.localidades = res.localidades;
         this.cargando = false;

@@ -24,15 +24,15 @@ export class LocalidadService {
   constructor(private http: HttpClient,
               private alert: AlertService) { }
 
-  cargarLocalidades(prov: Provincia) {
-    const url = `${URL_SERVICIO}/localidad/provincia/${prov.IdProvincia}`;
+  /* cargarLocalidades(prov: Provincia) {
+    const url = `${URL_SERVICIO}/localidad/provincia/${prov.id}`;
 
     return this.http.get(url)
     .pipe(
       // map((res: any) => res.localidades),
       catchError(this.alert.handleError('cargarLocalidades', ORIGEN))
     );
-  }
+  } */
 
 
   buscarLocalidadesPorTexto(texto: string) { // TODO
@@ -42,7 +42,10 @@ export class LocalidadService {
     .pipe( catchError(this.alert.handleError('buscarLocalidadTexto', ORIGEN)));
   }
 
-
+/**
+ *
+ * @param localidad
+ */
  crearLocalidad(localidad: Localidad) {
   const url = `${URL_SERVICIO}/localidad`;
   let body = JSON.stringify(localidad);
@@ -53,8 +56,13 @@ export class LocalidadService {
   );
  }
 
- actualizarLocalidad(localidad: Localidad) {
-  const url = `${URL_SERVICIO}/localidad/${localidad.IdLocalidad}`;
+/** Creando la DOCS
+ * @param localidad de tipo Localidad
+ * @returns un Observable con la instancia Localidad actualizada
+ */
+
+ actualizarLocalidad(localidad: Localidad): Observable<Localidad> {
+  const url = `${URL_SERVICIO}/localidad/${localidad.id}`;
   let body = JSON.stringify(localidad);
 
   return this.http.put(url, body, this.getHttpHeaders())
@@ -64,7 +72,7 @@ export class LocalidadService {
  }
 
  borrarLocalidad(localidad: Localidad) {
-  const url = `${URL_SERVICIO}/localidad/${localidad.IdLocalidad}`;
+  const url = `${URL_SERVICIO}/localidad/${localidad.id}`;
   let body = JSON.stringify(localidad);
 
   return this.http.delete(url, this.getHttpHeaders())
