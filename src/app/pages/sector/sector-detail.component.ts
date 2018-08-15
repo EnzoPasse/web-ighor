@@ -46,7 +46,6 @@ export class SectorDetailComponent implements OnInit, OnChanges {
       nombreLocalidad: this.sector.localidad.nombre,
       nombreSector: this.sector.nombre
     });
-    console.log(this.sectorForm.value);
   }
 
   rebuildForm() {

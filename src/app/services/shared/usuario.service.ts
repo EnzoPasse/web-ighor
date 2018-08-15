@@ -14,7 +14,6 @@ export class UsuarioService {
 
   usuario: Usuario;
   logueado: boolean = true;
-  intento: boolean = false;
   token: any;
 
 
@@ -25,24 +24,19 @@ export class UsuarioService {
 
   login(usuario: Usuario, recordar: boolean = false) {
 
-
-
+    this.logueado = false;
 
     if (recordar) {
       localStorage.setItem('email', usuario.email);
     } else {
       localStorage.removeItem('email');
     }
-    this.logueado = false;
-    this.intento = true;
      let url = URL_SERVICIO + '/auth/';
      let usuarioDTO = {
        username: usuario.email,
        password: usuario.password
      };
 
-     this.intento = true;
-     this.logueado = false;
 
     return this.http.post(url, usuarioDTO).pipe(
       map((response: any) => {
@@ -51,8 +45,9 @@ export class UsuarioService {
         return true;
       }),
        catchError(this.alert.handleError('loginUsuario', ORIGEN))
-
     );
+    this.logueado = this.logueado ? true : false;
+
   }
 
   logout() {

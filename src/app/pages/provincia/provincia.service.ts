@@ -35,8 +35,6 @@ export class ProvinciaService {
   crearProvincia(data: Provincia): Observable<Provincia> {
     const url = `${URL_SERVICIO}/provincia/`;
     let body = JSON.stringify(data);
-    console.log('bodyyyy' + body);
-
 
     return this.http.post(url, body, this.getHttpHeaders()).pipe(
       map((resp: Provincia) => {

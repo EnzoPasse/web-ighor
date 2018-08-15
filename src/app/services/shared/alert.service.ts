@@ -12,27 +12,24 @@ export class AlertService {
       let errMsg = `Operacion: ${origen}=>${operation}()`;
       console.log(`${errMsg}:`, err);
       if (err instanceof HttpErrorResponse) {
-        console.log(err);
-        // you could extract more info about the error if you want, e.g.:
-        /* errMsg += `
-                    Mensaje:${ err.error.mensaje}
-                    Estado: ${err.statusText}
-                    Ubicacion: ${err.url}
-                    Detalle: ${err.error.error} `; */
+
         switch (err.status) {
           case 0:
             errMsg = ` Mensaje: Servidor Inactivo
                           Estado: ${err.statusText}`;
             break;
+
            case 400:
-            errMsg = `Motivo: ${err.error.error}
-                         Mensaje: ${JSON.stringify(err.error.message)}
-                         Origen: ${err.error.path}`;
+            errMsg = `
+                  ${err.error.non_field_errors}
+                  `;
             break;
+
           case 401:
             errMsg = `Motivo: ${err.statusText}
                       Mensaje: ${err.error.detail}`;
             break;
+
           default:
             errMsg = `Mensaje: ${err.error.mensaje}
                               Estado: ${err.statusText}`;

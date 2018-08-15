@@ -18,7 +18,7 @@ declare function init_plugins();
 export class LoginComponent implements OnInit {
   email: string;
   recuerdame: boolean = false;
-  mensajes: any;
+  msjError: any;
 
   constructor(public usuarioService: UsuarioService, public router: Router) {}
 
@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit {
       return;
     }
 
+
     let usuario = new Usuario(
       null,
       null,
@@ -46,6 +47,10 @@ export class LoginComponent implements OnInit {
     this.usuarioService.login(usuario, this.recuerdame)
       .subscribe((correcto: any) => {
         this.router.navigate(['/home']);
-      });
+      }, error => this.msjError = <any>error);
+     /*  setTimeout(() => {
+        forma.controls.password.markAsUntouched();
+       } , 5000 ); */
+
   }
 }
