@@ -1,17 +1,12 @@
 // angular
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
 // core
 import { URL_SERVICIO } from '../../config/config';
-import { Provincia } from '../provincia/provincia.model';
 import { AlertService } from '../../services/shared/alert.service';
-import { Localidad } from '../localidad/localidad.model';
 import { Sector } from './sector.model';
-
 // rxjs
-import { Observable } from 'rxjs/Observable';
-import { catchError, map } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 
 const ORIGEN = 'SectorService';
 
@@ -19,12 +14,10 @@ const ORIGEN = 'SectorService';
 export class SectorService {
 
   constructor(private http: HttpClient, private alert: AlertService) {}
-  sector = [new Sector('1', 'Sur', new Localidad('1', 'Cordoba', 5014, new Provincia('1', 'Cordoba')))];
 
 
 
-  buscarSectoresPorTexto(arg0: any): any {
-     return Observable.of(this.sector);  }
+  buscarSectoresPorTexto(texto: string) { }
 
   /* buscarPorTexto(texto: string) {
     // TODO

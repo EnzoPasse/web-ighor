@@ -3,9 +3,9 @@ import { Sector } from '../sector/sector.model';
 export class Barrio {
 
   constructor(
-    public IdBarrio: string,
+    public id: string,
     public nombre: string,
-    public CodigoPostal: string,
+    public codigo_postal: string,
     public sector: Sector
   ) {}
 }

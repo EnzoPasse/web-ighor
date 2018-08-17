@@ -1,21 +1,63 @@
+// angular
 import { Injectable } from '@angular/core';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
+// core
 import { Barrio } from './barrio.model';
-import { Sector } from '../sector/sector.model';
-import { Localidad } from '../localidad/localidad.model';
-import { Provincia } from '../provincia/provincia.model';
-import { Observable } from 'rxjs/Observable';
+import { URL_SERVICIO } from '../../config/config';
+import { AlertService } from '../../services/service.index';
+// rxjs
+import { catchError } from 'rxjs/operators';
+
+const ORIGEN = 'BarrioService';
 
 @Injectable()
 export class BarrioService {
 
-  // tslint:disable-next-line:max-line-length
-   barrios = [new Barrio('1' , 'San Pablo', '5014', new Sector('1', 'Sur', new Localidad('1', 'Cordoba', 5014, new Provincia('1', 'Cordoba'))))];
+  constructor(private http: HttpClient, private alert: AlertService) {}
 
-  borrarBarrio(arg0: any): any {
-    throw new Error('Method not implemented.');
+  cargarBarrios() {
+    let url = `${URL_SERVICIO}/barrio`;
+
+    return this.http
+     .get(url, this.getHttpHeaders())
+     .pipe(catchError(this.alert.handleError('cargarBarrios', ORIGEN)));
   }
-  cargarBarrios(arg0: any): any {
-    return Observable.of(this.barrios);
+
+
+
+  crearBarrio(barrio: Barrio) {
+    let url = `${URL_SERVICIO}/barrio/`;
+    let body = JSON.stringify(barrio);
+
+    return this.http
+      .post(url, body, this.getHttpHeaders())
+      .pipe(catchError(this.alert.handleError('crearBarrios', ORIGEN)));
   }
-  constructor() { }
+
+  actualizarBarrio(barrio: Barrio) {
+    let url = `${URL_SERVICIO}/barrio/${barrio.id}/`;
+    let body = JSON.stringify(barrio);
+
+    return this.http
+      .put(url, body, this.getHttpHeaders())
+      .pipe(catchError(this.alert.handleError('actualizarBarrios', ORIGEN)));
+  }
+
+  borrarBarrio(barrio: Barrio) {
+    let url = `${URL_SERVICIO}/barrio/${barrio.id}/`;
+    let body = JSON.stringify(barrio);
+
+    return this.http
+      .delete(url, this.getHttpHeaders())
+      .pipe(catchError(this.alert.handleError('borrarBarrios', ORIGEN)));
+  }
+
+  private getHttpHeaders() {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json; charset=UTF-8'
+      })
+    };
+    return httpOptions;
+  }
 }

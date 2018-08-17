@@ -28,18 +28,19 @@ export class BarrioListComponent implements OnInit {
   ngOnInit() {}
 
   buscarSectores(event) {
-    this.sectorService
-      .buscarSectoresPorTexto(event.query).subscribe((res: Sector[]) => {
+    /* this.sectorService
+      .buscarSectoresPorTexto(event.query)
+        .subscribe((res: Sector[]) => {
         console.log(res);
         this.sectores = res;
-      });
+      }); */
   }
 
   cargarBarrios(event) {
     this.cargando = true;
     this.barrioSelected = event;
 
-    this.barrioService.cargarBarrios(this.barrioSelected).subscribe(
+    this.barrioService.cargarBarrios().subscribe(
       (res: any) => {
         this.barrios = res.barrios;
         this.cargando = false;
