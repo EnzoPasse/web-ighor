@@ -17,12 +17,12 @@ export class SectorService {
 
 
 
-  buscarSectoresPorTexto(texto: string) { }
+  buscarSectoresPorTexto(texto: string) {
 
-  /* buscarPorTexto(texto: string) {
-    // TODO
-    const url = `${URL_SERVICIO}/localidad/buscar/${texto}`;
-  } */
+    const url = `${URL_SERVICIO}/cuadrante/?search=${texto}`;
+    return this.http.get(url)
+        .pipe(catchError(this.alert.handleError('buscarcuadranteTexto', ORIGEN)));
+  }
 
   crearSector(sector: Sector) {
     const url = `${URL_SERVICIO}/cuadrante/`;
@@ -52,6 +52,14 @@ export class SectorService {
       .delete(url, this.getHttpHeaders())
       .pipe(catchError(this.alert.handleError('borrarLocalidades', ORIGEN)));
   }
+
+
+cargarBarrios(sector: Sector) {
+  const url = `${URL_SERVICIO}/cuadrante/${sector.id}/barrios/`;
+
+  return this.http.get(url)
+  .pipe(catchError(this.alert.handleError('cargarBarrios', ORIGEN)));
+}
 
   private getHttpHeaders() {
     const httpOptions = {

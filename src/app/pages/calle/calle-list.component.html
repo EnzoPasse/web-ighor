@@ -1,0 +1,94 @@
+<p-growl openTo="body" [value]="msgs" life="1500">
+</p-growl>
+
+  <div class="row">
+    <div class="col-8">
+      <div class="card" style="padding-bottom: 12px">
+        <div class="card-body">
+          <h3 class="card-title"> Barrio </h3>
+          <div class="ui-fluid">
+            <p-autoComplete [suggestions]="barrios" (completeMethod)="buscarBarrios($event)" field="nombre" placeholder="Buscar Barrio ..."
+              [minLength]="3" (onSelect)="cargarCalles($event)" emptyMessage="No existen coincidencias con su busqueda">
+              <ng-template let-sect pTemplate="SelectedItem">
+               {{sect.cuadrante.localidad.provincia.nombre}} - {{sect.cuadrante.localidad.nombre}} <small>({{sect.cuadrante.nombre}})</small> - <strong>{{ sect.nombre }}</strong>
+              </ng-template>
+            </p-autoComplete>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-4">
+      <div class="card" style="height: 130px">
+        <div class="card-body">
+          <div class="alert alert-info" role="alert">
+              <small> Busque o Seleccione el <strong>Barrio</strong> para mostrar sus Calles, o bien cambie su seleccion cuando lo necesite</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+<div class="text-center" *ngIf="cargando">
+  <p-progressSpinner>
+  </p-progressSpinner>
+  <br> Cargando...
+</div>
+
+<div class="row" *ngIf="!cargando">
+  <div class="col-12">
+    <div class="card" *ngIf="barrioSelected">
+      <div class="card-body">
+        <div class="text-right">
+          <button (click)="newCalle()" class="btn btn-success">
+            Crear Calle
+            <i class="fa fa-plus"></i>
+          </button>
+        </div>
+
+        <h3 class="card-title">
+         Calles Registradas en
+         <strong>{{barrioSelected.cuadrante.localidad.provincia.nombre}} - {{ barrioSelected.cuadrante.localidad.nombre }} <span><small>({{barrioSelected.cuadrante.nombre | lowercase }})</small></span> - {{ barrioSelected.nombre }}  :</strong>
+          <span class="badge bg-secondary">
+            <strong>{{ dt.totalRecords? dt.totalRecords : 0 }} </strong>
+          </span>
+        </h3>
+
+        <input #gb type="text" class="form-control" placeholder=" Buscar Barrio ...">
+        <br>
+        <br>
+
+        <p-dataTable #dt [value]="calles" [rows]="5" [paginator]="true" [pageLinks]="5" [rowsPerPageOptions]="[5,10,20]" [globalFilter]="gb"
+          [responsive]="true" [emptyMessage]="'No hay registros para mostrar'" rowHover="true" [immutable]="false">
+
+          <!-- <p-column field="id" header="ID" [style]="{'width':'75px', 'text-align':'center'}"></p-column> -->
+          <p-column field="calle.nombre" header="NOMBRE" [style]="{'width':'200px', 'text-align':'center'}"></p-column>
+          <p-column field="altura_desde" header="DESDE" [style]="{'width':'75px', 'text-align':'center'}"></p-column>
+          <p-column field="altura_hasta" header="HASTA" [style]="{'width':'75px', 'text-align':'center'}"></p-column>
+          <p-column field="plano" header="PLANO" [style]="{'width':'150px', 'text-align':'center'}"></p-column>
+          <p-column field="ubicacion" header="UBICACION" [style]="{'width':'150px', 'text-align':'center'}"></p-column>
+          <p-column header="OPCIONES" [style]="{'width':'200px','text-align':'center'}">
+            <ng-template let-calle="rowData" pTemplate="body">
+              <button type="button" pButton icon="fa-pencil" class="ui-button-success" (click)="selectCalle(calle)"></button>
+              <button type="button" pButton icon="fa-trash" class="ui-button-danger" (click)="borrarCalle(calle)"></button>
+            </ng-template>
+          </p-column>
+        </p-dataTable>
+      </div>
+    </div>
+  </div>
+</div>
+
+ <div *ngIf="calleSelected" class="animated fadeIn">
+  <app-calle-detail [calle]="calleSelected" [displayOption]="true" [tituloOption]="(nuevo) ? 'Nueva Calle' : 'Editar Calle'"
+    (calleInfo)="guardarCalle($event)"></app-calle-detail>
+</div>
+
+<p-confirmDialog #cd [responsive]="true">
+  <p-footer>
+    <button type="button" pButton icon="fa-check" class="ui-button-success" label="Aceptar" (click)="cd.accept()"></button>
+    <button type="button" pButton icon="fa-close" class="ui-button-danger" label="Cancelar" (click)="cd.reject()"></button>
+  </p-footer>
+</p-confirmDialog>
+

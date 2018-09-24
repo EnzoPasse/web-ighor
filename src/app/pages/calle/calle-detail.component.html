@@ -1,0 +1,192 @@
+<div class="row" *ngIf="!cargando">
+
+
+  <p-dialog header={{titulo}} [(visible)]="display" modal="true" [responsive]="true" [resizable]="true" appendTo="body">
+
+    <br>
+
+    <form [formGroup]="calleForm">
+
+
+      <div class="ui-g ui-fluid">
+        <div class="ui-md-6">
+          <div class="ui-inputgroup">
+            <span class="ui-float-label">
+              <input id="prov" type="text" pInputText formControlName="nombreProvincia" name="prov">
+              <label for="prov">Provincia</label>
+            </span>
+            <span class="ui-inputgroup-addon">
+              <i class="fa fa-tasks"></i>
+            </span>
+          </div>
+        </div>
+
+        <div class="ui-md-6">
+          <div class="ui-inputgroup">
+            <span class="ui-float-label">
+              <input id="localidad" type="text" pInputText formControlName="nombreLocalidad" class="form-control" name="localidad">
+              <label for="localidad">Localidad</label>
+            </span>
+            <span class="ui-inputgroup-addon">
+              <i class="fa fa-tasks"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="ui-g ui-fluid mt10">
+        <div class="ui-md-6">
+          <div class="ui-inputgroup">
+            <span class="ui-float-label">
+              <input id="sector" type="text" pInputText formControlName="nombreSector" class="form-control" name="sector">
+              <label for="sector">Sector</label>
+            </span>
+            <span class="ui-inputgroup-addon">
+              <i class="fa fa-tasks"></i>
+            </span>
+          </div>
+        </div>
+
+        <div class="ui-md-6">
+          <div class="ui-inputgroup">
+            <span class="ui-float-label">
+              <input id="barrio" type="text" pInputText formControlName="nombreBarrio" class="form-control" name="barrio">
+              <label for="barrio">Barrio</label>
+            </span>
+            <span class="ui-inputgroup-addon">
+              <i class="fa fa-tasks"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="ui-md-12">
+        <p-autoComplete formControlName="nombreCalle" size="40" [required]="true" [suggestions]="callesSimples"
+          (completeMethod)="buscarCallesSimples($event)" field="nombre" placeholder="Nombre Calle ..." [minLength]="3"
+          (onSelect)="calleSimpleSelected($event)" emptyMessage="No existen coincidencias con su busqueda" id="nombreCalle"
+          name="nombreCalle" forceSelection="true">
+          <ng-template let-sect pTemplate="SelectedItem">
+            <strong>{{ sect.nombre }}</strong>
+          </ng-template>
+        </p-autoComplete>
+        <small *ngIf="nombreCalle.invalid && (nombreCalle.dirty || nombreCalle.touched) " class="text-danger">
+          <div *ngIf="nombreCalle?.errors['required'] || nombreCalle.errors['minlength'] " class="text-center">
+            Calle Requerido!.
+          </div>
+        </small>
+      </div>
+
+      <div class="ui-g ui-md-4">
+        <p-checkbox label="Nomenclado" name="nomenclado" [(ngModel)]="nomenclado" binary="true" [ngModelOptions]="{standalone: true}"></p-checkbox>
+      </div>
+
+
+      <div *ngIf="nomenclado">
+        <div class="ui-g ui-fluid mt10">
+          <div class="ui-md-6">
+            <div class="ui-inputgroup">
+              <span class="ui-float-label">
+                <input id="altura_desde" type="text" pInputText formControlName="altura_desde" class="form-control"
+                  name="altura_desde" pKeyFilter="pint">
+                <label for="desde">Altura Desde</label>
+              </span>
+              <span class="ui-inputgroup-addon">
+                <i class="fa fa-tasks"></i>
+              </span>
+            </div>
+            <small *ngIf="altura_desde.invalid && (altura_desde.dirty || altura_desde.touched)" class="text-danger">
+              <div *ngIf="altura_desde?.errors['required'] " class="text-center">
+                Requerido!.
+              </div>
+            </small>
+          </div>
+
+          <div class="ui-md-6">
+            <div class="ui-inputgroup">
+              <span class="ui-float-label">
+                <input id="altura_hasta" type="text" pInputText formControlName="altura_hasta" class="form-control"
+                  name="altura_hasta" pKeyFilter="pint">
+                <label for="hasta">Altura Hasta</label>
+              </span>
+              <span class="ui-inputgroup-addon">
+                <i class="fa fa-tasks"></i>
+              </span>
+            </div>
+            <small *ngIf="altura_hasta.invalid && (altura_hasta.dirty || altura_hasta.touched)" class="text-danger">
+              <div *ngIf="altura_hasta?.errors['required'] " class="text-center">
+                Requerido!.
+              </div>
+            </small>
+          </div>
+        </div>
+
+        <div class="ui-g ui-fluid mt10">
+          <div class="ui-md-6">
+            <div class="ui-inputgroup">
+              <span class="ui-float-label">
+                <input id="plano" type="text" pInputText formControlName="plano" class="form-control" name="plano">
+                <label for="plano">Plano</label>
+              </span>
+              <span class="ui-inputgroup-addon">
+                <i class="fa fa-tasks"></i>
+              </span>
+            </div>
+          </div>
+
+          <div class="ui-md-6">
+            <div class="ui-inputgroup">
+              <span class="ui-float-label">
+                <input id="ubicacion" type="text" pInputText formControlName="ubicacion" class="form-control" name="ubicacion">
+                <label for="ubicacion">Ubicacion</label>
+              </span>
+              <span class="ui-inputgroup-addon">
+                <i class="fa fa-tasks"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="ui-g ui-md-8 ui-g-offset-2 mt10">
+          <p-selectButton id="tipo" [options]="numeracion" formControlName="tipo"></p-selectButton>
+        </div>
+
+      </div>
+
+      <div class="ui-g ui-md-12 mt10">
+        <div class="ui-inputgroup">
+          <span class="ui-float-label">
+            <input size="40" id="referencia" type="text" pInputText formControlName="referencia" class="form-control"
+              name="referencia">
+            <label for="referencia">Referencia</label>
+          </span>
+          <span class="ui-inputgroup-addon">
+            <i class="fa fa-tasks"></i>
+          </span>
+        </div>
+      </div>
+
+
+      <!-- <small *ngIf="nombreBarrio.invalid && (nombreBarrio.dirty || nombreBarrio.touched)" class="text-danger">
+              <div *ngIf="nombreBarrio?.errors['required'] " class="text-center">
+                Barrio Requerido!.
+              </div>
+              <div *ngIf="nombreBarrio?.errors['minlength']" class=" text-center">
+                Al menos 3 letras.
+              </div>
+            </small>
+          </div> -->
+
+    </form>
+
+    <p-footer>
+      <button [disabled]="calleForm.invalid" type="submit" pButton icon="fa-check" (click)="saveCalle(calleForm.value)"
+        label="Guardar" class="ui-button-success ui-state-hover"></button>
+      <button type="button" pButton icon="fa-close" class="ui-button-danger" (click)=" hideDialog()" label="Cancelar"></button>
+    </p-footer>
+
+  </p-dialog>
+
+</div>

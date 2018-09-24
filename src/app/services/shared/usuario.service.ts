@@ -46,7 +46,7 @@ export class UsuarioService {
       }),
        catchError(this.alert.handleError('loginUsuario', ORIGEN))
     );
-    this.logueado = this.logueado ? true : false;
+    // this.logueado = this.logueado ? true : false;
 
   }
 

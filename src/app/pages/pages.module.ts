@@ -20,6 +20,7 @@ import { LocalidadModule } from './localidad/localidad.module';
 import { ProvinciaModule } from './provincia/provincia.module';
 import { SectorModule } from './sector/sector.module';
 import { BarrioModule } from './barrio/barrio.module';
+import { CalleModule } from './calle/calle.module';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { BarrioModule } from './barrio/barrio.module';
     ProvinciaModule,
     LocalidadModule,
     SectorModule,
-    BarrioModule
+    BarrioModule,
+    CalleModule
   ],
   exports: [],
   providers: []

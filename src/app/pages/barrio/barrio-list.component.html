@@ -10,7 +10,7 @@
             <p-autoComplete [suggestions]="sectores" (completeMethod)="buscarSectores($event)" field="nombre" placeholder="Buscar Localidad / Sector..."
               [minLength]="3" (onSelect)="cargarBarrios($event)" emptyMessage="No existen coincidencias con su busqueda">
               <ng-template let-sect pTemplate="SelectedItem">
-                 {{sect.sector.localidad.nombre | lowercase}} - {{ sect.sector.localidad.provincia.nombre }} -  <strong>{{sect.nombre}}</strong>
+                {{ sect.localidad.provincia.nombre }} - {{sect.localidad.nombre }} - <strong>{{sect.nombre}}</strong>
               </ng-template>
             </p-autoComplete>
           </div>
@@ -49,13 +49,13 @@
 
         <h3 class="card-title">
          Barrios Registradas en
-         <strong>{{ sectorSelected.nombre }} - {{ sectorSelected.localidad.nombre }} - {{sectorSelected.localidad.provincia.nombre}} :</strong>
+         <strong>{{sectorSelected.localidad.provincia.nombre}} - {{ sectorSelected.localidad.nombre }} - {{ sectorSelected.nombre }} :</strong>
           <span class="badge bg-secondary">
             <strong>{{ dt.totalRecords? dt.totalRecords : 0 }} </strong>
           </span>
         </h3>
 
-        <input #gb type="text" class="form-control" placeholder=" Buscar Localidaa / Sector ...">
+        <input #gb type="text" class="form-control" placeholder=" Buscar Localidad / Sector ...">
         <br>
         <br>
 
@@ -77,10 +77,10 @@
   </div>
 </div>
 
-<!-- <div *ngIf="sectorSelected" class="animated fadeIn">
-  <app-sector-detail [sector]="sectorSelected" [displayOption]="true" [tituloOption]="(nuevo) ? 'Nuevo Sector' : 'Editar Sector'"
-    (sectorInfo)="guardarSector($event)"></app-sector-detail>
-</div> -->
+<div *ngIf="barrioSelected" class="animated fadeIn">
+  <app-barrio-detail [barrio]="barrioSelected" [displayOption]="true" [tituloOption]="(nuevo) ? 'Nuevo Barrio' : 'Editar Barrio'"
+    (barrioInfo)="guardarBarrio($event)"></app-barrio-detail>
+</div>
 
 <p-confirmDialog #cd [responsive]="true">
   <p-footer>

@@ -16,6 +16,10 @@ ANCHOS
   width: 70px;
 }
 
+.mt10 {
+  margin-top: 10px;
+}
+
 /************************************************
  CAMBIANDO LA FUENTE DE LOS COMPONENTES PRIMENG
  ************************************************/
@@ -36,7 +40,7 @@ ANCHOS
  ****************************************/
 
 .ui-autocomplete-dropdown{
-  width: 16px; 
+  width: 16px;
   height: 100%;
   position: absolute;
 }
@@ -63,11 +67,45 @@ ANCHOS
   VALIDADORES
 *****************/
 
-.ng-valid[required],
+/* .ng-valid[required],
 .ng-valid.required {
-  border-left: 3px solid #42a948; /* green */
+  border-left: 3px solid #42a948;
 }
 
 .ng-invalid:not(form) {
-  border-left: 3px solid #a94442; /* red */
+  border-left: 3px solid #a94442;
 }
+*/
+
+
+/****NUEVO*****/
+
+.ng-valid[required], .ng-valid.required {
+  border-left: 2px solid #42A948; /* green */
+}
+
+.ng-invalid:not(form) {
+  border-left: 2px solid #a94442; /* red */
+}
+
+ p-autocomplete.ng-invalid {
+  border-left: 0 none;
+}
+
+p-autocomplete.ng-touched.ng-dirty.ng-invalid > .ui-autocomplete > .ui-inputtext,
+p-autocomplete.ng-invalid > .ui-autocomplete > .ui-inputtext[required] {
+  border-left: 2px solid #a94442;
+/*   border-bottom: 1px solid #d6d6d6;
+ */}
+
+/*
+p-autocomplete.ng-valid[required] > .ui-autocomplete > .ui-inputtext,
+p-autocomplete.ng-valid.required > .ui-autocomplete > .ui-inputtext,
+p-autocomplete.ng-valid > .ui-autocomplete > .ui-inputtext[required] {
+  border-left: 2px solid #42A948;
+}
+
+/* p-autocomplete > .ui-autocomplete > .ui-inputtext {
+  padding: 6px 12px;
+}
+*/

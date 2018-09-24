@@ -1,46 +1,47 @@
 import { Component, OnInit } from '@angular/core';
-import { Sector } from '../sector/sector.model';
-import { Barrio } from './barrio.model';
+import { Calle } from './calle.model';
+import { Barrio } from '../barrio/barrio.model';
 import { Message, ConfirmationService } from 'primeng/components/common/api';
-import { SectorService } from '../sector/sector.service';
-import { BarrioService } from './barrio.service';
+import { CalleService } from './calle.service';
+import { BarrioService } from '../barrio/barrio.service';
 
 @Component({
-  selector: 'app-barrio-list',
-  templateUrl: './barrio-list.component.html',
+  selector: 'app-calle-list',
+  templateUrl: './calle-list.component.html',
   styleUrls: []
 })
-export class BarrioListComponent implements OnInit {
-  sectores: Sector[];
-  sectorSelected: Sector;
+export class CalleListComponent implements OnInit {
+
   barrios: Barrio[];
   barrioSelected: Barrio;
+  calles: Calle[];
+  calleSelected: Calle;
   cargando: boolean = false;
   msgs: Message[] = [];
   nuevo: boolean = false;
 
   constructor(
-    public sectorService: SectorService,
+    public calleService: CalleService,
     public barrioService: BarrioService,
     public confirmationService: ConfirmationService
   ) {}
 
   ngOnInit() {}
 
-  buscarSectores(event) {
-    this.sectorService.buscarSectoresPorTexto(event.query)
+  buscarBarrios(event) {
+    this.barrioService.buscarBarrioPorTexto(event.query)
         .subscribe((res: any) => {
-         this.sectores = res.cuadrantes;
+         this.barrios = res.barrios;
       });
   }
 
-  cargarBarrios(event) {
+  cargarCalles(event) {
     this.cargando = true;
-    this.sectorSelected = event;
+    this.barrioSelected = event;
 
-    this.sectorService.cargarBarrios(this.sectorSelected).subscribe(
+    this.barrioService.cargarCalles(this.barrioSelected).subscribe(
       (res: any) => {
-        this.barrios = res.barrios;
+        this.calles = res.calles;
         this.cargando = false;
       },
       error => {
@@ -54,28 +55,26 @@ export class BarrioListComponent implements OnInit {
     );
   }
 
-  selectBarrio(barrio: Barrio) {
-    this.barrioSelected = barrio;
-    this.barrioSelected.cuadrante = this.sectorSelected;
-    console.log('SELECT :' + JSON.stringify(this.barrioSelected));
+  selectCalle(calle: Calle) {
+    this.calleSelected = calle;
+    this.calleSelected.barrio = this.barrioSelected;
     this.nuevo = false;
   }
 
-  newBarrio() {
-    this.barrioSelected = new Barrio(null, '', '', this.sectorSelected );
-    console.log('SELECT :' + JSON.stringify(this.barrioSelected));
+  newCalle() {
+    this.calleSelected = new Calle(null, this.barrioSelected, null, 0, 0, '', '', '', true, '1' );
     this.nuevo = true;
   }
 
-  guardarBarrio(event: Barrio) {
+  guardarCalle(event: Calle) {
     if (this.nuevo) {
       // this.localidades.push(event);
-      this.barrios = [...this.barrios, event];
+      this.calles = [...this.calles, event];
       this.msgs = [
         {
           severity: 'success',
           summary: 'Operación Aceptada',
-          detail: `${event.nombre} Creado.`
+          detail: `${event.calle.nombre} Creado.`
         }
       ];
     } else {
@@ -83,7 +82,7 @@ export class BarrioListComponent implements OnInit {
         {
           severity: 'success',
           summary: 'Operación Aceptada',
-          detail: `${event.nombre} Actualizado.`
+          detail: `${event.calle.nombre} Actualizado.`
         }
       ];
     }
@@ -91,22 +90,22 @@ export class BarrioListComponent implements OnInit {
 
 
 
-  borrarBarrio(barrio: Barrio) {
+  borrarCalle(calle: Calle) {
     this.confirmationService.confirm({
       header: '¿ Estás Seguro ?',
       icon: 'fa-exclamation-circle 2x',
-      message: `Estás a punto de borrar el Barrio:
-                 "${barrio.nombre}"? `,
+      message: `Estás a punto de borrar la Calle :
+                 "${calle.calle.nombre}"? `,
       accept: () => {
-        this.barrioService
-          .borrarBarrio(barrio)
+        this.calleService
+          .borrarCalle(calle)
           .subscribe((data: any) => {
-            this.barrios = this.barrios.filter(c => c !== barrio);
+            this.calles = this.calles.filter(c => c !== calle);
             this.msgs = [
               {
                 severity: 'error',
                 summary: 'Operación Aceptada',
-                detail: `${barrio.nombre} Eliminada.`
+                detail: `${calle.calle.nombre} Eliminada.`
               }
             ];
           });
@@ -122,4 +121,5 @@ export class BarrioListComponent implements OnInit {
       }
     });
   }
+
 }

@@ -20,6 +20,10 @@ import { DialogModule } from 'primeng/components/dialog/dialog';
 import { ConfirmDialogModule } from 'primeng/components/confirmdialog/confirmdialog';
 import { CheckboxModule } from 'primeng/components/checkbox/checkbox';
 import { TableModule } from 'primeng/components/table/table';
+import { SelectButtonModule } from 'primeng/components/selectbutton/selectbutton';
+import { KeyFilterModule } from 'primeng/keyfilter';
+
+
 
 // PRIMENG SERVICES
 
@@ -40,7 +44,9 @@ import { ConfirmationService } from 'primeng/components/common/api';
     ProgressSpinnerModule,
     DialogModule,
     ConfirmDialogModule,
-    CheckboxModule
+    CheckboxModule,
+    SelectButtonModule,
+    KeyFilterModule
     ],
   exports: [
     InputTextModule,
@@ -51,7 +57,9 @@ import { ConfirmationService } from 'primeng/components/common/api';
     ProgressSpinnerModule,
     DialogModule,
     ConfirmDialogModule,
-    CheckboxModule
+    CheckboxModule,
+    SelectButtonModule,
+    KeyFilterModule
   ],
   providers: [ConfirmationService]// settingService
 })

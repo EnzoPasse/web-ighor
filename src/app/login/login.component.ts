@@ -36,7 +36,6 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-
     let usuario = new Usuario(
       null,
       null,
@@ -44,13 +43,16 @@ export class LoginComponent implements OnInit {
       forma.value.password,
       null
     );
-    this.usuarioService.login(usuario, this.recuerdame)
-      .subscribe((correcto: any) => {
-        this.router.navigate(['/home']);
-      }, error => this.msjError = <any>error);
-     /*  setTimeout(() => {
-        forma.controls.password.markAsUntouched();
-       } , 5000 ); */
 
+    this.usuarioService.login(usuario, this.recuerdame)
+    .subscribe(
+      (correcto: any) => {
+        this.router.navigate(['/home']);
+      },
+      error => {
+        this.msjError = <any>error;
+        setTimeout(() => {this.msjError = null; }, 7000);
+      }
+    );
   }
 }

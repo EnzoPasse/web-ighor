@@ -23,6 +23,11 @@ export class BarrioService {
      .pipe(catchError(this.alert.handleError('cargarBarrios', ORIGEN)));
   }
 
+  buscarBarrioPorTexto(texto: string) {
+    const url = `${URL_SERVICIO}/barrio/?search=${texto}`;
+    return this.http.get(url)
+        .pipe(catchError(this.alert.handleError('buscarcuadranteTexto', ORIGEN)));
+  }
 
 
   crearBarrio(barrio: Barrio) {
@@ -51,6 +56,14 @@ export class BarrioService {
       .delete(url, this.getHttpHeaders())
       .pipe(catchError(this.alert.handleError('borrarBarrios', ORIGEN)));
   }
+
+  cargarCalles(barrio: Barrio) {
+    const url = `${URL_SERVICIO}/barrio/${barrio.id}/calles/`;
+
+    return this.http.get(url)
+    .pipe(catchError(this.alert.handleError('cargarCalles', ORIGEN)));
+  }
+
 
   private getHttpHeaders() {
     const httpOptions = {

@@ -6,6 +6,6 @@ export class Barrio {
     public id: string,
     public nombre: string,
     public codigo_postal: string,
-    public sector: Sector
+    public cuadrante: Sector
   ) {}
 }
