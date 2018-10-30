@@ -12,6 +12,7 @@ import { SectorListComponent } from './sector/sector-list.component';
 import { LoginGuard } from '../services/service.index';
 import { BarrioListComponent } from './barrio/barrio-list.component';
 import { CalleListComponent } from './calle/calle-list.component';
+import { NormaBarrioComponent } from './normalizacion-barrio/norma-barrio.component';
 
 const pagesRoutes: Routes = [
   {
@@ -57,6 +58,11 @@ const pagesRoutes: Routes = [
         path: 'calle',
         component: CalleListComponent,
         data: { titulo: 'Calles' }
+      },
+      {
+        path: 'normaBarrio',
+        component: NormaBarrioComponent,
+        data: { titulo: 'Normalizador Barrio' }
       },
       { path: '**', component: PageNoFoundComponent }
     ]

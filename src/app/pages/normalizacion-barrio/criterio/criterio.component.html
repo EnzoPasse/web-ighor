@@ -1,0 +1,89 @@
+<div class="animate fade in">
+<p-dialog header= {{titulo}} [(visible)]="display" modal="true" [responsive]="true" [resizable]="true" [minWidth]="300"
+  appendTo="body" [closable]="false">
+
+
+  <div class="ui-md-12">
+    <div class="card">
+      <div class="card-body">
+        <!--         <h3 class="card-title"> Filtros </h3>
+ -->
+        <div class="ui-fluid">
+
+          <form [formGroup]="filtroForm">
+
+            <div formArrayName="filtros">
+              <div *ngFor="let item of filtroForm.controls['filtros'].controls; let i=index">
+
+                <div class="card-header">
+                  <span>Filtro {{ i + 1 }} </span>
+                  <label class="form-check-label pull-right">
+                    <button *ngIf="filtroForm.controls['filtros'].controls.length > 1" (click)="removerFiltro(i)"
+                      pButton icon="fa-trash-o" class="ui-button-danger ui-state-hover"></button>
+                  </label>
+                </div>
+
+                <div [formGroupName]="i">
+                  <div class="ui-g">
+
+
+                    <div class="ui-md-3">
+                      <p-selectButton id="tipo" [options]="numeracion" formControlName="operador"></p-selectButton>
+                    </div>
+
+
+                    <div class="ui-md-3">
+                      <div class="ui-inputgroup">
+                        <p-toggleButton formControlName="parentesis_abierto" onLabel="(" offLabel="("></p-toggleButton>
+                        <p-dropdown [options]="operadores" formControlName="criterio"
+                                     autoWidth="false" [style]="{'width':'115px'}"></p-dropdown>
+                      </div>
+                    </div>
+
+                    <div class="ui-md-4">
+                      <div class="ui-inputgroup">
+                        <input id="valor" type="text" pInputText formControlName="valor" name="valor">
+                        <p-toggleButton formControlName="parentesis_cerrado" onLabel=")" offLabel=")"></p-toggleButton>
+                      </div>
+
+                      <small *ngIf="filtroForm.controls['filtros'].controls[i].controls.valor.invalid && (filtroForm.controls['filtros'].controls[i].controls.valor.dirty || filtroForm.controls['filtros'].controls[i].controls.valor.touched)"
+                        class="text-danger">
+                        <div *ngIf="filtroForm.controls['filtros'].controls[i].controls.valor?.errors['required']"
+                          class="text-center">
+                          Requerido!.
+                        </div>
+                        <div *ngIf="filtroForm.controls['filtros'].controls[i].controls.valor?.errors['minlength']"
+                          class="text-center">
+                          Minimo 3 dígitos.
+                        </div>
+                      </small>
+
+                    </div>
+
+                    <!-- <div class="ui-md-1 ui-g-offset-1">  style="padding-right: 12px;"-->
+                        <div class="ui-md-2 ">
+                          <label class="form-check-label pull-right" >
+                        <button *ngIf="filtroForm.controls['filtros'].controls.length === i + 1" (click)="agregarFiltro()"
+                          pButton  label="Agregar" class="ui-button-success ui-state-hover"></button>
+                      </label>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </form>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <p-footer>
+    <button [disabled]="filtroForm.invalid" type="submit" pButton icon="fa-check" (click)="saveCriterios(filtroForm.value)"
+      label="Aplicar" class="ui-button-success ui-state-hover"></button>
+    <button type="button" pButton icon="fa-close" class="ui-button-danger" (click)=" hideDialog()" label="Volver"></button>
+  </p-footer>
+</p-dialog>
+</div>

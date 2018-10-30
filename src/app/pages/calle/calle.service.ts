@@ -16,7 +16,7 @@ export class CalleService {
 
   crearCalle(calle: Calle) {
     let url = `${URL_SERVICIO}/barrio_calle/`;
-    delete calle.tipoNumeracion;
+//    delete calle.tipoNumeracion;
 
     let body = JSON.stringify(calle);
 
@@ -27,7 +27,7 @@ export class CalleService {
 
   actualizarCalle(calle: Calle) {
     let url = `${URL_SERVICIO}/barrio_calle/${calle.id}/`;
-    delete calle.tipoNumeracion;
+  //  delete calle.tipoNumeracion;
 
     let body = JSON.stringify(calle);
 

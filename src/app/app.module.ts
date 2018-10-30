@@ -5,7 +5,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-
 // RUTAS
 import { AppRoutes } from './app.routes';
 
@@ -14,7 +13,6 @@ import { AppRoutes } from './app.routes';
 import { ServicesModule } from './services/services.module';
 import { SharedModule } from './shared/shared.module';
 
-
 // COMPONENTES
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -22,16 +20,14 @@ import { HttpInterceptorService } from './services/shared/http-interceptor.servi
 // import { PagesComponent } from './pages/pages.component';
 // import { PagesModule } from './pages/pages.module';
 
-
 // SERVICIOS
-
 
 @NgModule({
   declarations: [
     AppComponent,
-   // PagesComponent,
+    // PagesComponent,
     LoginComponent
-   ],
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -42,11 +38,13 @@ import { HttpInterceptorService } from './services/shared/http-interceptor.servi
     ServicesModule,
     SharedModule
   ],
-  providers: [{
-    provide: HTTP_INTERCEPTORS,
-    useClass: HttpInterceptorService,
-    multi: true
-  }],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

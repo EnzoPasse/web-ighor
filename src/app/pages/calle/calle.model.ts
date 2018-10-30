@@ -13,7 +13,7 @@ constructor(
  public plano: string,
  public ubicacion: string,
  public nomenclado: boolean,
- public tipoNumeracion: string
+ public tipo_numeracion: string
 ) { }
 
 }

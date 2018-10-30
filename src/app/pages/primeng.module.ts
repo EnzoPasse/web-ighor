@@ -22,6 +22,13 @@ import { CheckboxModule } from 'primeng/components/checkbox/checkbox';
 import { TableModule } from 'primeng/components/table/table';
 import { SelectButtonModule } from 'primeng/components/selectbutton/selectbutton';
 import { KeyFilterModule } from 'primeng/keyfilter';
+import { ToggleButtonModule } from 'primeng/components/ToggleButton/togglebutton';
+import { DropdownModule } from 'primeng/components/dropdown/dropdown';
+import { ChartModule } from 'primeng/chart';
+
+
+
+
 
 
 
@@ -46,7 +53,11 @@ import { ConfirmationService } from 'primeng/components/common/api';
     ConfirmDialogModule,
     CheckboxModule,
     SelectButtonModule,
-    KeyFilterModule
+    KeyFilterModule,
+    ToggleButtonModule,
+    DropdownModule,
+    ChartModule,
+    TableModule
     ],
   exports: [
     InputTextModule,
@@ -59,7 +70,11 @@ import { ConfirmationService } from 'primeng/components/common/api';
     ConfirmDialogModule,
     CheckboxModule,
     SelectButtonModule,
-    KeyFilterModule
+    KeyFilterModule,
+    ToggleButtonModule,
+    DropdownModule,
+    ChartModule,
+    TableModule
   ],
   providers: [ConfirmationService]// settingService
 })

@@ -89,7 +89,7 @@ export class CalleDetailComponent implements OnInit, OnChanges {
       referencia: this.calle.referencia,
       plano: this.calle.plano,
       ubicacion: this.calle.ubicacion,
-      tipo: this.calle.tipoNumeracion || 1
+      tipo: this.calle.tipo_numeracion || 1
     });
     this.nomenclado = this.calle.nomenclado;
   }
@@ -131,7 +131,7 @@ export class CalleDetailComponent implements OnInit, OnChanges {
       this.calle.referencia = this.calleForm.get('referencia').value;
       this.calle.plano = this.calleForm.get('plano').value;
       this.calle.ubicacion = this.calleForm.get('ubicacion').value;
-      this.calle.tipoNumeracion = this.calleForm.get('tipo').value;
+      this.calle.tipo_numeracion = this.calleForm.get('tipo').value;
       this.calle.nomenclado = this.nomenclado;
 
       console.log('CALLE' + JSON.stringify(this.calle));

@@ -21,16 +21,28 @@ ANCHOS
 }
 
 /************************************************
+ TOOGLE BUTTON
+ ************************************************/
+.ui-togglebutton,
+.ui-selectButton {
+  height: 100%;
+}
+.ui-togglebutton {
+  border-radius: 4px;
+}
+
+/************************************************
  CAMBIANDO LA FUENTE DE LOS COMPONENTES PRIMENG
  ************************************************/
 .ui-datatable,
+.ui-table,
 .ui-paginator,
 .ui-dialog,
 .ui-inputtext,
 .ui-growl,
 .ui-autocomplete-items,
 .ui-autocomplete-list-item,
-.ui-autocomplete>.ui-inputtext {
+.ui-autocomplete > .ui-inputtext {
   font-weight: 300;
   font-family: "Montserrat", sans-serif;
 }
@@ -39,12 +51,11 @@ ANCHOS
  AUTOCOMPLETE
  ****************************************/
 
-.ui-autocomplete-dropdown{
+.ui-autocomplete-dropdown {
   width: 16px;
   height: 100%;
   position: absolute;
 }
-
 
 /***************************************
  DATA TABLE
@@ -54,6 +65,10 @@ ANCHOS
   height: 50px;
 }
 
+.ui-table .ui-table-thead > tr > th {
+  background-color: aliceblue;
+  height: 50px;
+}
 .ui-paginator-rpp-options {
   font-weight: 300;
   font-family: "Montserrat", sans-serif;
@@ -77,26 +92,29 @@ ANCHOS
 }
 */
 
-
 /****NUEVO*****/
 
-.ng-valid[required], .ng-valid.required {
-  border-left: 2px solid #42A948; /* green */
+.ng-valid[required],
+.ng-valid.required {
+  border-left: 2px solid #42a948; /* green */
 }
 
 .ng-invalid:not(form) {
   border-left: 2px solid #a94442; /* red */
 }
 
- p-autocomplete.ng-invalid {
+p-autocomplete.ng-invalid {
   border-left: 0 none;
 }
 
-p-autocomplete.ng-touched.ng-dirty.ng-invalid > .ui-autocomplete > .ui-inputtext,
+p-autocomplete.ng-touched.ng-dirty.ng-invalid
+  > .ui-autocomplete
+  > .ui-inputtext,
 p-autocomplete.ng-invalid > .ui-autocomplete > .ui-inputtext[required] {
   border-left: 2px solid #a94442;
-/*   border-bottom: 1px solid #d6d6d6;
- */}
+  /*   border-bottom: 1px solid #d6d6d6;
+ */
+}
 
 /*
 p-autocomplete.ng-valid[required] > .ui-autocomplete > .ui-inputtext,
