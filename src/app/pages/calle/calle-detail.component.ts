@@ -125,7 +125,6 @@ export class CalleDetailComponent implements OnInit, OnChanges {
       this.calleForm.controls['nombreBarrio'].enable();
 
       this.calle.calle = this.calleForm.get('nombreCalle').value;
-      // this.calle.calle.nombre = this.calle.calle.nombre.toLocaleUpperCase();
       this.calle.altura_desde = this.calleForm.get('altura_desde').value;
       this.calle.altura_hasta = this.calleForm.get('altura_hasta').value;
       this.calle.referencia = this.calleForm.get('referencia').value;
@@ -134,7 +133,6 @@ export class CalleDetailComponent implements OnInit, OnChanges {
       this.calle.tipo_numeracion = this.calleForm.get('tipo').value;
       this.calle.nomenclado = this.nomenclado;
 
-      console.log('CALLE' + JSON.stringify(this.calle));
 
       if (this.calle.id === null) {
         this.calleService.crearCalle(this.calle).subscribe(

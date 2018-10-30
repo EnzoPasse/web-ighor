@@ -57,13 +57,11 @@ export class BarrioListComponent implements OnInit {
   selectBarrio(barrio: Barrio) {
     this.barrioSelected = barrio;
     this.barrioSelected.cuadrante = this.sectorSelected;
-    console.log('SELECT :' + JSON.stringify(this.barrioSelected));
     this.nuevo = false;
   }
 
   newBarrio() {
     this.barrioSelected = new Barrio(null, '', '', this.sectorSelected );
-    console.log('SELECT :' + JSON.stringify(this.barrioSelected));
     this.nuevo = true;
   }
 

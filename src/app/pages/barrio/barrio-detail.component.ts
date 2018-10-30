@@ -28,8 +28,6 @@ export class BarrioDetailComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.crearForm();
-    console.log('INIT:' + this.barrio);
-
   }
 
   crearForm() {

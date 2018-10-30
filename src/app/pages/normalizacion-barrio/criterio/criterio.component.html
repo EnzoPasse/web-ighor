@@ -13,7 +13,7 @@
           <form [formGroup]="filtroForm">
 
             <div formArrayName="filtros">
-              <div *ngFor="let item of filtroForm.controls['filtros'].controls; let i=index">
+              <div *ngFor="let item of filtroForm.controls['filtros']['controls']; let i=index">
 
                 <div class="card-header">
                   <span>Filtro {{ i + 1 }} </span>

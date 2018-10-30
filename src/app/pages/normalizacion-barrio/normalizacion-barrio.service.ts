@@ -5,7 +5,6 @@ import { URL_SERVICIO } from '../../config/config';
 import { catchError } from 'rxjs/operators';
 import { Barrio } from '../barrio/barrio.model';
 import { Consulta } from './norma-barrio.model';
-import { timingSafeEqual } from 'crypto';
 
 const ORIGEN = 'NormalizacionService';
 @Injectable()

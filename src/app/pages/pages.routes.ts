@@ -60,9 +60,14 @@ const pagesRoutes: Routes = [
         data: { titulo: 'Calles' }
       },
       {
-        path: 'normaBarrio',
+        path: 'normalizadorBarrios',
         component: NormaBarrioComponent,
         data: { titulo: 'Normalizador Barrio' }
+      },
+      {
+        path: 'normalizadorCalles',
+        component: PageNoFoundComponent,
+        data: { titulo: 'Normalizador Calle' }
       },
       { path: '**', component: PageNoFoundComponent }
     ]

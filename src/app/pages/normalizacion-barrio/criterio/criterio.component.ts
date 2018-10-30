@@ -21,7 +21,7 @@ import {
   templateUrl: './criterio.component.html',
   styles: []
 })
-export class CriterioComponent implements OnInit, OnChanges {
+export class CriterioComponent implements OnChanges {
   listartodo: boolean;
   numeracion: SelectItem[];
   operadores: SelectItem[];
@@ -61,11 +61,7 @@ export class CriterioComponent implements OnInit, OnChanges {
     ];
   }
 
-  ngOnInit() {
-    // this.crearForm();
-  }
-
-  ngOnChanges() {
+   ngOnChanges() {
     this.titulo = this.barrio + ' - (' + this.tituloOption + ')';
     this.crearForm();
   }
@@ -122,4 +118,5 @@ export class CriterioComponent implements OnInit, OnChanges {
 
     this.hideDialog();
   }
+
 }

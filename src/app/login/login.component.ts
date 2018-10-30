@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
     this.usuarioService.login(usuario, this.recuerdame)
     .subscribe(
       (correcto: any) => {
-        this.router.navigate(['/normaBarrio']);
+        this.router.navigate(['/normalizadorBarrios']);
       },
       error => {
         this.msjError = <any>error;

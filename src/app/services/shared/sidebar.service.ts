@@ -22,7 +22,8 @@ export class SidebarService {
     titulo: 'Normalizacion',
     icono: 'mdi mdi-database',
     submenu: [
-      { titulo: 'Barrios', url: '/normaBarrio' },
+      { titulo: 'Barrios', url: '/normalizadorBarrios' },
+      { titulo: 'Calles', url: '/normalizadorCalles' }
     ]
  }
   ];

@@ -4,7 +4,6 @@ import { BarrioService } from '../barrio/barrio.service';
 import { Barrio } from '../barrio/barrio.model';
 import { NormalizacionBarrioService } from './normalizacion-barrio.service';
 import { Consulta, Filtros } from './norma-barrio.model';
-import { log } from 'util';
 
 @Component({
   selector: 'app-norma-barrio',
@@ -92,13 +91,11 @@ export class NormaBarrioComponent implements OnInit {
       this.barriosMal,
       event.filtros
     );
-console.log('CONSULTA:' +  JSON.stringify(consulta));
 
     this.normalizadorService
       .cargarBarriosMal(consulta)
       .subscribe((res: any) => {
                 this.barriosMal = res;
-                console.log('RESPUESTA: ' + JSON.stringify(res));
 
               });
 
