@@ -25,11 +25,9 @@
 
     <div *ngIf="barriosMal?.length > 0 && cargandoFiltros" class="card">
       <div class="card-body">
-        <!-- <h3 class="card-title"> Normalizador </h3> -->
         <div class="ui-fluid">
-
-          <p-table [columns]="columnas" [value]="barriosMal" [(selection)]="barriosMalSelected"
-             dataKey="nombre" [scrollable]="true" scrollHeight="230px">
+          <p-table [columns]="columnas" [value]="barriosMal" [(selection)]="barriosMalSelected" datakey="id" dataKey="nombre"
+            [scrollable]="true" scrollHeight="230px">
             <ng-template pTemplate="header" let-columns>
               <tr>
                 <th style="width: 5em">
@@ -37,7 +35,8 @@
                 </th>
                 <th *ngFor="let col of columns" [pSortableColumn]="col.fields">
                   {{col.headers}}
-                  <p-sortIcon [field]="col.fields" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+                  <p-sortIcon [field]="col.fields" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order"
+                    ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
 
                 </th>
               </tr>
@@ -53,16 +52,12 @@
               </tr>
             </ng-template>
             <ng-template pTemplate="summary">
-                 Total: {{barriosMal?.length}} Items
+              Total: {{barriosMal?.length}} Items
             </ng-template>
           </p-table>
-<!--  <pre>
-{{ barriosMalSelected | json }}
-</pre> -->
-        </div>
+          </div>
       </div>
     </div>
-
   </div>
 
 
@@ -70,9 +65,9 @@
     <div *ngIf="cargandoFiltros">
       <div class="card">
         <div class="card-body">
-              <div class="ui-fluid">
-            <button  pButton [ngClass]="(nuevo)? 'ui-button-warning ui-state-hover' : 'ui-button-success ui-state-hover'" label="{{tituloboton}}" style="height:76px"
-              (click)="filtrosSelectedChangue()">
+          <div class="ui-fluid">
+            <button pButton [ngClass]="(nuevo)? 'ui-button-warning ui-state-hover' : 'ui-button-success ui-state-hover'"
+              label="{{tituloboton}}" style="height:76px" (click)="filtrosSelectedChangue()">
             </button>
           </div>
         </div>
@@ -81,25 +76,31 @@
       <div class="card">
         <div class="card-body">
           <div class="ui-fluid">
+            <h5 class="text-center">Gráfico Totales</h5>
             <p-chart type="pie" [data]="data"></p-chart>
-           <!--  <p-chart type="line" [data]="data"></p-chart> -->
+            <h5 class="text-center">Gráfico Parciales</h5>
+            <p-chart type="line" [data]="data"></p-chart>
           </div>
         </div>
       </div>
     </div>
-
-    <div *ngIf="barriosMalSelected.length > 0">
-        <div class="card">
-          <div class="card-body">
-             <div class="ui-fluid">
-              <button  pButton class="ui-button-info ui-state-hover" label="{{barriosMalSelected.length}} items" style="height:76px">Normalizar
-              </button>
-            </div>
-          </div>
-        </div>
   </div>
 
 </div>
+
+<div class="ui-md-12">
+    <div *ngIf="barriosMalSelected.length > 0">
+      <div class="card">
+        <div class="card-body">
+          <div class="ui-fluid">
+            <button pButton class="ui-button-info ui-state-hover" label="{{barriosMalSelected.length}} items" style="height:76px"
+              (click)="normalizar()">Normalizar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 <div>

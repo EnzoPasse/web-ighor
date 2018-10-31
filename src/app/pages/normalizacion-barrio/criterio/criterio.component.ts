@@ -50,14 +50,14 @@ export class CriterioComponent implements OnChanges {
     public confirmationService: ConfirmationService
   ) {
     this.numeracion = [
-      { label: 'AND', value: '1' },
-      { label: 'OR', value: '0' }
+      { label: 'AND', value: 1 },
+      { label: 'OR', value: 0 }
     ];
     this.operadores = [
-      { label: ' Like', value: '1' },
-      { label: 'Not Like', value: '2' },
-      { label: '  =', value: '3' },
-      { label: '  <>', value: '4' }
+      { label: ' Like', value: 1 },
+      { label: 'Not Like', value: 2 },
+      { label: '  =', value: 3 },
+      { label: '  <>', value: 4 }
     ];
   }
 
@@ -85,9 +85,9 @@ export class CriterioComponent implements OnChanges {
 
   crearFiltro() {
     return this.fb.group({
-      operador: ['1', , ],
+      operador: [1, , ],
       parentesis_abierto: [false, , ],
-      criterio: ['1', , ],
+      criterio: [1, , ],
       valor: ['', [Validators.required, Validators.minLength(3)]],
       parentesis_cerrado: [false, , ]
     });

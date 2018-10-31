@@ -4,6 +4,7 @@ import { BarrioService } from '../barrio/barrio.service';
 import { Barrio } from '../barrio/barrio.model';
 import { NormalizacionBarrioService } from './normalizacion-barrio.service';
 import { Consulta, Filtros } from './norma-barrio.model';
+import { log } from 'util';
 
 @Component({
   selector: 'app-norma-barrio',
@@ -25,6 +26,7 @@ export class NormaBarrioComponent implements OnInit {
   barrioSelected: Barrio;
   nombreBarrio: string;
   tituloboton: string;
+
 
   constructor(
     public barrioService: BarrioService,
@@ -87,7 +89,7 @@ export class NormaBarrioComponent implements OnInit {
     let consulta: Consulta = new Consulta(
       // tslint:disable-next-line:radix
       parseInt(this.barrioSelected.id),
-      false,
+      true,
       this.barriosMal,
       event.filtros
     );
@@ -124,6 +126,49 @@ export class NormaBarrioComponent implements OnInit {
       };
 
     });
+  }
+
+  normalizar() {
+    const ids: Array<number> = [];
+ for (let index = 0; index < this.barriosMalSelected.length; index++) {
+      let valor = this.barriosMalSelected[index].id;
+      ids.push(valor);
+ }
+
+ console.log('ids: ' + ids);
+     let consulta: Consulta = new Consulta(
+      // tslint:disable-next-line:radix
+      parseInt(this.barrioSelected.id),
+      true,
+      ids,
+      this.filtrosSelected
+    );
+
+    console.log('CONSULTA: ' + JSON.stringify(consulta));
+     if (this.barriosMalSelected.length > 0) {
+       this.normalizadorService.normalizar(consulta)
+       .subscribe(
+        (res: any) => {
+
+          console.log(res);
+
+          this.msgs = [
+            {
+              severity: 'success',
+              summary: 'Operación Aceptada',
+              detail: `${res.cant_filas} items Normalizados.`
+            }
+          ];
+        },
+        error => {
+          this.confirmationService.confirm({
+            header: 'ERROR !',
+            message: `${error}`,
+            accept: () => {}
+          });
+        }
+      );
+     }
   }
 
 }

@@ -3,6 +3,9 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class SidebarService {
 
+  personal: any = [
+  ];
+
   menu: any = [
    {
      titulo: 'Maestros',

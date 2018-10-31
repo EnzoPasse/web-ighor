@@ -36,6 +36,15 @@ export class NormalizacionBarrioService {
      pipe(catchError(this.alert.handleError('reporteNormalizacion', ORIGEN)));
   }
 
+  normalizar(consulta: Consulta) {
+    const url = `${URL_SERVICIO}/normalizadorbarrio/${consulta.barrio}/`;
+    const body =  JSON.stringify(consulta);
+
+    return this.http.put(url, body, this.getHttpHeaders())
+    .pipe(catchError(this.alert.handleError('Normalizacion', ORIGEN)));
+
+  }
+
   private getHttpHeaders() {
     const httpOptions = {
       headers: new HttpHeaders({

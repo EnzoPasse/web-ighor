@@ -10,7 +10,8 @@
         <li class="user-profile">
           <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
             <!-- <img src="../assets/images/users/profile.png" alt="user" /> -->
-            <span class="hide-menu">{{usuario.email}} </span>
+            <i [class]= "'mdi mdi-account'" > </i>
+            <span class="hide-menu">{{usuario.first_name}} {{usuario.last_name}} </span>
           </a>
           <ul aria-expanded="false" class="collapse">
             <!-- <li>
@@ -25,7 +26,7 @@
           </ul>
         </li>
         <li class="nav-devider"></li>
-        <li class="nav-small-cap">PERSONAL</li>
+        <li class="nav-small-cap">ACCIONES</li>
 
         <li *ngFor="let menu of _sideService.menu">
           <a class="has-arrow waves-effect waves-dark" aria-expanded="false">
