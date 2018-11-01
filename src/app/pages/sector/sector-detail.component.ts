@@ -11,12 +11,13 @@ import { SectorService } from './sector.service';
 })
 export class SectorDetailComponent implements OnInit, OnChanges {
   @Input() sector: Sector;
-  @Input() displayOption: boolean;
+  @Input() display: boolean;
   @Input() tituloOption: string;
   @Output() sectorInfo: EventEmitter<Sector> = new EventEmitter<Sector>();
+  @Output()
+  displayInfo: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   sectorForm: FormGroup;
-  display: boolean;
   titulo: string;
 
   constructor(
@@ -59,7 +60,6 @@ export class SectorDetailComponent implements OnInit, OnChanges {
 
   ngOnChanges(): void {
 
-    this.display = this.displayOption;
     this.titulo = this.tituloOption;
     if (this.sectorForm) {
       this.cargarDatos();
@@ -67,8 +67,8 @@ export class SectorDetailComponent implements OnInit, OnChanges {
   }
 
   hideDialog() {
-    this.display = false;
     this.rebuildForm();
+    this.displayInfo.emit(false);
   }
 
   saveSector(secto: Sector) {
@@ -106,8 +106,7 @@ export class SectorDetailComponent implements OnInit, OnChanges {
         );
       }
     }
-    this.display = false;
-    this.rebuildForm();
+    this.hideDialog();
   }
 
   // para ponerlo como propiedad del Component y poder hacer el binding con el HTML

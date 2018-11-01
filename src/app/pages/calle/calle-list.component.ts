@@ -19,6 +19,7 @@ export class CalleListComponent implements OnInit {
   cargando: boolean = false;
   msgs: Message[] = [];
   nuevo: boolean = false;
+  display: boolean = false;
 
   constructor(
     public calleService: CalleService,
@@ -27,6 +28,10 @@ export class CalleListComponent implements OnInit {
   ) {}
 
   ngOnInit() {}
+
+  onDialogClose(event) {
+    this.display = event; // cerrando el modal
+  }
 
   buscarBarrios(event) {
     this.barrioService.buscarBarrioPorTexto(event.query)
@@ -59,11 +64,13 @@ export class CalleListComponent implements OnInit {
     this.calleSelected = calle;
     this.calleSelected.barrio = this.barrioSelected;
     this.nuevo = false;
+    this.display = true;
   }
 
   newCalle() {
     this.calleSelected = new Calle(null, this.barrioSelected, null, 0, 0, '', '', '', true, '1' );
     this.nuevo = true;
+    this.display = true;
   }
 
   guardarCalle(event: Calle) {

@@ -81,8 +81,8 @@
 </div>
 
  <div *ngIf="calleSelected" class="animated fadeIn">
-  <app-calle-detail [calle]="calleSelected" [displayOption]="true" [tituloOption]="(nuevo) ? 'Nueva Calle' : 'Editar Calle'"
-    (calleInfo)="guardarCalle($event)"></app-calle-detail>
+  <app-calle-detail [calle]="calleSelected" [display]="display" [tituloOption]="(nuevo) ? 'Nueva Calle' : 'Editar Calle'"
+    (calleInfo)="guardarCalle($event)" (displayInfo)="onDialogClose($event)"></app-calle-detail>
 </div>
 
 <p-confirmDialog #cd [responsive]="true">

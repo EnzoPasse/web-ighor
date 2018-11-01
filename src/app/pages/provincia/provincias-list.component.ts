@@ -19,6 +19,7 @@ export class ProvinciasListComponent implements OnInit {
   cargando: boolean = false;
   msgs: Message[] = [];
   nuevo: boolean = false;
+  display: boolean = false;
 
 
   constructor(
@@ -29,6 +30,10 @@ export class ProvinciasListComponent implements OnInit {
 
   ngOnInit() {
     this.cargarProvincias();
+  }
+
+  onDialogClose(event) {
+    this.display = event; // cerrando el modal
   }
 
   cargarProvincias() {
@@ -50,11 +55,13 @@ export class ProvinciasListComponent implements OnInit {
   selectProvincia( provincia: Provincia ) {
     this.provinciaSelected = provincia;
     this.nuevo = false;
+    this.display = true;
   }
 
   newProvincia() {
     this.provinciaSelected = new Provincia(null, '');
     this.nuevo = true;
+    this.display = true;
   }
 
   guardarProvincia(event: Provincia) {

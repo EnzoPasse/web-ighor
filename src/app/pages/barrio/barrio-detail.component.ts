@@ -12,12 +12,13 @@ import { ConfirmationService } from 'primeng/components/common/api';
 export class BarrioDetailComponent implements OnInit, OnChanges {
 
   @Input() barrio: Barrio;
-  @Input() displayOption: boolean;
+  @Input() display: boolean;
   @Input() tituloOption: string;
   @Output() barrioInfo: EventEmitter<Barrio> = new EventEmitter<Barrio>();
+  @Output()
+  displayInfo: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   barrioForm: FormGroup;
-  display: boolean;
   titulo: string;
 
   constructor(
@@ -67,7 +68,6 @@ export class BarrioDetailComponent implements OnInit, OnChanges {
 
   ngOnChanges(): void {
 
-    this.display = this.displayOption;
     this.titulo = this.tituloOption;
     if (this.barrioForm) {
       this.cargarDatos();
@@ -75,8 +75,8 @@ export class BarrioDetailComponent implements OnInit, OnChanges {
   }
 
   hideDialog() {
-    this.display = false;
     this.rebuildForm();
+    this.displayInfo.emit(false);
   }
 
   saveBarrio(barrio: Barrio) {
@@ -118,8 +118,7 @@ export class BarrioDetailComponent implements OnInit, OnChanges {
         );
       }
     }
-    this.display = false;
-    this.rebuildForm();
+   this.hideDialog();
   }
 
   // para ponerlo como propiedad del Component y poder hacer el binding con el HTML

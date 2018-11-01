@@ -78,8 +78,8 @@
 </div>
 
 <div *ngIf="barrioSelected" class="animated fadeIn">
-  <app-barrio-detail [barrio]="barrioSelected" [displayOption]="true" [tituloOption]="(nuevo) ? 'Nuevo Barrio' : 'Editar Barrio'"
-    (barrioInfo)="guardarBarrio($event)"></app-barrio-detail>
+  <app-barrio-detail [barrio]="barrioSelected" [display]="display" [tituloOption]="(nuevo) ? 'Nuevo Barrio' : 'Editar Barrio'"
+    (barrioInfo)="guardarBarrio($event)" (displayInfo)="onDialogClose($event)"></app-barrio-detail>
 </div>
 
 <p-confirmDialog #cd [responsive]="true">

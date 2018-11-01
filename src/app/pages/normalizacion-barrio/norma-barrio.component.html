@@ -27,7 +27,7 @@
       <div class="card-body">
         <div class="ui-fluid">
           <p-table [columns]="columnas" [value]="barriosMal" [(selection)]="barriosMalSelected" datakey="id" dataKey="nombre"
-            [scrollable]="true" scrollHeight="230px">
+            [scrollable]="true" scrollHeight="240px">
             <ng-template pTemplate="header" let-columns>
               <tr>
                 <th style="width: 5em">
@@ -55,9 +55,24 @@
               Total: {{barriosMal?.length}} Items
             </ng-template>
           </p-table>
-          </div>
+        </div>
       </div>
     </div>
+
+
+    <div *ngIf="barriosMalSelected.length > 0">
+      <!-- <div class="card">
+        <div class="card-body"> -->
+          <div class="ui-fluid">
+            <button pButton class="ui-button-danger ui-state-hover" label="{{barriosMalSelected.length}} items" style="height:76px"
+              (click)="normalizar()">Normalizar
+            </button>
+          </div>
+        <!-- </div>
+      </div> -->
+    </div>
+
+
   </div>
 
 
@@ -76,10 +91,11 @@
       <div class="card">
         <div class="card-body">
           <div class="ui-fluid">
-            <h5 class="text-center">Gráfico Totales</h5>
-            <p-chart type="pie" [data]="data"></p-chart>
-            <h5 class="text-center">Gráfico Parciales</h5>
-            <p-chart type="line" [data]="data"></p-chart>
+            <h4 class="text-center">Totales</h4>
+            <p-chart type="pie" [data]="grafico1"></p-chart>
+            <br>
+            <h4 class="text-center">Sector</h4>
+            <p-chart type="pie" [data]="grafico2"></p-chart>
           </div>
         </div>
       </div>
@@ -87,21 +103,6 @@
   </div>
 
 </div>
-
-<div class="ui-md-12">
-    <div *ngIf="barriosMalSelected.length > 0">
-      <div class="card">
-        <div class="card-body">
-          <div class="ui-fluid">
-            <button pButton class="ui-button-info ui-state-hover" label="{{barriosMalSelected.length}} items" style="height:76px"
-              (click)="normalizar()">Normalizar
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
 
 <div>
   <app-criterio [filtrosIn]="filtrosSelected" [display]="display" [tituloOption]="(nuevo) ? 'Nuevos Filtros' : 'Editar Filtros' "

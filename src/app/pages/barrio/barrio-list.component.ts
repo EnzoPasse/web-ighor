@@ -18,6 +18,7 @@ export class BarrioListComponent implements OnInit {
   cargando: boolean = false;
   msgs: Message[] = [];
   nuevo: boolean = false;
+  display: boolean = false;
 
   constructor(
     public sectorService: SectorService,
@@ -26,6 +27,11 @@ export class BarrioListComponent implements OnInit {
   ) {}
 
   ngOnInit() {}
+
+  onDialogClose(event) {
+    this.display = event; // cerrando el modal
+  }
+
 
   buscarSectores(event) {
     this.sectorService.buscarSectoresPorTexto(event.query)
@@ -58,11 +64,13 @@ export class BarrioListComponent implements OnInit {
     this.barrioSelected = barrio;
     this.barrioSelected.cuadrante = this.sectorSelected;
     this.nuevo = false;
+    this.display = true;
   }
 
   newBarrio() {
     this.barrioSelected = new Barrio(null, '', '', this.sectorSelected );
     this.nuevo = true;
+    this.display = true;
   }
 
   guardarBarrio(event: Barrio) {

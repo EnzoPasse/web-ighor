@@ -13,8 +13,6 @@ import {
   Validators
 } from '@angular/forms';
 
-import { Localidad } from '../localidad/localidad.model';
-import { LocalidadService } from '../localidad/localidad.service';
 import { ConfirmationService } from 'primeng/components/common/api';
 import { Provincia } from './provincia.model';
 import { ProvinciaService } from './provincia.service';
@@ -25,13 +23,14 @@ import { ProvinciaService } from './provincia.service';
 })
 export class ProvinciaDetailComponent implements OnInit, OnChanges {
   @Input() provincia: Provincia;
-  @Input() displayOption: boolean;
+  @Input() display: boolean;
   @Input() tituloOption: string;
   @Output()
   provinciaInfo: EventEmitter<Provincia> = new EventEmitter<Provincia>();
+  @Output()
+  displayInfo: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   provinciaForm: FormGroup;
-  display: boolean;
   titulo: string;
 
   constructor(
@@ -67,7 +66,7 @@ export class ProvinciaDetailComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void {
-    this.display = this.displayOption;
+    this.display = this.display;
     this.titulo = this.tituloOption;
     if (this.provinciaForm) {
       this.cargarDatos();
@@ -75,8 +74,8 @@ export class ProvinciaDetailComponent implements OnInit, OnChanges {
   }
 
   hideDialog() {
-    this.display = false;
     this.rebuildForm();
+    this.displayInfo.emit(false);
   }
 
   saveProvincia(loca: Provincia) {
@@ -112,8 +111,7 @@ export class ProvinciaDetailComponent implements OnInit, OnChanges {
         );
       }
     }
-    this.display = false;
-    this.rebuildForm();
+    this.hideDialog();
   }
 
   // para ponerlo como propiedad del Component y poder hacer el binding con el HTML

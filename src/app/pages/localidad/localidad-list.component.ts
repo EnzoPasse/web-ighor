@@ -23,6 +23,7 @@ export class LocalidadListComponent implements OnInit {
   cargando: boolean = false;
   msgs: Message[] = [];
   nuevo: boolean = false;
+  display: boolean = false;
 
   constructor(
     public localidadService: LocalidadService,
@@ -54,6 +55,10 @@ export class LocalidadListComponent implements OnInit {
     this.cargarProvincias();
   }
 
+  onDialogClose(event) {
+    this.display = event; // cerrando el modal
+  }
+
   cargarLocalidades(event) {
     this.cargando = true;
     this.provinciaSelected = event;
@@ -77,6 +82,7 @@ export class LocalidadListComponent implements OnInit {
     this.localidadSelected = localidad;
     this.localidadSelected.provincia = this.provinciaSelected;
     this.nuevo = false;
+    this.display = true;
   }
 
   newLocalidad() {
@@ -87,6 +93,7 @@ export class LocalidadListComponent implements OnInit {
       this.provinciaSelected
     );
     this.nuevo = true;
+    this.display = true;
   }
 
   guardarLocalidad(event: Localidad) {

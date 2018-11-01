@@ -25,14 +25,15 @@ export class CalleDetailComponent implements OnInit, OnChanges {
   @Input()
   calle: Calle;
   @Input()
-  displayOption: boolean;
+  display: boolean;
   @Input()
   tituloOption: string;
   @Output()
   calleInfo: EventEmitter<Calle> = new EventEmitter<Calle>();
+  @Output()
+  displayInfo: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   calleForm: FormGroup;
-  display: boolean;
   titulo: string;
   callesSimples: CalleSimple[];
   nomenclado: boolean;
@@ -105,7 +106,6 @@ export class CalleDetailComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void {
-    this.display = this.displayOption;
     this.titulo = this.tituloOption;
     if (this.calleForm) {
       this.cargarDatos();
@@ -113,8 +113,8 @@ export class CalleDetailComponent implements OnInit, OnChanges {
   }
 
   hideDialog() {
-    this.display = false;
     this.rebuildForm();
+    this.displayInfo.emit(false);
   }
 
   saveCalle(calle: Calle) {
@@ -162,8 +162,7 @@ export class CalleDetailComponent implements OnInit, OnChanges {
         );
       }
     }
-    this.display = false;
-    this.rebuildForm();
+    this.hideDialog();
   }
 
   // para ponerlo como propiedad del Component y poder hacer el binding con el HTML

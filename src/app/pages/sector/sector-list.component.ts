@@ -21,6 +21,7 @@ export class SectorListComponent implements OnInit {
   cargando: boolean = false;
   msgs: Message[] = [];
   nuevo: boolean = false;
+  display: boolean = false;
 
   constructor(
     public sectorService: SectorService,
@@ -29,6 +30,11 @@ export class SectorListComponent implements OnInit {
   ) {}
 
   ngOnInit() {}
+
+
+  onDialogClose(event) {
+    this.display = event; // cerrando el modal
+  }
 
   buscarLocalidades(event) {
       this.localidadService.buscarLocalidadesPorTexto(event.query)
@@ -61,11 +67,13 @@ export class SectorListComponent implements OnInit {
     this.sectorSelected = sector;
     this.sectorSelected.localidad = this.localidadSelected;
     this.nuevo = false;
+    this.display = true;
   }
 
   newSector() {
     this.sectorSelected = new Sector(null, '', this.localidadSelected );
     this.nuevo = true;
+    this.display = true;
   }
 
   guardarSector(event: Sector) {

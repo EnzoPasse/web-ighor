@@ -1,35 +1,6 @@
 
 <p-growl openTo="body" [value]="msgs" life="1500">
 </p-growl>
-<!--
-<div class="row">
-
-  <div class="col-6">
-    <div class="card" style="padding-bottom: 12px">
-      <div class="card-body">
-        <h3 class="card-title"> Provincia </h3>
-        <div class="ui-fluid">
-          <p-autoComplete [suggestions]="results" (completeMethod)="search($event)" field="nombre" placeholder="Buscar Provincia..."
-            [dropdown]="true" (onSelect)="cargarLocalidades($event)" emptyMessage="No existen coincidencias con su busqueda">
-          </p-autoComplete>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-6">
-    <div class="card" style="height: 130px">
-      <div class="card-body">
-        <div class="alert alert-info" role="alert">
-          <small> Busque o Seleccione la provincia a la cual mostrar sus localidades,
-          o bien cambie su seleccion cuando lo necesite</small>
-        </div>
-      </div>
-    </div>
-  </div>
-
-</div>
- -->
 
 <div class="text-center" *ngIf="cargando">
   <p-progressSpinner>
@@ -78,8 +49,8 @@
 
 
  <div *ngIf="provinciaSelected" class="animated fadeIn">
-  <app-provincia-detail [provincia]="provinciaSelected" [displayOption]="true" [tituloOption]="(nuevo) ? 'Nueva Provincia' : 'Editar Provincia'"
-    (provinciaInfo)="guardarProvincia($event)"></app-provincia-detail>
+  <app-provincia-detail [provincia]="provinciaSelected" [display]="display" [tituloOption]="(nuevo) ? 'Nueva Provincia' : 'Editar Provincia'"
+    (provinciaInfo)="guardarProvincia($event)" (displayInfo)="onDialogClose($event)"></app-provincia-detail>
  </div>
 
 <p-confirmDialog #cd [responsive]="true">
@@ -89,78 +60,4 @@
   </p-footer>
 </p-confirmDialog>
 
-
-
-
-<!--
-<app-cargando *ngIf="cargando"></app-cargando>
-
-<div class="row" animated fadeIn *ngIf="!cargando">
-  <div class="col-12">
-    <div class="card">
-      <div class="card-body">
-        <div class="text-right">
-          <button (click)="crearProvincia()" class="btn btn-success">
-            Crear Provincia
-            <i class="fa fa-plus"></i>
-          </button>
-        </div>
-        <h3 class="card-title">
-          Provincias Registradas :
-          <span class="badge bg-secondary">
-            <strong>{{totalRegistros}} </strong>
-          </span>
-        </h3>
-
-        <div [hidden]="!provincias">
-
-          <input #input type="text" class="form-control" placeholder=" Buscar provincia ...">
-          <br>
-
-          <table class="table table-hover">
-            <thead class="thead-dark">
-              <tr>
-                <th class="w150">
-                  <i class="fa fa-key"></i> Id</th>
-                <th>
-                  <i class="fa fa-list-alt"></i> Provincia</th>
-                <th>
-                  <i class="fa fa-ellipsis-h"></i> Opciones</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let item of provincias | paginate: {itemsPerPage: 5, currentPage:page, id: '1'} ;let i= index; let l = count">
-                <td>
-                  {{ item.IdProvincia }}
-                </td>
-                <td (click)="edit(item)">
-                  <span *ngIf="item !== editProv">{{ item.nombre }}</span>
-                  <input *ngIf="item === editProv" [(ngModel)]="item.nombre " name="nombre" type="text" class="form-control pointer">
-                </td>
-                <td>
-                  <button (click)="actualizarProvincia(item)" class="btn btn-primary">
-                    <i class="fa fa-save"></i>
-                  </button>
-                  <button (click)="borrarProvincia(item)" class="btn btn-danger">
-                    <i class="fa fa-trash-o"></i>
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-
-          <div class="text-center">
-            <pagination-controls (pageChange)="page = $event" id="1" maxSize="5" directionLinks="true" autoHide="true" previousLabel=""
-              nextLabel="">
-            </pagination-controls>
-          </div>
-
-        </div>
-
-      </div>
-    </div>
-  </div>
-</div>
- -->
 

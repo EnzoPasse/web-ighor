@@ -19,7 +19,8 @@ export class NormaBarrioComponent implements OnInit {
   mensajeError: any = '';
   filtrosSelected: Filtros[] = [];
   cargandoFiltros: boolean = false;
-  data: any;
+  grafico1: any;
+  grafico2: any;
   columnas: any;
   nuevo: boolean = false;
   display: boolean = false;
@@ -114,13 +115,24 @@ export class NormaBarrioComponent implements OnInit {
        .subscribe((res: any) => {
             total = res.cantidad_registros_total;
             normalizados = res.cantidad_registros_barrio_calle_normalizado;
-       this.data = {
+       this.grafico1 = {
         labels: ['Normalizados', 'Total'],
         datasets: [
           {
             data: [normalizados, total],
             backgroundColor: ['#FF6384', '#36A2EB'], // , '#FFCE56'
             hoverBackgroundColor: ['#FF6384', '#36A2EB'] // , '#FFCE56'
+          }
+        ]
+      };
+
+      this.grafico2 = {
+        labels: ['Normalizados', 'Sector'],
+        datasets: [
+          {
+            data: [normalizados, total],
+            backgroundColor: ['#FFCE56', '#36A2EB'],
+            hoverBackgroundColor: ['#FFCE56', '#36A2EB']
           }
         ]
       };
@@ -135,7 +147,6 @@ export class NormaBarrioComponent implements OnInit {
       ids.push(valor);
  }
 
- console.log('ids: ' + ids);
      let consulta: Consulta = new Consulta(
       // tslint:disable-next-line:radix
       parseInt(this.barrioSelected.id),
@@ -144,14 +155,10 @@ export class NormaBarrioComponent implements OnInit {
       this.filtrosSelected
     );
 
-    console.log('CONSULTA: ' + JSON.stringify(consulta));
      if (this.barriosMalSelected.length > 0) {
        this.normalizadorService.normalizar(consulta)
        .subscribe(
         (res: any) => {
-
-          console.log(res);
-
           this.msgs = [
             {
               severity: 'success',
@@ -169,6 +176,12 @@ export class NormaBarrioComponent implements OnInit {
         }
       );
      }
+
+     setTimeout(() => {
+      this.barriosMalSelected = [];
+      this.barriosMal = [];
+     }, 1500);
+
   }
 
 }

@@ -78,8 +78,8 @@
 </div>
 
 <div *ngIf="sectorSelected" class="animated fadeIn">
-  <app-sector-detail [sector]="sectorSelected" [displayOption]="true" [tituloOption]="(nuevo) ? 'Nuevo Sector' : 'Editar Sector'"
-    (sectorInfo)="guardarSector($event)"></app-sector-detail>
+  <app-sector-detail [sector]="sectorSelected" [display]="display" [tituloOption]="(nuevo) ? 'Nuevo Sector' : 'Editar Sector'"
+    (sectorInfo)="guardarSector($event)" (displayInfo)="onDialogClose($event)"></app-sector-detail>
 </div>
 
 <p-confirmDialog #cd [responsive]="true">

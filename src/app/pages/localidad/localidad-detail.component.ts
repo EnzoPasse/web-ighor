@@ -25,12 +25,13 @@ import { LocalidadService } from './localidad.service';
 })
 export class LocalidadDetailComponent implements OnInit, OnChanges {
   @Input() localidad: Localidad;
-  @Input() displayOption: boolean;
+  @Input() display: boolean;
   @Input() tituloOption: string;
   @Output() localidadInfo: EventEmitter<Localidad> = new EventEmitter<Localidad>();
+  @Output()
+  displayInfo: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   localidadForm: FormGroup;
-  display: boolean;
   titulo: string;
 
   constructor(
@@ -70,7 +71,6 @@ export class LocalidadDetailComponent implements OnInit, OnChanges {
 
   ngOnChanges(): void {
 
-    this.display = this.displayOption;
     this.titulo = this.tituloOption;
     if (this.localidadForm) {
       this.cargarDatos();
@@ -78,8 +78,8 @@ export class LocalidadDetailComponent implements OnInit, OnChanges {
   }
 
   hideDialog() {
-    this.display = false;
     this.rebuildForm();
+    this.displayInfo.emit(false);
   }
 
   saveLocalidad(loca: Localidad) {
@@ -117,8 +117,7 @@ export class LocalidadDetailComponent implements OnInit, OnChanges {
         );
       }
     }
-    this.display = false;
-    this.rebuildForm();
+    this.hideDialog();
   }
 
   // para ponerlo como propiedad del Component y poder hacer el binding con el HTML
