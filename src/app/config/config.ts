@@ -3,5 +3,5 @@
 
 // export const URL_SERVICIO = 'http://localhost:3000/api';
 
-export const URL_SERVICIO = 'http://rgocio.pythonanywhere.com/v1';
+export const URL_SERVICIO = 'https://rgocio.pythonanywhere.com/v1';
 

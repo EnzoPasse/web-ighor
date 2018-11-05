@@ -6,13 +6,14 @@ import { PageNoFoundComponent } from '../shared/page-no-found/page-no-found.comp
 import { HomeComponent } from './home/home.component';
 import { AccountSettingComponent } from './account-setting/account-setting.component';
 import { UsuarioComponent } from './usuario/usuario.component';
-import { ProvinciasListComponent } from './provincia/provincias-list.component';
-import { LocalidadListComponent } from './localidad/localidad-list.component';
-import { SectorListComponent } from './sector/sector-list.component';
+import { ProvinciasListComponent } from './maestro/provincia/provincias-list.component';
+import { LocalidadListComponent } from './maestro/localidad/localidad-list.component';
+import { SectorListComponent } from './maestro/sector/sector-list.component';
+import { BarrioListComponent } from './maestro/barrio/barrio-list.component';
+import { CalleListComponent } from './maestro/calle/calle-list.component';
+import { NormaBarrioComponent } from './normalizacion/normalizacion-barrio/norma-barrio.component';
 import { LoginGuard } from '../services/service.index';
-import { BarrioListComponent } from './barrio/barrio-list.component';
-import { CalleListComponent } from './calle/calle-list.component';
-import { NormaBarrioComponent } from './normalizacion-barrio/norma-barrio.component';
+import { NormaCalleComponent } from './normalizacion/normalizacion-calle/norma-calle.component';
 
 const pagesRoutes: Routes = [
   {
@@ -66,7 +67,7 @@ const pagesRoutes: Routes = [
       },
       {
         path: 'normalizadorCalles',
-        component: PageNoFoundComponent,
+        component: NormaCalleComponent,
         data: { titulo: 'Normalizador Calle' }
       },
       { path: '**', component: PageNoFoundComponent }

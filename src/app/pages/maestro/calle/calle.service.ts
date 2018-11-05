@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Calle } from './calle.model';
-import { URL_SERVICIO } from '../../config/config';
+import { URL_SERVICIO } from '../../../config/config';
 import { catchError } from 'rxjs/operators/catchError';
-import { AlertService } from '../../services/service.index';
+import { AlertService } from '../../../services/service.index';
 
 const ORIGEN = 'CalleService';
 
@@ -49,6 +49,12 @@ export class CalleService {
     const url = `${URL_SERVICIO}/calle/?search=${texto}`;
     return this.http.get(url)
         .pipe(catchError(this.alert.handleError('buscarCalleSimpleTexto', ORIGEN)));
+  }
+
+  buscarCallePorTexto(texto: string) {
+    const url = `${URL_SERVICIO}/barrio_calle/?search=${texto}`;
+    return this.http.get(url)
+        .pipe(catchError(this.alert.handleError('buscarCalleTexto', ORIGEN)));
   }
 
 

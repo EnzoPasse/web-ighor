@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Message, ConfirmationService } from 'primeng/components/common/api';
-import { BarrioService } from '../barrio/barrio.service';
-import { Barrio } from '../barrio/barrio.model';
 import { NormalizacionBarrioService } from './normalizacion-barrio.service';
-import { Consulta, Filtros } from './norma-barrio.model';
-import { log } from 'util';
+import { Consulta, Filtros } from '../normalizacion.model';
+import { Barrio } from '../../maestro/barrio/barrio.model';
+import { BarrioService } from '../../maestro/barrio/barrio.service';
 
 @Component({
   selector: 'app-norma-barrio',
@@ -50,6 +49,7 @@ export class NormaBarrioComponent implements OnInit {
         this.barrios = res.barrios;
         this.cargandoFiltros = false;
         this.barriosMal = [];
+        this.barriosMalSelected = [];
       });
   }
 
@@ -60,7 +60,7 @@ export class NormaBarrioComponent implements OnInit {
       this.normalizadorService.buscarFiltros(event).subscribe(
         (data: Consulta) => {
           this.actualizarFiltros(data.filtros);
-          this.cargandoFiltros = true;
+            this.cargandoFiltros = true;
         },
         error => {
           this.mensajeError = <any>error;
@@ -86,6 +86,7 @@ export class NormaBarrioComponent implements OnInit {
   }
 
   guardarFiltro(event) {
+    this.cargandoFiltros = false;
     this.actualizarFiltros(event.filtros);
     let consulta: Consulta = new Consulta(
       // tslint:disable-next-line:radix
@@ -99,7 +100,7 @@ export class NormaBarrioComponent implements OnInit {
       .cargarBarriosMal(consulta)
       .subscribe((res: any) => {
                 this.barriosMal = res;
-
+                this.cargandoFiltros = true;
               });
 
     this.columnas = [
@@ -114,14 +115,14 @@ export class NormaBarrioComponent implements OnInit {
     this.normalizadorService.reporteNormalizacion()
        .subscribe((res: any) => {
             total = res.cantidad_registros_total;
-            normalizados = res.cantidad_registros_barrio_calle_normalizado;
+            normalizados = res.cantidad_registros_barrio_normalizado;
        this.grafico1 = {
         labels: ['Normalizados', 'Total'],
         datasets: [
           {
             data: [normalizados, total],
-            backgroundColor: ['#FF6384', '#36A2EB'], // , '#FFCE56'
-            hoverBackgroundColor: ['#FF6384', '#36A2EB'] // , '#FFCE56'
+            backgroundColor: ['#FF6384', '#FFCE56'], // , '#FFCE56'
+            hoverBackgroundColor: ['#FF6384', '#FFCE56'] // , '#FFCE56'
           }
         ]
       };
@@ -131,8 +132,8 @@ export class NormaBarrioComponent implements OnInit {
         datasets: [
           {
             data: [normalizados, total],
-            backgroundColor: ['#FFCE56', '#36A2EB'],
-            hoverBackgroundColor: ['#FFCE56', '#36A2EB']
+            backgroundColor: ['#DD6535', '#36A2EB'],
+            hoverBackgroundColor: ['#DD6535', '#36A2EB']
           }
         ]
       };

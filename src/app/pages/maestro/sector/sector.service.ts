@@ -2,8 +2,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 // core
-import { URL_SERVICIO } from '../../config/config';
-import { AlertService } from '../../services/shared/alert.service';
+import { URL_SERVICIO } from '../../../config/config';
+import { AlertService } from '../../../services/shared/alert.service';
 import { Sector } from './sector.model';
 // rxjs
 import { catchError } from 'rxjs/operators';

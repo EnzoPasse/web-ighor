@@ -23,6 +23,15 @@
       </div>
     </div>
 
+    <div *ngIf="barriosMal?.length > 0 && !cargandoFiltros" class="text-center">
+        <p-progressSpinner>
+          </p-progressSpinner>
+          <br> Cargando...
+    </div>
+
+
+
+
     <div *ngIf="barriosMal?.length > 0 && cargandoFiltros" class="card">
       <div class="card-body">
         <div class="ui-fluid">
@@ -64,7 +73,7 @@
       <!-- <div class="card">
         <div class="card-body"> -->
           <div class="ui-fluid">
-            <button pButton class="ui-button-danger ui-state-hover" label="{{barriosMalSelected.length}} items" style="height:76px"
+            <button pButton class="ui-button-success ui-state-hover" label="{{barriosMalSelected.length}} items" style="height:76px"
               (click)="normalizar()">Normalizar
             </button>
           </div>
@@ -81,7 +90,7 @@
       <div class="card">
         <div class="card-body">
           <div class="ui-fluid">
-            <button pButton [ngClass]="(nuevo)? 'ui-button-warning ui-state-hover' : 'ui-button-success ui-state-hover'"
+            <button pButton [ngClass]="(nuevo)? 'ui-button-warning ui-state-hover' : 'ui-button-info ui-state-hover'"
               label="{{tituloboton}}" style="height:76px" (click)="filtrosSelectedChangue()">
             </button>
           </div>

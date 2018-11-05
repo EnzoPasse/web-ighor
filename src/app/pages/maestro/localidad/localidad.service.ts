@@ -3,10 +3,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 // core
-import { URL_SERVICIO } from '../../config/config';
+import { URL_SERVICIO } from '../../../config/config';
 import { Provincia } from '../provincia/provincia.model';
 import { Localidad } from './localidad.model';
-import { AlertService } from '../../services/shared/alert.service';
+import { AlertService } from '../../../services/shared/alert.service';
 
 // rxjs
 import { Observable } from 'rxjs/Observable';

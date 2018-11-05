@@ -29,3 +29,23 @@ export class BarriosMal {
     public barrio: string
   ) {}
 }
+
+export class ConsultaCalle {
+
+  constructor(
+    public calle_barrio: number,
+    public all: boolean,
+    public calles_mal: number[],
+    public filtros: Filtros[]
+  ) {}
+}
+
+export class CalleMal {
+
+  constructor (
+    public id: number,
+    public descripcion_mal: string,
+    public barrio: string
+  ) {}
+}
+

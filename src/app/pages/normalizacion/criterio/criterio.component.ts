@@ -1,17 +1,15 @@
 import {
   Component,
-  OnInit,
   Input,
   Output,
   EventEmitter,
   OnChanges
 } from '@angular/core';
 import { SelectItem, ConfirmationService } from 'primeng/components/common/api';
-import { Filtros } from '../norma-barrio.model';
+import { Filtros } from '../normalizacion.model';
 import {
   FormGroup,
   FormBuilder,
-  FormControl,
   Validators,
   FormArray
 } from '@angular/forms';

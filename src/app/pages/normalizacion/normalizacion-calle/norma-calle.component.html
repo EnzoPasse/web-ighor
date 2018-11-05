@@ -1,0 +1,119 @@
+<p-growl openTo="body" [value]="msgs" life="1500">
+  </p-growl>
+
+  <div class="ui-g">
+
+    <div class="ui-md-8">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title"> Calle </h3>
+          <div class="ui-fluid">
+            <p-autoComplete [suggestions]="calles" (completeMethod)="buscarCalles($event)" field="calle.nombre" placeholder="Buscar Calle ..."
+              [minLength]="3" (onSelect)="cargarFiltros($event)" emptyMessage="No existen coincidencias con su busqueda"
+              forceSelection="true">
+              <ng-template let-sect pTemplate="SelectedItem">
+                {{sect.barrio.cuadrante.localidad.provincia.nombre}} - {{sect.barrio.cuadrante.localidad.nombre}} <small>({{sect.barrio.cuadrante.nombre}})</small>
+                - <strong>{{ sect.barrio.nombre }} - {{sect.calle.nombre}}</strong>
+              </ng-template>
+            </p-autoComplete>
+            <!-- <div class="ui-g ui-md-8">
+                <p-checkbox label="Incluir los barrios ya Normalizados" name="all" [(ngModel)]="listartodo" binary="true"></p-checkbox>
+              </div> -->
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="callesMal?.length > 0 && !cargandoFiltros" class="text-center">
+          <p-progressSpinner>
+            </p-progressSpinner>
+            <br> Cargando...
+      </div>
+
+
+
+
+      <div *ngIf="callesMal?.length > 0 && cargandoFiltros" class="card">
+        <div class="card-body">
+          <div class="ui-fluid">
+            <p-table [columns]="columnas" [value]="callesMal" [(selection)]="callesMalSelected" datakey="id" dataKey="nombre"
+              [scrollable]="true" scrollHeight="240px">
+              <ng-template pTemplate="header" let-columns>
+                <tr>
+                  <th style="width: 5em">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                  </th>
+                  <th *ngFor="let col of columns" [pSortableColumn]="col.fields">
+                    {{col.headers}}
+                    <p-sortIcon [field]="col.fields" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order"
+                      ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+
+                  </th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-rowData let-columns="columns">
+                <tr [pSelectableRow]="rowData">
+                  <td style="width: 5em">
+                    <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+                  </td>
+                  <td *ngFor="let col of columns" class="text-center">
+                    {{rowData[col.fields]}}
+                  </td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="summary">
+                Total: {{callesMal?.length}} Items
+              </ng-template>
+            </p-table>
+          </div>
+        </div>
+      </div>
+
+
+      <div *ngIf="callesMalSelected.length > 0">
+        <!-- <div class="card">
+          <div class="card-body"> -->
+            <div class="ui-fluid">
+              <button pButton class="ui-button-success ui-state-hover" label="{{callesMalSelected.length}} items" style="height:76px"
+                (click)="normalizar()">Normalizar
+              </button>
+            </div>
+          <!-- </div>
+        </div> -->
+      </div>
+
+
+    </div>
+
+
+    <div class="ui-md-4">
+      <div *ngIf="cargandoFiltros">
+        <div class="card">
+          <div class="card-body">
+            <div class="ui-fluid">
+              <button pButton [ngClass]="(nuevo)? 'ui-button-warning ui-state-hover' : 'ui-button-info ui-state-hover'"
+                label="{{tituloboton}}" style="height:76px" (click)="filtrosSelectedChangue()">
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <div class="ui-fluid">
+              <h4 class="text-center">Totales</h4>
+              <p-chart type="pie" [data]="grafico1"></p-chart>
+              <br>
+              <h4 class="text-center">Sector</h4>
+              <p-chart type="pie" [data]="grafico2"></p-chart>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div>
+    <app-criterio [filtrosIn]="filtrosSelected" [display]="display" [tituloOption]="(nuevo) ? 'Nuevos Filtros' : 'Editar Filtros' "
+      [barrio]="nombreCalle" (filtroInfo)="guardarFiltro($event)" (displayInfo)="onDialogClose($event)"></app-criterio>
+  </div>

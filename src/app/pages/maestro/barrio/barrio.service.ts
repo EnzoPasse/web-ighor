@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 // core
 import { Barrio } from './barrio.model';
-import { URL_SERVICIO } from '../../config/config';
-import { AlertService } from '../../services/service.index';
+import { URL_SERVICIO } from '../../../config/config';
+import { AlertService } from '../../../services/service.index';
 // rxjs
 import { catchError } from 'rxjs/operators';
 

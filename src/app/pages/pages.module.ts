@@ -16,12 +16,8 @@ import { PagesComponent } from './pages.component';
 import { HomeComponent } from './home/home.component';
 import { AccountSettingComponent } from './account-setting/account-setting.component';
 import { UsuarioComponent } from './usuario/usuario.component';
-import { LocalidadModule } from './localidad/localidad.module';
-import { ProvinciaModule } from './provincia/provincia.module';
-import { SectorModule } from './sector/sector.module';
-import { BarrioModule } from './barrio/barrio.module';
-import { CalleModule } from './calle/calle.module';
-import { NormalizacionBarrioModule } from './normalizacion-barrio/normalizacion-barrio.module';
+import { MaestroModule } from './maestro/maestro.module';
+import { NormalizacionBarrioModule } from './normalizacion/normalizacion.module';
 
 
 @NgModule({
@@ -36,11 +32,7 @@ import { NormalizacionBarrioModule } from './normalizacion-barrio/normalizacion-
     FormsModule,
     SharedModule,
     PagesRoutes,
-    ProvinciaModule,
-    LocalidadModule,
-    SectorModule,
-    BarrioModule,
-    CalleModule,
+    MaestroModule,
     NormalizacionBarrioModule
   ],
   exports: [],

@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AlertService } from '../../services/service.index';
-import { URL_SERVICIO } from '../../config/config';
+import { AlertService } from '../../../services/service.index';
+import { URL_SERVICIO } from '../../../config/config';
 import { catchError } from 'rxjs/operators';
-import { Barrio } from '../barrio/barrio.model';
-import { Consulta } from './norma-barrio.model';
+import { Consulta } from '../normalizacion.model';
+import { Barrio } from '../../maestro/barrio/barrio.model';
 
 const ORIGEN = 'NormalizacionService';
+
 @Injectable()
 export class NormalizacionBarrioService {
+
   constructor(private http: HttpClient, private alert: AlertService) {}
 
   buscarFiltros(barrio: Barrio) {

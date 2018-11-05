@@ -3,9 +3,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 
 // core
-import { URL_SERVICIO } from '../../config/config';
+import { URL_SERVICIO } from '../../../config/config';
 import { Provincia } from './provincia.model';
-import { AlertService } from '../../services/service.index';
+import { AlertService } from '../../../services/service.index';
 
 // rxjs
 import { catchError, map } from 'rxjs/operators';

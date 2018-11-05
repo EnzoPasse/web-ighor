@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
-import { Usuario } from '../models/usuario.model';
+import { Usuario } from '../pages/usuario/usuario.model';
 import { UsuarioService } from '../services/service.index';
 
 // llamda a un script fuera de angular
