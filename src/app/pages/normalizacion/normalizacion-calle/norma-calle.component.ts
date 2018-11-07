@@ -35,7 +35,6 @@ export class NormaCalleComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.cargarGraficos();
   }
 
   onDialogClose(event) {
@@ -46,8 +45,8 @@ export class NormaCalleComponent implements OnInit {
     this.calleService
       .buscarCallePorTexto(event.query)
       .subscribe((res: any) => {
-        console.log(res);
         this.calles = res.calles_barrio; ////// VER SI VIENE ASI EL DATO
+        console.log(this.calles);
         this.cargandoFiltros = false;
         this.callesMal = [];
         this.callesMalSelected = [];
@@ -55,6 +54,7 @@ export class NormaCalleComponent implements OnInit {
   }
 
   cargarFiltros(event: Calle) {
+
     if (event) {
       this.calleSelected = event;
       this.nombreCalle = event.calle.nombre;
@@ -62,6 +62,8 @@ export class NormaCalleComponent implements OnInit {
         (data: ConsultaCalle) => {
           this.actualizarFiltros(data.filtros);
             this.cargandoFiltros = true;
+            this.cargarGraficos();
+
         },
         error => {
           this.mensajeError = <any>error;
@@ -114,17 +116,23 @@ export class NormaCalleComponent implements OnInit {
   }
 
   cargarGraficos() {
-    let total: number;
-    let normalizados: number;
-    this.normalizadorService.reporteNormalizacion()
+    let total_resgistros: number;
+    let barrios_calle: number;
+    let usuarios_barrio: number;
+    let usuarios_calle: number;
+    // tslint:disable-next-line:radix
+    this.normalizadorService.reporteNormalizacion(parseInt(this.calleSelected.id))
        .subscribe((res: any) => {
-            total = res.cantidad_registros_total;
-            normalizados = res.cantidad_registros_barrio_calle_normalizado;
+            total_resgistros = res.cantidad_registros_total;
+            barrios_calle = res.cantidad_calles_por_barrio;
+            usuarios_barrio = res.cantidad_registros_calle_normalizado_por_barrio;
+            usuarios_calle = res.cantidad_registros_calle_normalizado;
+
        this.grafico1 = {
-        labels: ['Normalizados', 'Total'],
+        labels: ['Calles/Barrio', 'Total'],
         datasets: [
           {
-            data: [normalizados, total],
+            data: [barrios_calle, total_resgistros],
             backgroundColor: ['#FF6384', '#FFCE56'], // , '#FFCE56'
             hoverBackgroundColor: ['#FF6384', '#FFCE56'] // , '#FFCE56'
           }
@@ -132,10 +140,10 @@ export class NormaCalleComponent implements OnInit {
       };
 
       this.grafico2 = {
-        labels: ['Normalizados', 'Sector'],
+        labels: ['Calle', 'Barrio'],
         datasets: [
           {
-            data: [normalizados, total],
+            data: [usuarios_calle, usuarios_barrio],
             backgroundColor: ['#DD6535', '#36A2EB'],
             hoverBackgroundColor: ['#DD6535', '#36A2EB']
           }
@@ -154,7 +162,7 @@ export class NormaCalleComponent implements OnInit {
 
      let consulta: ConsultaCalle = new ConsultaCalle(
       // tslint:disable-next-line:radix
-      parseInt(this.calleSelected.calle.id),
+      parseInt(this.calleSelected.id),
       true,
       ids,
       this.filtrosSelected
@@ -185,6 +193,7 @@ export class NormaCalleComponent implements OnInit {
      setTimeout(() => {
       this.callesMalSelected = [];
       this.callesMal = [];
+      this.cargarGraficos();
      }, 1500);
 
   }

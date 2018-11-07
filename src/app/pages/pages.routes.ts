@@ -22,9 +22,11 @@ const pagesRoutes: Routes = [
     canActivate: [LoginGuard],
     children: [
       { path: '', redirectTo: '/home', pathMatch: 'full' },
-      { path: 'home',
+      {
+        path: 'home',
         component: HomeComponent,
-        data: { titulo: 'Home' } },
+        data: { titulo: 'Home' }
+      },
       {
         path: 'account-setting',
         component: AccountSettingComponent,
@@ -72,7 +74,8 @@ const pagesRoutes: Routes = [
       },
       { path: '**', component: PageNoFoundComponent }
     ]
-  }
+  },
+  { path: '**', component: PageNoFoundComponent }
 ];
 
 @NgModule({

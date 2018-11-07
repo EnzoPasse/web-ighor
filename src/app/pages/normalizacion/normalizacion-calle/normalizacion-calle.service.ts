@@ -31,8 +31,8 @@ export class NormalizacionCalleService {
       .pipe(catchError(this.alert.handleError('buscaCalleMal', ORIGEN)));
   }
 
-  reporteNormalizacion() {
-    const url = `${URL_SERVICIO}/reporte_normalizacion/`;
+  reporteNormalizacion(id: number) {
+    const url = `${URL_SERVICIO}/reporte_normalizacion_calle_barrio/${id}`;
 
     return this.http.get(url).
      pipe(catchError(this.alert.handleError('reporteNormalizacion', ORIGEN)));

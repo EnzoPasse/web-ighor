@@ -35,7 +35,7 @@ export class NormaBarrioComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.cargarGraficos();
+   // this.cargarGraficos();
   }
 
   onDialogClose(event) {
@@ -61,6 +61,8 @@ export class NormaBarrioComponent implements OnInit {
         (data: Consulta) => {
           this.actualizarFiltros(data.filtros);
             this.cargandoFiltros = true;
+            this.cargarGraficos();
+
         },
         error => {
           this.mensajeError = <any>error;
@@ -110,17 +112,22 @@ export class NormaBarrioComponent implements OnInit {
   }
 
   cargarGraficos() {
-    let total: number;
-    let normalizados: number;
-    this.normalizadorService.reporteNormalizacion()
+    let total_registros: number;
+    let barrios_sector: number;
+    let usuarios_sector: number;
+    let usuarios_barrio: number;
+    // tslint:disable-next-line:radix
+    this.normalizadorService.reporteNormalizacion(parseInt(this.barrioSelected.id))
        .subscribe((res: any) => {
-            total = res.cantidad_registros_total;
-            normalizados = res.cantidad_registros_barrio_normalizado;
+            total_registros = res.cantidad_registros_total;
+            barrios_sector = res.cantidad_barrios_por_sector;
+            usuarios_sector = res.cantidad_registros_barrio_normalizado_por_sector;
+            usuarios_barrio = res.cantidad_registros_barrio_normalizado;
        this.grafico1 = {
-        labels: ['Normalizados', 'Total'],
+        labels: ['Barrios/sector', 'Total'],
         datasets: [
           {
-            data: [normalizados, total],
+            data: [barrios_sector, total_registros],
             backgroundColor: ['#FF6384', '#FFCE56'], // , '#FFCE56'
             hoverBackgroundColor: ['#FF6384', '#FFCE56'] // , '#FFCE56'
           }
@@ -128,10 +135,10 @@ export class NormaBarrioComponent implements OnInit {
       };
 
       this.grafico2 = {
-        labels: ['Normalizados', 'Sector'],
+        labels: ['Normalizados', 'Usuarios'],
         datasets: [
           {
-            data: [normalizados, total],
+            data: [usuarios_sector, usuarios_barrio],
             backgroundColor: ['#DD6535', '#36A2EB'],
             hoverBackgroundColor: ['#DD6535', '#36A2EB']
           }
@@ -181,6 +188,7 @@ export class NormaBarrioComponent implements OnInit {
      setTimeout(() => {
       this.barriosMalSelected = [];
       this.barriosMal = [];
+      this.cargarGraficos();
      }, 1500);
 
   }

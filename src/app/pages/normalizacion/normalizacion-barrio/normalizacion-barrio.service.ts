@@ -31,8 +31,8 @@ export class NormalizacionBarrioService {
       .pipe(catchError(this.alert.handleError('buscaBarrioMal', ORIGEN)));
   }
 
-  reporteNormalizacion() {
-    const url = `${URL_SERVICIO}/reporte_normalizacion/`;
+  reporteNormalizacion(id: number) {
+    const url = `${URL_SERVICIO}/reporte_normalizacion_barrio/${id}`;
 
     return this.http.get(url).
      pipe(catchError(this.alert.handleError('reporteNormalizacion', ORIGEN)));
