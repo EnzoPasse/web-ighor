@@ -28,7 +28,15 @@ export class SidebarService {
       { titulo: 'Barrios', url: '/normalizadorBarrios' },
       { titulo: 'Calles', url: '/normalizadorCalles' }
     ]
- }
+ },
+ {
+  titulo: 'Hoja de Rutas',
+  icono: 'mdi mdi-map',
+  submenu: [
+    { titulo: 'Generar Hoja de Rutas', url: '/generarHojaRuta' },
+    { titulo: 'Asignar Hojas de Rutas', url: '/asignarHojaRuta' }
+  ]
+}
   ];
 
   constructor() { }

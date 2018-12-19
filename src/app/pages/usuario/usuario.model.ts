@@ -8,6 +8,7 @@ export class Usuario {
       public password?: string,
       public token?: string,
       public role?: Rol,
+      public id?: number
   ) { }
 
 }

@@ -14,6 +14,8 @@ import { CalleListComponent } from './maestro/calle/calle-list.component';
 import { NormaBarrioComponent } from './normalizacion/normalizacion-barrio/norma-barrio.component';
 import { LoginGuard } from '../services/service.index';
 import { NormaCalleComponent } from './normalizacion/normalizacion-calle/norma-calle.component';
+import { GenerarHojaRutaComponent } from './hoja-ruta/generar-hoja-ruta/generar-hoja-ruta.component';
+import { AsignarHojaRutaComponent } from './hoja-ruta/asignar-hoja-ruta/asignar-hoja-ruta.component';
 
 const pagesRoutes: Routes = [
   {
@@ -65,12 +67,22 @@ const pagesRoutes: Routes = [
       {
         path: 'normalizadorBarrios',
         component: NormaBarrioComponent,
-        data: { titulo: 'Normalizador Barrio' }
+        data: { titulo: 'Normalizar Barrio' }
       },
       {
         path: 'normalizadorCalles',
         component: NormaCalleComponent,
-        data: { titulo: 'Normalizador Calle' }
+        data: { titulo: 'Normalizar Calle' }
+      },
+      {
+        path: 'generarHojaRuta',
+        component: GenerarHojaRutaComponent,
+        data: { titulo: 'Generar Hoja de Ruta' }
+      },
+      {
+        path: 'asignarHojaRuta',
+        component: AsignarHojaRutaComponent,
+        data: { titulo: 'Asignar Hoja de Ruta' }
       },
       { path: '**', component: PageNoFoundComponent }
     ]

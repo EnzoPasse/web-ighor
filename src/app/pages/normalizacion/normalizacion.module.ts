@@ -14,4 +14,4 @@ import { NormalizacionCalleService } from './normalizacion-calle/normalizacion-c
   exports: [],
   providers: [NormalizacionBarrioService, NormalizacionCalleService]
 })
-export class NormalizacionBarrioModule {}
+export class NormalizacionModule {}

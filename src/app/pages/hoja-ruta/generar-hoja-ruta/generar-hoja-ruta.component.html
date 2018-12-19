@@ -1,0 +1,65 @@
+<p-growl openTo="body" [value]="msgs" life="1500"> </p-growl>
+
+<div class="ui-g">
+  <div class="ui-md-8">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title">Barrio</h3>
+        <div class="ui-fluid">
+          <p-autoComplete
+            [suggestions]="barrios"
+            (completeMethod)="buscarBarrios($event)"
+            field="nombre"
+            placeholder="Buscar Barrio ..."
+            [minLength]="3"
+            (onSelect)="seleccionarBarrio($event)"
+            emptyMessage="No existen coincidencias con su busqueda"
+            forceSelection="true"
+          >
+            <ng-template let-sect pTemplate="SelectedItem">
+              {{ sect.cuadrante.localidad.provincia.nombre }} -
+              {{ sect.cuadrante.localidad.nombre }}
+              <small>({{ sect.cuadrante.nombre }})</small> -
+              <strong>{{ sect.nombre }}</strong>
+            </ng-template>
+          </p-autoComplete>
+          <!--
+            <div class="ui-g ui-md-8">
+              <p-checkbox label="Incluir los barrios ya Normalizados" name="all" [(ngModel)]="listartodo" binary="true"></p-checkbox>
+            </div>
+          -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ui-md-4">
+    <div *ngIf="barrioSelected">
+      <div class="card">
+        <div class="card-body">
+          <div class="ui-fluid">
+            <button
+              pButton
+              class="ui-button-success ui-state-hover"
+              label=" Generar las Hojas de Rutas "
+              style="height:76px"
+              (click)="generarHojasRutas()"
+            ></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="ui-g-offset-4 ">
+  <div *ngIf="cargando" class= "text-center">
+    <p-progressSpinner> </p-progressSpinner>
+    <div class="alert alert-primary" role="alert">
+      Por favor espere ...
+      <br>
+      Estamos generando las hojas de ruta
+      <br>
+      para el barrio <strong>{{ barrioSelected.nombre }} </strong>
+    </div>
+  </div>
+</div>

@@ -17,7 +17,8 @@ import { HomeComponent } from './home/home.component';
 import { AccountSettingComponent } from './account-setting/account-setting.component';
 import { UsuarioComponent } from './usuario/usuario.component';
 import { MaestroModule } from './maestro/maestro.module';
-import { NormalizacionBarrioModule } from './normalizacion/normalizacion.module';
+import { NormalizacionModule } from './normalizacion/normalizacion.module';
+import { HojaRutaModule } from './hoja-ruta/hoja-ruta.module';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { NormalizacionBarrioModule } from './normalizacion/normalizacion.module'
     SharedModule,
     PagesRoutes,
     MaestroModule,
-    NormalizacionBarrioModule
+    NormalizacionModule,
+    HojaRutaModule
   ],
   exports: [],
   providers: []
