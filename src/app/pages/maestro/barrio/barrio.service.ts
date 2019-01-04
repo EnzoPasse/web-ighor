@@ -65,6 +65,23 @@ export class BarrioService {
   }
 
 
+  generarHojaRutas(barrio: Barrio) {
+   let url = `${URL_SERVICIO}/barrio/${barrio.id}/generar_hoja_ruta/`;
+   let body = {}; // JSON.stringify(barrio);
+
+   return this.http.put( url, body, this.getHttpHeaders())
+    .pipe(catchError(this.alert.handleError('generarHojaRuta', ORIGEN)));
+  }
+
+  cargarHojaRutas(barrio: Barrio) {
+  let url = `${URL_SERVICIO}/barrio/${barrio.id}/hojas_ruta/`;
+  let body = JSON.stringify(barrio);
+
+   return this.http.get(url)
+    .pipe(catchError(this.alert.handleError('cargarHojaRuta', ORIGEN)));
+  }
+
+
   private getHttpHeaders() {
     const httpOptions = {
       headers: new HttpHeaders({

@@ -13,6 +13,7 @@
             placeholder="Buscar Barrio ..."
             [minLength]="3"
             (onSelect)="seleccionarBarrio($event)"
+            (onClear)="clear()"
             emptyMessage="No existen coincidencias con su busqueda"
             forceSelection="true"
           >
@@ -44,6 +45,7 @@
               label=" Generar las Hojas de Rutas "
               style="height:76px"
               (click)="generarHojasRutas()"
+              [disabled]=display
             ></button>
           </div>
         </div>
@@ -51,15 +53,48 @@
     </div>
   </div>
 
-<div class="ui-g-offset-4 ">
-  <div *ngIf="cargando" class= "text-center">
-    <p-progressSpinner> </p-progressSpinner>
-    <div class="alert alert-primary" role="alert">
-      Por favor espere ...
-      <br>
-      Estamos generando las hojas de ruta
-      <br>
-      para el barrio <strong>{{ barrioSelected.nombre }} </strong>
+  <div class="ui-g-offset-4 ">
+    <div *ngIf="cargando" class="text-center">
+      <p-progressSpinner> </p-progressSpinner>
+      <div class="alert alert-primary" role="alert">
+        Por favor espere ... <br />
+        Estamos generando las hojas de ruta <br />
+        para el barrio <strong>{{ barrioSelected?.nombre }} </strong>
+      </div>
     </div>
   </div>
+
+  <div *ngIf="display" class="card ui-fluid">
+    <div class="card-body">
+      <div class="ui-fluid">
+        <p-table [columns]="columnas" [value]="display" >
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th *ngFor="let col of columns"  class="text-center">
+                {{col.headers}}
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr>
+              <td *ngFor="let col of columns" class="text-center">
+                {{rowData[col.fields]}}
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+
+<div class="ui-md-12">
+  <div *ngIf="display" class="ui-fluid">
+    <div class="alert alert-info" role="alert">
+      <h4 class="alert-heading">Atención!</h4>
+      <p>Para el Barrio seleccionado  ya se han generado las hojas de rutas, por favor verifique la información.</p>
+      <button type ="button" class="btn btn-link" (click)="cambiardisplay()">Continuar de todos modos</button>
+    </div>
+  </div>
+</div>
+
 </div>
