@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Message, ConfirmationService } from 'primeng/components/common/api';
+import { Barrio } from '../../maestro/barrio/barrio.model';
+import { BarrioService } from '../../maestro/barrio/barrio.service';
 
 @Component({
   selector: 'app-asignar-hoja-ruta',
@@ -7,9 +10,37 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AsignarHojaRutaComponent implements OnInit {
 
-  constructor() { }
+  msgs: Message[] = [];
+  barrios: Barrio[] = [];
+  barrioSelected: Barrio;
 
-  ngOnInit() {
+  constructor(public barrioService: BarrioService,
+    public confirmationService: ConfirmationService) { }
+
+  ngOnInit() {}
+
+  buscarBarrios(event) {
+    this.barrioService
+      .buscarBarrioPorTexto(event.query)
+      .subscribe((res: any) => {
+        this.barrios = res.barrios;
+      });
   }
+
+  seleccionarBarrio(barrio: Barrio) {
+    this.barrioSelected = Object.assign({}, barrio);
+    if (this.barrioSelected) {
+      this.barrioService
+        .cargarHojaRutas(this.barrioSelected)
+        .subscribe((res: any) => {
+          console.log(res);
+        });
+    }
+  }
+
+  clear() {
+    this.barrioSelected = null;
+  }
+
 
 }

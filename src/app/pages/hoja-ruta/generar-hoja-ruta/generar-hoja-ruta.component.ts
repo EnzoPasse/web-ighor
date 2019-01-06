@@ -4,7 +4,6 @@ import { BarrioService } from '../../maestro/barrio/barrio.service';
 import { Barrio } from '../../maestro/barrio/barrio.model';
 import { HojaRuta } from '../hoja-ruta.models';
 import { DatePipe } from '@angular/common';
-import { isNull, isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'app-generar-hoja-ruta',
