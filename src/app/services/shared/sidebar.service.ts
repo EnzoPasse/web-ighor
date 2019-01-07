@@ -8,7 +8,7 @@ export class SidebarService {
 
   menu: any = [
    {
-     titulo: 'Maestros',
+     titulo: 'Administracion',
      icono: 'mdi mdi-sitemap',
      submenu: [
        { titulo: 'Home', url: '/home' },
@@ -33,7 +33,7 @@ export class SidebarService {
   titulo: 'Hoja de Rutas',
   icono: 'mdi mdi-map',
   submenu: [
-    { titulo: 'Generar Hoja de Rutas', url: '/generarHojaRuta' },
+    { titulo: 'Generar Hojas de Rutas', url: '/generarHojaRuta' },
     { titulo: 'Asignar Hojas de Rutas', url: '/asignarHojaRuta' }
   ]
 }
