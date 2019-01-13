@@ -11,6 +11,10 @@ export class Usuario {
       public id?: number
   ) { }
 
+  toString(): String {
+    return this.first_name.toString();
+  }
+
 }
 
 export class Rol {

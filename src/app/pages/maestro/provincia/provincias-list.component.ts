@@ -106,13 +106,13 @@ export class ProvinciasListComponent implements OnInit {
           });
       },
       reject: () => {
-        this.msgs = [
+        /* this.msgs = [
           {
             severity: 'warn',
             summary: 'Operación Cancelada',
             detail: `${provincia.nombre} NO Eliminada.`
           }
-        ];
+        ]; */
       }
     });
   }

@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
     this.usuarioService.login(usuario, this.recuerdame)
     .subscribe(
       (correcto: any) => {
-        this.router.navigate(['/generarHojaRuta']);
+        this.router.navigate(['/asignarHojaRuta']);
       },
       error => {
         this.msjError = <any>error;

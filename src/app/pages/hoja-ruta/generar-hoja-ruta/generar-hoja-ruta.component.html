@@ -45,7 +45,7 @@
               label=" Generar las Hojas de Rutas "
               style="height:76px"
               (click)="generarHojasRutas()"
-              [disabled]=display
+              [disabled]="display"
             ></button>
           </div>
         </div>
@@ -67,34 +67,41 @@
   <div *ngIf="display" class="card ui-fluid">
     <div class="card-body">
       <div class="ui-fluid">
-        <p-table [columns]="columnas" [value]="display" >
+        <p-table [columns]="columnas" [value]="display">
           <ng-template pTemplate="header" let-columns>
             <tr>
-              <th *ngFor="let col of columns"  class="text-center">
-                {{col.headers}}
+              <th *ngFor="let col of columns" class="text-center">
+                {{ col.headers }}
               </th>
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-rowData let-columns="columns">
             <tr>
               <td *ngFor="let col of columns" class="text-center">
-                {{rowData[col.fields]}}
+                {{ rowData[col.fields] }}
               </td>
             </tr>
           </ng-template>
         </p-table>
       </div>
     </div>
+     <div class="text-center">
+        <h3> <span class="badge badge-secondary"> Hojas de Rutas Generadas = {{ cantRegistros }}</span> </h3>
+     </div>
   </div>
 
-<div class="ui-md-12">
-  <div *ngIf="display" class="ui-fluid">
-    <div class="alert alert-info" role="alert">
-      <h4 class="alert-heading">Atención!</h4>
-      <p>Para el Barrio seleccionado  ya se han generado las hojas de rutas, por favor verifique la información.</p>
-      <button type ="button" class="btn btn-link" (click)="cambiardisplay()">Continuar de todos modos</button>
+  <div class="ui-md-12">
+    <div *ngIf="display" class="ui-fluid">
+      <div class="alert alert-info" role="alert">
+        <h4 class="alert-heading">Atención!</h4>
+        <p>
+          Para el Barrio seleccionado ya se han generado las hojas de rutas, por
+          favor verifique la información.
+        </p>
+        <button type="button" class="btn btn-link" (click)="cambiardisplay()">
+          Continuar de todos modos
+        </button>
+      </div>
     </div>
   </div>
-</div>
-
 </div>

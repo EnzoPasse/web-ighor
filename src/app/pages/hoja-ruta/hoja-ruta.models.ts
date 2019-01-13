@@ -22,7 +22,8 @@ export class Hoja {
     public altura_hasta: string,
     public cant_registros: number,
     public estado: Estado,
-    public asignado_a?: string
+    public asignado_a?: string,
+    public detalle_hoja_ruta?: DetalleHoja[]
   ) {}
 }
 

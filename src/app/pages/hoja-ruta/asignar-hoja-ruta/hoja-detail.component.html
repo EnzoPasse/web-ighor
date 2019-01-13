@@ -1,0 +1,56 @@
+<div class="row">
+  <p-dialog
+    header="Detalle de Hoja de Ruta"
+    [(visible)]="display"
+    modal="true"
+    [responsive]="true"
+    [resizable]="true"
+    [minWidth]="300"
+    appendTo="body"
+    [closable]="false"
+  >
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Titular</th>
+          <th scope="col">Apellido</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Provincia</th>
+          <th scope="col">Localidad</th>
+          <th scope="col">Barrio</th>
+          <th scope="col">Calle</th>
+          <th scope="col">Altura</th>
+          <th scope="col">Piso</th>
+          <th scope="col">Dpto</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of hojaDetalle; let i = index">
+          <th scope="row">{{ i + 1 }}</th>
+          <td><strong><strong>{{ item.titular }}</strong></strong ></td>
+          <td>{{ item.apellido }}</td>
+          <td>{{ item.nombre }}</td>
+          <td><small>{{ item.provincia }}</small></td>
+          <td><small>{{ item.localidad }}</small></td>
+          <td>{{ item.barrio }}</td>
+          <td>{{ item.calle }}</td>
+          <td>{{ item.altura }}</td>
+          <td>{{ item.piso ? item.piso : " - " }}</td>
+          <td>{{ item.departamento ? item.departamento : " - " }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p-footer>
+      <button
+        type="button"
+        pButton
+        icon="fa-close"
+        class="ui-button-danger"
+        (click)="hideDialog()"
+        label="Cerrar"
+      ></button>
+    </p-footer>
+  </p-dialog>
+</div>

@@ -18,6 +18,7 @@ export class GenerarHojaRutaComponent implements OnInit {
   hojasRutas: any;
   columnas: any;
   display: any;
+  cantRegistros: number;
 
   constructor(
     public barrioService: BarrioService,
@@ -55,9 +56,11 @@ export class GenerarHojaRutaComponent implements OnInit {
         localidad: res.barrio.cuadrante.localidad.nombre,
         provincia: res.barrio.cuadrante.localidad.provincia.nombre,
         usuario: res.owner.first_name + ' ' + res.owner.last_name,
-        fecha: this.datepipe.transform(res.fecha, 'dd/MM/yyyy , h:mm a')
+        fecha: this.datepipe.transform(res.fecha, 'dd/MM/yyyy , h:mm a'),
+
       };
       this.display = Array.of(resultado);
+      this.cantRegistros = res.hojas.length;
     } else {
       this.display = null;
     }

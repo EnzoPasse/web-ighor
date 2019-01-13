@@ -5,14 +5,16 @@ import { GenerarHojaRutaComponent } from './generar-hoja-ruta/generar-hoja-ruta.
 import { AsignarHojaRutaComponent } from './asignar-hoja-ruta/asignar-hoja-ruta.component';
 import { CargarVisitaHojaRutaComponent } from './cargar-visita-hoja-ruta/cargar-visita-hoja-ruta.component';
 import { PrimeNgModule } from '../primeng.module';
+import { HojaRutaService } from './hoja-ruta.service';
+import { HojaDetailComponent } from './asignar-hoja-ruta/hoja-detail.component';
 
 @NgModule({
   imports: [
     CommonModule, PrimeNgModule, FormsModule, ReactiveFormsModule
   ],
   declarations: [
-     GenerarHojaRutaComponent, AsignarHojaRutaComponent, CargarVisitaHojaRutaComponent
+     GenerarHojaRutaComponent, AsignarHojaRutaComponent, CargarVisitaHojaRutaComponent, HojaDetailComponent
   ],
-  providers: [DatePipe]
+  providers: [DatePipe, HojaRutaService]
 })
 export class HojaRutaModule { }
