@@ -1,0 +1,30 @@
+<div class="row">
+  <p-dialog
+    header="Impresión Hoja Ruta"
+    [(visible)]="displayPDF"
+    modal="true"
+    [responsive]="true"
+    [resizable]="true"
+    [minWidth]="1000"
+    appendTo="body"
+    [closable]="false"
+  >
+    <iframe
+      width="100%"
+      height="600px"
+      [src]="pdfRuta"
+      type="application/pdf"
+    ></iframe>
+
+    <p-footer>
+      <button
+        type="button"
+        pButton
+        icon="fa-close"
+        class="ui-button-danger"
+        (click)="hideDialog()"
+        label="Cerrar"
+      ></button>
+    </p-footer>
+  </p-dialog>
+</div>

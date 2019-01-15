@@ -92,14 +92,14 @@
 
   <div class="ui-md-12">
     <div *ngIf="display" class="ui-fluid">
-      <div class="alert alert-info" role="alert">
+      <div class="alert alert-warning" role="alert">
         <h4 class="alert-heading">Atención!</h4>
         <p>
-          Para el Barrio seleccionado ya se han generado las hojas de rutas, por
-          favor verifique la información.
-        </p>
+          Para el Barrio seleccionado ya se han generado un registro.
+          El registro actual podria tener asociados vendedores; Por favor verifique la información.
+       </p>
         <button type="button" class="btn btn-link" (click)="cambiardisplay()">
-          Continuar de todos modos
+          Continuar y pasar a histórico el registro actual.
         </button>
       </div>
     </div>

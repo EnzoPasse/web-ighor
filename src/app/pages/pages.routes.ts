@@ -26,8 +26,7 @@ const pagesRoutes: Routes = [
       { path: '', redirectTo: '/home', pathMatch: 'full' },
       {
         path: 'home',
-        component: HomeComponent,
-        data: { titulo: 'Home' }
+        component: HomeComponent
       },
       {
         path: 'account-setting',

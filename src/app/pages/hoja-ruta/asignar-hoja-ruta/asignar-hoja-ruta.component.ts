@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Message, ConfirmationService } from 'primeng/components/common/api';
+import { Message, ConfirmationService, SelectItem } from 'primeng/components/common/api';
 import { Barrio } from '../../maestro/barrio/barrio.model';
 import { BarrioService } from '../../maestro/barrio/barrio.service';
 import { HojaRuta, Hoja, DetalleHoja } from '../hoja-ruta.models';
@@ -18,12 +18,14 @@ export class AsignarHojaRutaComponent implements OnInit {
   barrios: Barrio[] = [];
   barrioSelected: Barrio;
   hojaRuta: HojaRuta;
-  vendedores: any = [];
+  vendedores: SelectItem [];
   cargando: boolean = false;
   hojasSelected: any[] = [];
   ruta: SafeResourceUrl;
   hojaDetalleSelected: DetalleHoja[];
   displayModal: boolean = false;
+  displayModalPDF: boolean = false;
+  ids: any;
 
   constructor(
     public hojaRutaService: HojaRutaService,
@@ -33,7 +35,7 @@ export class AsignarHojaRutaComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.hojaRutaService.buscarVendedores().subscribe((res: Usuario[]) => {
+ /*    this.hojaRutaService.buscarVendedores().subscribe((res: Usuario[]) => {
       let vende: Usuario[];
       vende = res;
       if (vende.length > 0) {
@@ -44,7 +46,14 @@ export class AsignarHojaRutaComponent implements OnInit {
           });
         }
       }
-    });
+    }); */
+this.vendedores = [];
+this.hojaRutaService.buscarVendedores().subscribe((res: Usuario []) => {
+  this.vendedores = res.map((data: Usuario) => {
+    return {label: data.first_name + ', ' +  data.last_name, value: data};
+  });
+});
+
   }
 
   buscarBarrios(event) {
@@ -73,41 +82,45 @@ export class AsignarHojaRutaComponent implements OnInit {
   }
 
   imprimir() {
-    this.hojasSelected = this.hojasSelected.filter(
-      data => data.asignada_a !== null );
+    // se extraen solo los ids de aquellas hojas que esten asignasdas
+    this.ids = this.hojasSelected
+      .filter(datos => datos.asignada_a !== null)
+      .map(data => data.id);
 
-    this.ruta = this.domSanitizer.bypassSecurityTrustResourceUrl(
-      this.generarRutaPDF(this.barrioSelected.id, this.hojasSelected));
-
-    console.log('URL' + this.ruta);
-
-  }
-
-
- private generarRutaPDF(idBarrio: any, hojas: string[]) {
-    let url = `${URL_SERVICIO}/pdf/?barrio=${idBarrio}`;
-
-    if (hojas.length > 0) {
-      let newHojas = hojas.toString();
-      url += `&hojas=${newHojas}`;
-    } else {
-      url += `&hojas=all`;
+    if (this.ids.length > 0) {
+      this.ruta = this.domSanitizer.bypassSecurityTrustResourceUrl(
+        this.generarRutaPDF(this.barrioSelected.id, this.ids)
+      );
+      this.displayModalPDF = true;
+      console.log('displeay' + this.displayModalPDF);
+      console.log('RUTA' + this.ruta);
     }
-    return url;
   }
 
- detalle(event: Hoja) {
 
-   this.hojaRutaService.buscarHojaRutaDetalle(event).
-   subscribe((res: Hoja) => {
-    this.hojaDetalleSelected = res.detalle_hoja_ruta;
-    console.log(this.hojaDetalleSelected);
-   });
-   this.displayModal = true;
- }
+  private generarRutaPDF(idBarrio: any, hojas: any []) {
+    let url = `${URL_SERVICIO}/pdf/?barrio=${idBarrio}`;
+     url += `&hojas=${hojas}`;
+        return url;
+  }
 
- onDialogClose(event) {
-  this.displayModal = event;
-  this.hojaDetalleSelected = []; // cerrando el modal
-}
+
+  onDialogClosePDF(event) {
+    this.displayModalPDF = event;
+    this.ruta = null;
+  }
+
+
+  detalle(event: Hoja) {
+    this.hojaRutaService.buscarHojaRutaDetalle(event).subscribe((res: Hoja) => {
+      this.hojaDetalleSelected = res.detalle_hoja_ruta;
+    });
+    this.displayModal = true;
+  }
+
+  onDialogClose(event) {
+    this.displayModal = event;
+    this.hojaDetalleSelected = []; // cerrando el modal
+  }
+
 }

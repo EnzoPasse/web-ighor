@@ -5,9 +5,9 @@
     <div class="col-8">
       <div class="card" style="padding-bottom: 12px">
         <div class="card-body">
-          <h3 class="card-title"> Localidad / Sector </h3>
+          <h3 class="card-title"> Localidad </h3>
           <div class="ui-fluid">
-            <p-autoComplete [suggestions]="sectores" (completeMethod)="buscarSectores($event)" field="nombre" placeholder="Buscar Localidad / Sector..."
+            <p-autoComplete [suggestions]="sectores" (completeMethod)="buscarSectores($event)" field="nombre" placeholder="Buscar Localidad..."
               [minLength]="3" (onSelect)="cargarBarrios($event)" emptyMessage="No existen coincidencias con su busqueda">
               <ng-template let-sect pTemplate="SelectedItem">
                 {{ sect.localidad.provincia.nombre }} - {{sect.localidad.nombre }} - <strong>{{sect.nombre}}</strong>
@@ -22,7 +22,7 @@
       <div class="card" style="height: 130px">
         <div class="card-body">
           <div class="alert alert-info" role="alert">
-              <small> Busque o Seleccione la <strong>Localiadad / Sector</strong> para mostrar sus Barrios, o bien cambie su seleccion cuando lo necesite</small>
+              <small> Busque o Seleccione la <strong>Localiadad y sector</strong> para mostrar sus Barrios, o bien cambie su seleccion cuando lo necesite</small>
           </div>
         </div>
       </div>
@@ -55,7 +55,7 @@
           </span>
         </h3>
 
-        <input #gb type="text" class="form-control" placeholder=" Buscar Localidad / Sector ...">
+        <input #gb type="text" class="form-control" placeholder=" Buscar Barrio...">
         <br>
         <br>
 

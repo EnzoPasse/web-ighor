@@ -1,16 +1,15 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
-import { DetalleHoja } from '../hoja-ruta.models';
 
 
 @Component({
-  selector: 'app-hoja-detail',
-  templateUrl: './hoja-detail.component.html',
+  selector: 'app-pdf-modal',
+  templateUrl: './pdf-modal.component.html',
   styleUrls: []
 })
-export class HojaDetailComponent implements OnInit, OnChanges {
+export class PdfModalComponent implements OnInit, OnChanges {
 
-  @Input() hojaDetalle: DetalleHoja [];
-  @Input() display: boolean;
+  @Input() pdfRuta: string;
+  @Input() displayPDF: boolean;
   @Output() displayInfo: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor() {}

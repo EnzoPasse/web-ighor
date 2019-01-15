@@ -44,7 +44,7 @@ export class ProvinciasListComponent implements OnInit {
          this.cargando = false;
     }, error => {
         this.confirmationService.confirm({
-        header: 'ERROR !',
+        header: 'ERROR!',
         message: `${error}`,
         accept: () => {},
         reject: () => {}

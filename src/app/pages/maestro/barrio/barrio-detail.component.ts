@@ -97,7 +97,7 @@ export class BarrioDetailComponent implements OnInit, OnChanges {
           },
           error => {
             this.confirmationService.confirm({
-              header: 'ERROR !',
+              header: 'Intenta Nuevamente !',
               message: `${error}`,
               accept: () => {}
             });
@@ -110,7 +110,7 @@ export class BarrioDetailComponent implements OnInit, OnChanges {
           },
           error => {
             this.confirmationService.confirm({
-              header: 'ERROR !',
+              header: 'Intenta Nuevamente !',
               message: `${error}`,
               accept: () => {}
             });

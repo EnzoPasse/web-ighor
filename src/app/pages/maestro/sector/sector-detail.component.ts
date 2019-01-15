@@ -85,7 +85,7 @@ export class SectorDetailComponent implements OnInit, OnChanges {
           },
           error => {
             this.confirmationService.confirm({
-              header: 'ERROR !',
+              header: 'Intenta Nuevamente !',
               message: `${error}`,
               accept: () => {}
             });
@@ -98,7 +98,7 @@ export class SectorDetailComponent implements OnInit, OnChanges {
           },
           error => {
             this.confirmationService.confirm({
-              header: 'ERROR !',
+              header: 'Intenta Nuevamente !',
               message: `${error}`,
               accept: () => {}
             });

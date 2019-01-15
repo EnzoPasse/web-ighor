@@ -51,7 +51,7 @@
                   <th style="width:80px">Altura desde</th>
                   <th style="width:80px">Altura hasta</th>
                   <th style="width:90px">Registros</th>
-                  <th style="width:200px">Asignada a</th>
+                  <th style="width:180px">Vendedor</th>
                   <th style="width:100px">Estado</th>
                 </tr>
               </ng-template>
@@ -66,66 +66,86 @@
                   <td>{{ rowData.altura_hasta }}</td>
                   <td>
                     <span class="badge badge-secondary">
-                        {{ rowData.cant_registros}}
-                        </span>
-                    <button type="button" class="btn btn-link pull-right" (click)="detalle(rowData)">
-                     <small>detalle</small>
+                      {{ rowData.cant_registros }}
+                    </span>
+                    <button
+                      type="button"
+                      class="btn btn-link pull-right"
+                      (click)="detalle(rowData)"
+                    >
+                      <small>detalle</small>
                     </button>
                   </td>
-                  <td>
-                    <p-dropdown
-                      [options]="vendedores"
-                      [(ngModel)]="rowData.asignada_a"
-                      [style]="{ width: '100%' }"
-                      placeholder="Seleccionar"
-                      appendTo="body"
-                    >
-                    </p-dropdown>
-                    <!--  <ng-template pTemplate="output">
-                      {{ rowData.asignada_a?.first_name }}
-                    </ng-template> -->
+                  <td pEditableColumn class="pointer">
+                    <p-cellEditor>
+                      <ng-template pTemplate="input">
+                        <p-dropdown
+                          [options]="vendedores"
+                          [(ngModel)]="rowData.asignada_a"
+                          [style]="{ width: '100%' }"
+                          placeholder="Seleccionar"
+                        >
+                        </p-dropdown>
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                        {{
+                          rowData.asignada_a? rowData.asignada_a.first_name + ", " + rowData.asignada_a.last_name : "Seleccionar" }}
+                      </ng-template>
+                    </p-cellEditor>
                   </td>
                   <td class="text-center">
-                      <span [ngClass]="{
-                            'badge badge-success' : rowData.estado.nombre === 'Cerrada',
-                            'badge badge-info' : rowData.estado.nombre === 'Asignada',
-                            'badge badge-danger' : rowData.estado.nombre === 'Sin Asignar'
-                           }">
-                        {{ rowData.estado.nombre }}
+                    <span
+                      [ngClass]="{
+                        'badge badge-danger':
+                          rowData.estado.nombre === 'Sin Asignar',
+                        'badge badge-success':
+                          rowData.estado.nombre === 'Asignada',
+                          'badge badge-info':
+                          rowData.estado.nombre === 'Cerrada'
+                      }"
+                    >
+                      {{ rowData.estado.nombre }}
                     </span>
-                   </td>
+                  </td>
                 </tr>
               </ng-template>
             </p-table>
           </div>
         </div>
       </div>
+      <div *ngIf="(hojasSelected.length > 0 && hojasSelected[0].asignada_a!== null ) ">
+        <div class="ui-fluid">
+        <button
+          pButton
+          class="ui-button-success ui-state-hover"
+          label="Imprimir"
+          (click)="imprimir()"
+          style="height:76px"
+        ></button>
+       </div>
+      </div>
     </div>
   </div>
-  <div></div>
-  <button
-    pButton
-    class="ui-button-success ui-state-hover"
-    label="imprimir"
-    (click)="imprimir()"
-  ></button>
 </div>
-
-<iframe
-  *ngIf="ruta"
-  class="e2e-iframe-trusted-src"
-  width="100%"
-  height="600px"
-  [src]="ruta"
-  type="application/pdf"
-></iframe>
 
 <div *ngIf="hojaDetalleSelected?.length > 0" class="animated fadeIn">
-    <app-hoja-detail [display]="displayModal" [hojaDetalle]="hojaDetalleSelected" (displayInfo)="onDialogClose($event)"></app-hoja-detail>
+  <app-hoja-detail
+    [display]="displayModal"
+    [hojaDetalle]="hojaDetalleSelected"
+    (displayInfo)="onDialogClose($event)"
+  ></app-hoja-detail>
 </div>
 
+<div *ngIf="ruta" class="animated fadeIn">
+  <app-pdf-modal
+    [displayPDF]="displayModalPDF"
+    [pdfRuta]="ruta"
+    (displayInfo)="onDialogClosePDF($event)"
+  ></app-pdf-modal>
+</div>
 
-<pre>
- <!--  {{ hojaRuta | json }} -->
+<!-- <pre>
+ {{ hojaRuta | json }}
   {{ hojasSelected | json }}
 </pre>
+ -->

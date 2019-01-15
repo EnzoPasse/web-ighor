@@ -42,6 +42,8 @@ export class GenerarHojaRutaComponent implements OnInit {
       this.barrioService
         .cargarHojaRutas(this.barrioSelected)
         .subscribe((res: HojaRuta) => {
+          console.log(res);
+
           this.caragarDatos(res);
         });
     }
@@ -50,6 +52,7 @@ export class GenerarHojaRutaComponent implements OnInit {
   private caragarDatos(res: HojaRuta) {
     if (JSON.stringify(res) !== '{}') {
       const resultado = {
+        registro: res.id,
         barrio: res.barrio.nombre,
         // codigo_postal : res.barrio.codigo_postal,
         cuadrante: res.barrio.cuadrante.nombre,
@@ -66,8 +69,8 @@ export class GenerarHojaRutaComponent implements OnInit {
     }
 
     this.columnas = [
+      { fields: 'registro', headers: 'Registro'},
       { fields: 'barrio', headers: 'Barrio' },
-      // { fields: 'codigo_postal', headers: 'Cod. Postal'},
       { fields: 'cuadrante', headers: 'Sector' },
       { fields: 'localidad', headers: 'Localidad' },
       { fields: 'provincia', headers: 'Provincia' },

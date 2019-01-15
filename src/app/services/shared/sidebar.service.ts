@@ -11,7 +11,7 @@ export class SidebarService {
      titulo: 'Administracion',
      icono: 'mdi mdi-sitemap',
      submenu: [
-       { titulo: 'Home', url: '/home' },
+      // { titulo: 'Home', url: '/home' },
       // { titulo: 'Usuarios', url: '/usuario' },
        { titulo: 'Provincias', url: '/provincia' },
        { titulo: 'Localidades', url: '/localidad' },
