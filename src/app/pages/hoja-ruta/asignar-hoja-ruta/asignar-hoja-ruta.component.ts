@@ -19,13 +19,14 @@ export class AsignarHojaRutaComponent implements OnInit {
   barrioSelected: Barrio;
   hojaRuta: HojaRuta;
   vendedores: SelectItem [];
+  estados: SelectItem [];
   cargando: boolean = false;
   hojasSelected: any[] = [];
   ruta: SafeResourceUrl;
   hojaDetalleSelected: DetalleHoja[];
   displayModal: boolean = false;
   displayModalPDF: boolean = false;
-  ids: any;
+  columnas: any;
 
   constructor(
     public hojaRutaService: HojaRutaService,
@@ -54,6 +55,11 @@ this.hojaRutaService.buscarVendedores().subscribe((res: Usuario []) => {
   });
 });
 
+this.estados = [];
+this.estados.push({label: 'Sin Asignar' , value: 1});
+this.estados.push({label: 'Asignada' , value: 2});
+this.estados.push({label: 'Cerrada' , value: 3});
+
   }
 
   buscarBarrios(event) {
@@ -64,7 +70,7 @@ this.hojaRutaService.buscarVendedores().subscribe((res: Usuario []) => {
       });
   }
 
-  seleccionarBarrio(barrio: Barrio) {
+  cargarHojasRuta(barrio: Barrio) {
     this.barrioSelected = Object.assign({}, barrio);
     if (this.barrioSelected) {
       this.cargando = true;
@@ -73,7 +79,18 @@ this.hojaRutaService.buscarVendedores().subscribe((res: Usuario []) => {
         .subscribe((res: HojaRuta) => {
           this.hojaRuta = res;
           this.cargando = false;
+          this.hojasSelected = [];
         });
+
+        this.columnas = [
+          { field: 'numero', headers: 'Nro'},
+          { field: 'calle.nombre', header: 'Calle' },
+          { field: 'altura_desde', header: 'Altura Desde' },
+          { field: 'altura_hasta', header: 'Altura Hasta' },
+          { field: 'cant_registros', header: 'Registros' },
+          { field: 'asignada_a', header: 'Vendedor' },
+          { field: 'estado', header: 'Estado' }
+        ];
     }
   }
 
@@ -81,35 +98,56 @@ this.hojaRutaService.buscarVendedores().subscribe((res: Usuario []) => {
     this.barrioSelected = null;
   }
 
+isAsignada() {
+  let isnotNull = this.hojasSelected.findIndex(datos => datos.asignada_a !== null);
+  if (isnotNull === -1) {
+     return false;
+    }
+     return true;
+}
+
+
+
   imprimir() {
     // se extraen solo los ids de aquellas hojas que esten asignasdas
-    this.ids = this.hojasSelected
+    let ids = this.hojasSelected
       .filter(datos => datos.asignada_a !== null)
       .map(data => data.id);
 
-    if (this.ids.length > 0) {
+    if (ids.length > 0) {
       this.ruta = this.domSanitizer.bypassSecurityTrustResourceUrl(
-        this.generarRutaPDF(this.barrioSelected.id, this.ids)
+        this.generarRutaPDF(this.barrioSelected.id, ids)
       );
-      this.displayModalPDF = true;
-      console.log('displeay' + this.displayModalPDF);
-      console.log('RUTA' + this.ruta);
+     this.displayModalPDF = true;
     }
   }
 
+  actualizarHR(imprimir?: boolean) {
+    this.hojaRutaService.actualizarHojaRuta(this.hojasSelected)
+     .subscribe(res => {
+       this.cargarHojasRuta(this.barrioSelected);
+       this.msgs = [
+        {
+          severity: 'success',
+          summary: 'Operación Aceptada',
+          detail: `${res.length} Vendedores Asignados.`
+        }
+      ];
+       if (imprimir) {
+         this.imprimir();
+       }
+    });
+  }
+
+  AsignarImprimir() {
+    this.actualizarHR(true);
+  }
 
   private generarRutaPDF(idBarrio: any, hojas: any []) {
     let url = `${URL_SERVICIO}/pdf/?barrio=${idBarrio}`;
      url += `&hojas=${hojas}`;
         return url;
   }
-
-
-  onDialogClosePDF(event) {
-    this.displayModalPDF = event;
-    this.ruta = null;
-  }
-
 
   detalle(event: Hoja) {
     this.hojaRutaService.buscarHojaRutaDetalle(event).subscribe((res: Hoja) => {
@@ -122,5 +160,11 @@ this.hojaRutaService.buscarVendedores().subscribe((res: Usuario []) => {
     this.displayModal = event;
     this.hojaDetalleSelected = []; // cerrando el modal
   }
+
+  onDialogClosePDF(event) {
+    this.displayModalPDF = event;
+    this.ruta = null;
+  }
+
 
 }

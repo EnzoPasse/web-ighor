@@ -25,6 +25,7 @@ import { KeyFilterModule } from 'primeng/keyfilter';
 import { ToggleButtonModule } from 'primeng/components/ToggleButton/togglebutton';
 import { DropdownModule } from 'primeng/components/dropdown/dropdown';
 import { ChartModule } from 'primeng/chart';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 
 
@@ -58,7 +59,8 @@ import { ConfirmationService } from 'primeng/components/common/api';
     ToggleButtonModule,
     DropdownModule,
     ChartModule,
-    TableModule
+    TableModule,
+    MultiSelectModule
     ],
   exports: [
     InputTextModule,
@@ -75,7 +77,8 @@ import { ConfirmationService } from 'primeng/components/common/api';
     ToggleButtonModule,
     DropdownModule,
     ChartModule,
-    TableModule
+    TableModule,
+    MultiSelectModule
   ],
   providers: [ConfirmationService]// settingService
 })

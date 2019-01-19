@@ -47,6 +47,16 @@ export class HojaRutaService {
     );
   }
 
+  actualizarHojaRuta(hojas: Hoja []) {
+   let url = `${URL_SERVICIO}/actualizar_hoja_ruta/`;
+
+   return this.http.post(url, hojas, this.getHttpHeaders()).
+    pipe(
+      // map((res: any) => res.localidades),
+      catchError(this.alert.handleError('Actualizar HR', ORIGEN))
+    );
+  }
+
   private getHttpHeaders() {
     const httpOptions = {
       headers: new HttpHeaders({

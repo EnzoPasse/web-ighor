@@ -12,7 +12,7 @@
             field="nombre"
             placeholder="Buscar Barrio ..."
             [minLength]="3"
-            (onSelect)="seleccionarBarrio($event)"
+            (onSelect)="cargarHojasRuta($event)"
             (onClear)="clear()"
             emptyMessage="No existen coincidencias con su busqueda"
             forceSelection="true"
@@ -33,6 +33,38 @@
       <div class="card">
         <div class="card-body">
           <div class="ui-fluid">
+
+<!--               <p-table
+              [value]="hojaRuta.hojas"
+              [columns]="columnas"
+              [loading]="cargando"
+              [paginator]="true"
+              [rows]="10"
+              [(selection)]="hojasSelected"
+              dataKey="numero"
+              [responsive]="true"
+              #dt >
+
+              <ng-template pTemplate="header" let-columns>
+                  <tr>
+                      <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                          {{col.header}}
+                          <p-sortIcon [field]="col.field"></p-sortIcon>
+                      </th>
+                  </tr>
+                  <tr>
+                      <th *ngFor="let col of columns" [ngSwitch]="col.field">
+                          <input *ngSwitchCase="'calle'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')" style="width:auto">
+                          <p-multiSelect *ngSwitchCase="'asignada_a'" [options]="vendedores" [(ngModel)]="col.asignada_a" defaultLabel="" (onChange)="dt.filter($event.target.value, col.field,'in')" styleClass="ui-column-filter" [style]="{'width':'100%'}"></p-multiSelect>
+                           <p-multiSelect *ngSwitchCase="'estado'" [options]="estados" [(ngModel)]="col.estado.nombre" defaultLabel="" (onChange)="dt.filter($event.target.value, col.field,'in')" styleClass="ui-column-filter" [style]="{'width':'100%'}"></p-multiSelect>
+                      </th>
+                  </tr>
+              </ng-template>
+
+          </p-table> -->
+
+
+
             <p-table
               [value]="hojaRuta.hojas"
               [loading]="cargando"
@@ -40,7 +72,16 @@
               [rows]="10"
               [(selection)]="hojasSelected"
               dataKey="numero"
+              [responsive]="true"
+              #dt
+              [globalFilterFields]="['Vendedor']"
             >
+            <ng-template pTemplate="caption">
+              <div style="text-align: right">
+                  <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                  <input type="text" pInputText  placeholder="Filtrar" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+              </div>
+          </ng-template>
               <ng-template pTemplate="header">
                 <tr class="text-center">
                   <th style="width: 3em">
@@ -89,22 +130,26 @@
                       </ng-template>
                       <ng-template pTemplate="output">
                         {{
-                          rowData.asignada_a? rowData.asignada_a.first_name + ", " + rowData.asignada_a.last_name : "Seleccionar" }}
+                          rowData.asignada_a
+                            ? rowData.asignada_a.first_name +
+                              ", " +
+                              rowData.asignada_a.last_name
+                            : "Seleccionar"
+                        }}
                       </ng-template>
                     </p-cellEditor>
                   </td>
                   <td class="text-center">
                     <span
                       [ngClass]="{
-                        'badge badge-danger':
+                        'badge badge-pill badge-danger':
                           rowData.estado.nombre === 'Sin Asignar',
-                        'badge badge-success':
+                        'badge badge-pill badge-success':
                           rowData.estado.nombre === 'Asignada',
-                          'badge badge-info':
-                          rowData.estado.nombre === 'Cerrada'
+                        'badge badge-pill badge-info': rowData.estado.nombre === 'Cerrada'
                       }"
                     >
-                      {{ rowData.estado.nombre }}
+                      <small>{{ rowData.estado.nombre }}</small>
                     </span>
                   </td>
                 </tr>
@@ -113,16 +158,34 @@
           </div>
         </div>
       </div>
-      <div *ngIf="(hojasSelected.length > 0 && hojasSelected[0].asignada_a!== null ) ">
-        <div class="ui-fluid">
-        <button
-          pButton
-          class="ui-button-success ui-state-hover"
-          label="Imprimir"
-          (click)="imprimir()"
-          style="height:76px"
-        ></button>
-       </div>
+      <div *ngIf="hojasSelected.length > 0 && isAsignada()" class="ui-g ui-fluid">
+        <div class="ui-md-4">
+            <button
+              pButton
+              class="ui-button-success ui-state-hover"
+              label="Asignar"
+              (click)="actualizarHR()"
+              style="height:50px"
+            ></button>
+        </div>
+        <div class="ui-md-4">
+            <button
+              pButton
+              class="ui-button-warning ui-state-hover"
+              label="Imprimir"
+              (click)="imprimir()"
+              style="height:50px"
+            ></button>
+        </div>
+        <div class="ui-md-4">
+          <button
+            pButton
+            class="ui-button-danger ui-state-hover"
+            label="Asignar e Imprimir"
+            (click)="AsignarImprimir()"
+            style="height:50px"
+          ></button>
+      </div>
       </div>
     </div>
   </div>
@@ -145,7 +208,6 @@
 </div>
 
 <!-- <pre>
- {{ hojaRuta | json }}
   {{ hojasSelected | json }}
-</pre>
- -->
+</pre> -->
+
