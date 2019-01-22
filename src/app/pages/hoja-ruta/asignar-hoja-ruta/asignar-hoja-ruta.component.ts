@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Message, ConfirmationService, SelectItem } from 'primeng/components/common/api';
 import { Barrio } from '../../maestro/barrio/barrio.model';
 import { BarrioService } from '../../maestro/barrio/barrio.service';
-import { HojaRuta, Hoja, DetalleHoja } from '../hoja-ruta.models';
+import { HojaRuta, Hoja, DetalleHoja, Estado } from '../hoja-ruta.models';
 import { HojaRutaService } from '../hoja-ruta.service';
 import { Usuario } from '../../usuario/usuario.model';
 import { URL_SERVICIO } from '../../../config/config';
@@ -18,6 +18,7 @@ export class AsignarHojaRutaComponent implements OnInit {
   barrios: Barrio[] = [];
   barrioSelected: Barrio;
   hojaRuta: HojaRuta;
+  hojasFilter: Hoja [];
   vendedores: SelectItem [];
   estados: SelectItem [];
   cargando: boolean = false;
@@ -49,18 +50,24 @@ export class AsignarHojaRutaComponent implements OnInit {
       }
     }); */
 this.vendedores = [];
+
 this.hojaRutaService.buscarVendedores().subscribe((res: Usuario []) => {
   this.vendedores = res.map((data: Usuario) => {
     return {label: data.first_name + ', ' +  data.last_name, value: data};
   });
-});
+  this.vendedores.unshift({label: 'Seleccionar', value: null }); // agregar al principio del array
+ });
 
 this.estados = [];
-this.estados.push({label: 'Sin Asignar' , value: 1});
-this.estados.push({label: 'Asignada' , value: 2});
-this.estados.push({label: 'Cerrada' , value: 3});
+this.estados.push({label: 'Seleccionar' , value: ''});
+this.estados.push({label: 'Sin Asignar' , value: 'Sin Asignar'});
+this.estados.push({label: 'Asignada' , value: 'Asignada'});
+this.estados.push({label: 'Cerrada' , value: 'Cerrada'});
 
-  }
+
+
+
+}
 
   buscarBarrios(event) {
     this.barrioService
@@ -78,18 +85,20 @@ this.estados.push({label: 'Cerrada' , value: 3});
         .cargarHojaRutas(this.barrioSelected)
         .subscribe((res: HojaRuta) => {
           this.hojaRuta = res;
+          this.hojasFilter = res.hojas;
           this.cargando = false;
           this.hojasSelected = [];
         });
 
         this.columnas = [
-          { field: 'numero', headers: 'Nro'},
-          { field: 'calle.nombre', header: 'Calle' },
-          { field: 'altura_desde', header: 'Altura Desde' },
-          { field: 'altura_hasta', header: 'Altura Hasta' },
-          { field: 'cant_registros', header: 'Registros' },
-          { field: 'asignada_a', header: 'Vendedor' },
-          { field: 'estado', header: 'Estado' }
+          { field: 'check', header: '', width: '3em'},
+          { field: 'numero', header: 'Nro', width: '60px'},
+          { field: 'calle.nombre', header: 'Calle', width: '200px'},
+          { field: 'altura_desde', header: 'Altura Desde', width: '80px' },
+          { field: 'altura_hasta', header: 'Altura Hasta', width: '80px' },
+          { field: 'cant_registros', header: 'Registros', width: '90px' },
+          { field: 'asignada_a', header: 'Vendedor', width: '180px' },
+          { field: 'estado.nombre', header: 'Estado', width: '100px' }
         ];
     }
   }
@@ -106,7 +115,26 @@ isAsignada() {
      return true;
 }
 
+filtroComboVendedor(event: Usuario) {
 
+  if (event) {
+  this.hojasFilter = this.hojaRuta.hojas
+   .filter(data => data.asignada_a !== null)
+   .filter(data => data.asignada_a.id === event.id);
+  } else {
+    this.hojasFilter = this.hojaRuta.hojas;
+  }
+}
+
+filtroComboEstado(event) {
+  console.log(event);
+  if (event) {
+    this.hojasFilter = this.hojaRuta.hojas
+      .filter(data => data.estado.nombre === event);
+  } else {
+    this.hojasFilter = this.hojaRuta.hojas;
+  }
+}
 
   imprimir() {
     // se extraen solo los ids de aquellas hojas que esten asignasdas

@@ -34,8 +34,8 @@
         <div class="card-body">
           <div class="ui-fluid">
 
-<!--               <p-table
-              [value]="hojaRuta.hojas"
+              <p-table
+              [value]="hojasFilter"
               [columns]="columnas"
               [loading]="cargando"
               [paginator]="true"
@@ -43,29 +43,108 @@
               [(selection)]="hojasSelected"
               dataKey="numero"
               [responsive]="true"
-              #dt >
+              #dt>
+              <!-- [globalFilterFields]="['calle.nombre','asignada_a','estado.nombre']"  -->
+
+              <!-- <ng-template pTemplate="caption">
+                  <div style="text-align: right">
+                      <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                      <input type="text" pInputText  placeholder="Filtrar" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+                  </div>
+              </ng-template> -->
 
               <ng-template pTemplate="header" let-columns>
-                  <tr>
+                  <!-- <tr>
                       <th *ngFor="let col of columns" [pSortableColumn]="col.field">
                           {{col.header}}
                           <p-sortIcon [field]="col.field"></p-sortIcon>
                       </th>
+                  </tr> -->
+                  <tr>
+                    <th *ngFor="let col of columns" [ngStyle]="{'width': col.width}">
+                         {{ col.header }}
+                    </th>
                   </tr>
                   <tr>
                       <th *ngFor="let col of columns" [ngSwitch]="col.field">
-                          <input *ngSwitchCase="'calle'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')" style="width:auto">
-                          <p-multiSelect *ngSwitchCase="'asignada_a'" [options]="vendedores" [(ngModel)]="col.asignada_a" defaultLabel="" (onChange)="dt.filter($event.target.value, col.field,'in')" styleClass="ui-column-filter" [style]="{'width':'100%'}"></p-multiSelect>
-                           <p-multiSelect *ngSwitchCase="'estado'" [options]="estados" [(ngModel)]="col.estado.nombre" defaultLabel="" (onChange)="dt.filter($event.target.value, col.field,'in')" styleClass="ui-column-filter" [style]="{'width':'100%'}"></p-multiSelect>
+                          <p-tableHeaderCheckbox *ngSwitchCase="'check'" [style]="{'width':'100%'}"> </p-tableHeaderCheckbox>
+                          <input *ngSwitchCase="'calle.nombre'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')" [style]="{'width':'100%'}">
+                          <p-dropdown *ngSwitchCase="'asignada_a'" [options]="vendedores" placeholder="Todos"  (onChange)="filtroComboVendedor($event.value)" styleClass="ui-column-filter" [style]="{'width':'100%'}"></p-dropdown>
+                          <p-dropdown *ngSwitchCase="'estado.nombre'" [options]="estados"  placeholder="Todos" (onChange)="filtroComboEstado($event.value)" styleClass="ui-column-filter" [style]="{'width':'100%'}"></p-dropdown>
                       </th>
                   </tr>
               </ng-template>
+              <ng-template pTemplate="body" let-rowData>
+                  <tr>
+                    <td style="width: 3em">
+                      <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+                    </td>
+                    <td>{{ rowData.numero }}</td>
+                    <td>{{ rowData.calle.nombre }}</td>
+                    <td>{{ rowData.altura_desde }}</td>
+                    <td>{{ rowData.altura_hasta }}</td>
+                    <td>
+                      <span class="badge badge-secondary">
+                        {{ rowData.cant_registros }}
+                      </span>
+                      <button
+                        type="button"
+                        class="btn btn-link pull-right"
+                        (click)="detalle(rowData)"
+                      >
+                        <small>detalle</small>
+                      </button>
+                    </td>
+                    <td pEditableColumn class="pointer">
+                      <p-cellEditor>
+                        <ng-template pTemplate="input">
+                          <p-dropdown
+                            [options]="vendedores"
+                            [(ngModel)]="rowData.asignada_a"
+                            styleClass="ui-column-filter"
+                            [style]="{'width': '100%' }"
+                            placeholder="Seleccionar"
+                          >
+                          </p-dropdown>
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                          {{
+                            rowData.asignada_a
+                              ? rowData.asignada_a.first_name +
+                                ", " +
+                                rowData.asignada_a.last_name
+                              : "Seleccionar"
+                          }}
+                        </ng-template>
+                      </p-cellEditor>
+                    </td>
+                    <td class="text-center">
+                      <span
+                        [ngClass]="{
+                          'badge badge-pill badge-danger':
+                            rowData.estado.nombre === 'Sin Asignar',
+                          'badge badge-pill badge-success':
+                            rowData.estado.nombre === 'Asignada',
+                          'badge badge-pill badge-info': rowData.estado.nombre === 'Cerrada'
+                        }"
+                      >
+                        <small>{{ rowData.estado.nombre }}</small>
+                      </span>
+                    </td>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage" let-columns>
+                    <tr>
+                        <td [attr.colspan]="columns.length">
+                            No se han encotrado registros
+                        </td>
+                    </tr>
+                </ng-template>
 
-          </p-table> -->
+          </p-table>
 
 
-
-            <p-table
+           <!--  <p-table
               [value]="hojaRuta.hojas"
               [loading]="cargando"
               [paginator]="true"
@@ -154,7 +233,7 @@
                   </td>
                 </tr>
               </ng-template>
-            </p-table>
+            </p-table> -->
           </div>
         </div>
       </div>
