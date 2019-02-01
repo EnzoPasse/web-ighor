@@ -40,6 +40,7 @@
               [loading]="cargando"
               [paginator]="true"
               [rows]="10"
+              [rowsPerPageOptions]="[5,10,20]"
               [(selection)]="hojasSelected"
               dataKey="numero"
               [responsive]="true"
@@ -52,6 +53,12 @@
                       <input type="text" pInputText  placeholder="Filtrar" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
                   </div>
               </ng-template> -->
+
+              <ng-template pTemplate="caption">
+                  <div style="text-align: right">
+                      <p-button class="ui-button-secondary" icon="fa fa-refresh" (click)="recargar()"></p-button>
+                  </div>
+                </ng-template>
 
               <ng-template pTemplate="header" let-columns>
                   <!-- <tr>
@@ -69,8 +76,8 @@
                       <th *ngFor="let col of columns" [ngSwitch]="col.field">
                           <p-tableHeaderCheckbox *ngSwitchCase="'check'" [style]="{'width':'100%'}"> </p-tableHeaderCheckbox>
                           <input *ngSwitchCase="'calle.nombre'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')" [style]="{'width':'100%'}">
-                          <p-dropdown *ngSwitchCase="'asignada_a'" [options]="vendedores" placeholder="Todos"  (onChange)="filtroComboVendedor($event.value)" styleClass="ui-column-filter" [style]="{'width':'100%'}"></p-dropdown>
-                          <p-dropdown *ngSwitchCase="'estado.nombre'" [options]="estados"  placeholder="Todos" (onChange)="filtroComboEstado($event.value)" styleClass="ui-column-filter" [style]="{'width':'100%'}"></p-dropdown>
+                          <p-dropdown *ngSwitchCase="'asignada_a'" [options]="vendedores" placeholder="Seleccionar" editable="true"	 (onChange)="filtroComboVendedor($event.value)" styleClass="ui-column-filter" [style]="{'width':'100%'}"></p-dropdown>
+                          <p-dropdown *ngSwitchCase="'estado.nombre'" [options]="estados" placeholder="Seleccionar" editable="true" (onChange)="filtroComboEstado($event.value)" styleClass="ui-column-filter" [style]="{'width':'100%'}"></p-dropdown>
                       </th>
                   </tr>
               </ng-template>
@@ -87,13 +94,16 @@
                       <span class="badge badge-secondary">
                         {{ rowData.cant_registros }}
                       </span>
-                      <button
+                      <span  class="pointer pull-right">
+                          <i class="fa fa-address-card-o" (click)="detalle(rowData)"></i>
+                      </span>
+                      <!-- <button
                         type="button"
                         class="btn btn-link pull-right"
                         (click)="detalle(rowData)"
                       >
                         <small>detalle</small>
-                      </button>
+                      </button> -->
                     </td>
                     <td pEditableColumn class="pointer">
                       <p-cellEditor>
@@ -128,7 +138,7 @@
                           'badge badge-pill badge-info': rowData.estado.nombre === 'Cerrada'
                         }"
                       >
-                        <small>{{ rowData.estado.nombre }}</small>
+                        <small><strong>{{ rowData.estado.nombre }}</strong></small>
                       </span>
                     </td>
                   </tr>
@@ -140,9 +150,7 @@
                         </td>
                     </tr>
                 </ng-template>
-
           </p-table>
-
 
            <!--  <p-table
               [value]="hojaRuta.hojas"
@@ -285,8 +293,4 @@
     (displayInfo)="onDialogClosePDF($event)"
   ></app-pdf-modal>
 </div>
-
-<!-- <pre>
-  {{ hojasSelected | json }}
-</pre> -->
 

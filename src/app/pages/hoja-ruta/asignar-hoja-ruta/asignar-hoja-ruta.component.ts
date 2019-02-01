@@ -55,11 +55,10 @@ this.hojaRutaService.buscarVendedores().subscribe((res: Usuario []) => {
   this.vendedores = res.map((data: Usuario) => {
     return {label: data.first_name + ', ' +  data.last_name, value: data};
   });
-  this.vendedores.unshift({label: 'Seleccionar', value: null }); // agregar al principio del array
+  // this.vendedores.unshift({label: ' ', value: null }); // agregar al principio del array
  });
 
 this.estados = [];
-this.estados.push({label: 'Seleccionar' , value: ''});
 this.estados.push({label: 'Sin Asignar' , value: 'Sin Asignar'});
 this.estados.push({label: 'Asignada' , value: 'Asignada'});
 this.estados.push({label: 'Cerrada' , value: 'Cerrada'});
@@ -103,6 +102,12 @@ this.estados.push({label: 'Cerrada' , value: 'Cerrada'});
     }
   }
 
+recargar() {
+  if (this.barrioSelected) {
+    this.cargarHojasRuta(this.barrioSelected);
+  }
+}
+
   clear() {
     this.barrioSelected = null;
   }
@@ -116,7 +121,6 @@ isAsignada() {
 }
 
 filtroComboVendedor(event: Usuario) {
-
   if (event) {
   this.hojasFilter = this.hojaRuta.hojas
    .filter(data => data.asignada_a !== null)
@@ -127,7 +131,6 @@ filtroComboVendedor(event: Usuario) {
 }
 
 filtroComboEstado(event) {
-  console.log(event);
   if (event) {
     this.hojasFilter = this.hojaRuta.hojas
       .filter(data => data.estado.nombre === event);

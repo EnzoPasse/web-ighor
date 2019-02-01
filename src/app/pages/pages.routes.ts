@@ -16,6 +16,7 @@ import { LoginGuard } from '../services/service.index';
 import { NormaCalleComponent } from './normalizacion/normalizacion-calle/norma-calle.component';
 import { GenerarHojaRutaComponent } from './hoja-ruta/generar-hoja-ruta/generar-hoja-ruta.component';
 import { AsignarHojaRutaComponent } from './hoja-ruta/asignar-hoja-ruta/asignar-hoja-ruta.component';
+import { CargarVisitaHojaRutaComponent } from './hoja-ruta/cargar-visita-hoja-ruta/cargar-visita-hoja-ruta.component';
 
 const pagesRoutes: Routes = [
   {
@@ -82,6 +83,11 @@ const pagesRoutes: Routes = [
         path: 'asignarHojaRuta',
         component: AsignarHojaRutaComponent,
         data: { titulo: 'Asignar Hoja de Ruta' }
+      },
+      {
+        path: 'cargarHojaRuta',
+        component: CargarVisitaHojaRutaComponent,
+        data: { titulo: 'Cargar Hoja de Ruta' }
       },
       { path: '**', component: PageNoFoundComponent }
     ]

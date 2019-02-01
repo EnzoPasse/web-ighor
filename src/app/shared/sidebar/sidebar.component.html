@@ -28,11 +28,11 @@
         <li class="nav-devider"></li>
         <li class="nav-small-cap">ACCIONES</li>
 
-        <li *ngFor="let menu of _sideService.menu">
+        <li *ngFor="let menu of menuUsuario">
           <a class="has-arrow waves-effect waves-dark" aria-expanded="false">
             <i [class]= "menu.icono" > </i>
             <span class="hide-menu"> {{ menu.titulo }}
-              <span class="label label-rouded label-themecolor pull-right">{{ menu.submenu.length }}</span>
+              <span class="label label-rouded label-themecolor pull-right">{{ menu.submenu.length? menu.submenu.length : 0 }}</span>
             </span>
           </a>
           <ul aria-expanded="false" class="collapse">
