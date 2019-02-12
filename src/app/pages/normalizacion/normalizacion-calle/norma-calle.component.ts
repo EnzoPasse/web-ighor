@@ -99,7 +99,7 @@ export class NormaCalleComponent implements OnInit {
       event.filtros
     );
 
-    console.log('CONSULTA:' + consulta);
+    console.log('CONSULTA:' + JSON.stringify(consulta));
 
     this.normalizadorService
       .cargarCallesMal(consulta)
@@ -167,6 +167,7 @@ export class NormaCalleComponent implements OnInit {
       ids,
       this.filtrosSelected
     );
+
 
      if (this.callesMalSelected.length > 0) {
        this.normalizadorService.normalizar(consulta)

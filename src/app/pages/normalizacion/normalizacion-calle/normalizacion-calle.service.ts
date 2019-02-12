@@ -42,6 +42,8 @@ export class NormalizacionCalleService {
     const url = `${URL_SERVICIO}/normalizadorcalle/${consulta.calle_barrio}/`;
     const body =  JSON.stringify(consulta);
 
+    console.log('NORMA' + body);
+
     return this.http.put(url, body, this.getHttpHeaders())
     .pipe(catchError(this.alert.handleError('Normalizacion', ORIGEN)));
 

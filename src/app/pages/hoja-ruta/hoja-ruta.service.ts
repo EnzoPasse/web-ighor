@@ -38,12 +38,12 @@ export class HojaRutaService {
     );
   }
 
-  buscarHojaRutaDetalle(hoja: Hoja) {
+  buscarHojaRutaClientes(hoja: Hoja) {
     let url = `${URL_SERVICIO}/hoja_ruta/${hoja.id}`;
 
     return this.http.get(url).pipe(
       // map((res: any) => res.localidades),
-      catchError(this.alert.handleError('PDF', ORIGEN))
+      catchError(this.alert.handleError('DetalleClientes', ORIGEN))
     );
   }
 
@@ -56,6 +56,44 @@ export class HojaRutaService {
       catchError(this.alert.handleError('Actualizar HR', ORIGEN))
     );
   }
+
+buscarHojaRutaDetalle(numero?: number) {
+  let url = `${URL_SERVICIO}/vendedor_detalle_hoja_ruta/`;
+
+  if ( numero > 0) {
+     url = url + `?numero=${numero}`;
+  }
+
+  return this.http.get(url).pipe(
+    // map((res: any) => res.localidades),
+    catchError(this.alert.handleError('DetalleHojaRuta', ORIGEN))
+  );
+}
+
+actualiarHojaRutaDetalle(detalle: any[]) {
+  let url = `${URL_SERVICIO}/vendedor_detalle_hoja_ruta/`;
+
+  return this.http.post(url, detalle, this.getHttpHeaders()).
+   pipe(
+     catchError(this.alert.handleError('ActualiarDetalleHR', ORIGEN))
+   );
+}
+
+cargarObservaciones() {
+  let url = `${URL_SERVICIO}/observacion/`;
+
+  return this.http.get(url).pipe(
+    catchError(this.alert.handleError('Observaciones', ORIGEN))
+  );
+}
+
+cargarProductos() {
+ let url = `${URL_SERVICIO}/producto/`;
+
+ return this.http.get(url).pipe(
+    catchError(this.alert.handleError('Productos', ORIGEN))
+  );
+}
 
   private getHttpHeaders() {
     const httpOptions = {

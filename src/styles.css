@@ -42,8 +42,18 @@ ANCHOS
 .ui-inputtext,
 .ui-growl,
 .ui-autocomplete-items,
+.ui-autocomplete-item,
+.ui-autocomplete-label,
+.ui-autocomplete-open,
 .ui-autocomplete-list-item,
-.ui-autocomplete > .ui-inputtext {
+.ui-autocomplete > .ui-inputtext,
+.ui.multiselect-items,
+.ui.multiselect-item,
+.ui.multiselect-open,
+.ui-multiselect-label,
+.ui-multiselect-panel,
+.ui.multiselect-label-container,
+.ui-multiselect {
   font-weight: 300;
   font-family: "Montserrat", sans-serif;
 }

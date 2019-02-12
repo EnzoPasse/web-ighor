@@ -181,7 +181,7 @@ filtroComboEstado(event) {
   }
 
   detalle(event: Hoja) {
-    this.hojaRutaService.buscarHojaRutaDetalle(event).subscribe((res: Hoja) => {
+    this.hojaRutaService.buscarHojaRutaClientes(event).subscribe((res: Hoja) => {
       this.hojaDetalleSelected = res.detalle_hoja_ruta;
     });
     this.displayModal = true;

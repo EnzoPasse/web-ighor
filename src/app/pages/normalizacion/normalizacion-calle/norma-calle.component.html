@@ -30,8 +30,6 @@
       </div>
 
 
-
-
       <div *ngIf="callesMal?.length > 0 && cargandoFiltros" class="card">
         <div class="card-body">
           <div class="ui-fluid">
@@ -62,6 +60,13 @@
               </ng-template>
               <ng-template pTemplate="summary">
                 Total: {{callesMal?.length}} Items
+              </ng-template>
+              <ng-template pTemplate="emptymessage" let-columns>
+                  <tr>
+                      <td [attr.colspan]="columns.length">
+                          No se han encotrado registros
+                      </td>
+                  </tr>
               </ng-template>
             </p-table>
           </div>
@@ -117,3 +122,7 @@
     <app-criterio [filtrosIn]="filtrosSelected" [display]="display" [tituloOption]="(nuevo) ? 'Nuevos Filtros' : 'Editar Filtros' "
       [barrio]="nombreCalle" (filtroInfo)="guardarFiltro($event)" (displayInfo)="onDialogClose($event)"></app-criterio>
   </div>
+
+  <pre>
+    {{ callesMalSelected | json}}
+  </pre>

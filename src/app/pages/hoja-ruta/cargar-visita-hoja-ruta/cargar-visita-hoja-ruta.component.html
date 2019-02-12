@@ -1,3 +1,159 @@
-<p>
-  cargar-visita-hoja-ruta works!
-</p>
+<p-growl openTo="body" [value]="msgs" life="1500"> </p-growl>
+
+<div class="text-center">
+   <h1>{{ usuario.first_name }} {{ usuario.last_name }}</h1>
+   <hr />
+</div>
+  <div class="ui-g ui-fluid">
+    <div class="ui-g-12 ui-md-6 ui-g-offset-3">
+      <div class="ui-inputgroup">
+        <label for="nro">Hoja de Ruta N° </label>
+        <input
+          type="text"
+          pInputText
+          placeholder="Nro de Hoja de Ruta"
+          id="nro"
+          name="nro"
+          [(ngModel)]="nroHoja"
+          [ngModelOptions]="{ standalone: true }"
+          pKeyFilter="int"
+          (keyup.enter)="buscarHojaRuta()"
+          #nro="ngModel"
+          [required]="true"
+          (keyup)="textVacio(nro.value)"/>
+        <button
+          pButton
+          type="button"
+          label="Buscar"
+          class="ui-button-success ui-state-hover"
+          (click)="buscarHojaRuta()"
+        ></button>
+      </div>
+      <div *ngIf="nro.invalid && (nro.dirty || nro.touched)" class="alert alert-danger">
+          <div *ngIf="nro?.errors.required" class="text-center">
+            El Nro de Hoja de Ruta es requerido para la busqueda
+          </div>
+      </div>
+
+
+    </div>
+  </div>
+  <br />
+
+  <div *ngIf="detalle && nroHoja">
+    <div class="ui-md-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="ui-fluid">
+            <p-table
+              [value]="detalle"
+              [columns]="columnas"
+              [loading]="cargando"
+              [paginator]="true"
+              [rows]="10"
+              [rowsPerPageOptions]="[5, 10, 20]"
+              dataKey="numero"
+              [responsive]="true"
+              #dt
+            >
+
+              <ng-template pTemplate="caption">
+               <h3>
+                <div style="text-align: center">
+                  <strong>Barrio: {{ detalle[0]?.barrio }}</strong>
+                </div>
+                <div style="text-align: center">
+                  <strong>Calle:<small><strong>{{ detalle[0]?.calle }}</strong></small></strong>
+                </div>
+              </h3>
+              </ng-template>
+
+              <ng-template pTemplate="header" let-columns>
+                <tr>
+                  <th
+                    *ngFor="let col of columns"
+                    [ngStyle]="{ width: col.width }">
+                    {{ col.header }}
+                  </th>
+                </tr>
+                <tr>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-rowData>
+                <tr>
+                  <td>{{ rowData.numero_orden }}</td>
+                  <td>{{ rowData.apellido + ", " + rowData.nombre }}</td>
+                  <td>{{ rowData.altura }}</td>
+                  <td>{{ rowData.piso }}</td>
+                  <td>{{ rowData.departamento }}</td>
+                  <td>{{ rowData.tipo }}</td>
+                  <td><strong>{{ rowData.titular }}</strong></td>
+
+                  <td class="pointer">
+                    <p-multiSelect
+                      [options]="productos"
+                      [(ngModel)]="rowData.producto"
+                      [ngModelOptions]="{ standalone: true }"
+                      [style]="{ width: '100%' }"
+                      defaultLabel="Seleccionar"
+                      selectedItemsLabel="{0} Productos">
+                    </p-multiSelect>
+                  </td>
+
+                  <td class="pointer">
+                    <p-dropdown
+                      [options]="observaciones"
+                      [(ngModel)]="rowData.observacion"
+                      [ngModelOptions]="{ standalone: true }"
+                      styleClass="ui-column-filter"
+                      [style]="{ width: '100%' }"
+                      placeholder="Seleccionar"
+                      [required]="true"
+                      id="obser"
+                      name="obser"
+                      #obser="ngModel">
+                    </p-dropdown>
+                    <small *ngIf="obser.invalid && (obser.dirty || obser.touched)" class="text-danger">
+                      <div *ngIf="obser?.errors.required" class="text-center">
+                        Requerido
+                      </div>
+                    </small>
+                  </td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="emptymessage" let-columns>
+                <tr>
+                  <td [attr.colspan]="columns.length">
+                    No se han encotrado registros
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ui-g ui-fluid">
+      <div *ngIf="detalle" class="ui-md-6 ui-g-offset-3">
+         <div *ngIf="error" class="alert alert-danger" role="alert">
+           <div class="text-center">
+              <strong>Se Deben cargar todas las observaciones!.</strong>
+          </div>
+         </div>
+      </div>
+  </div>
+
+<div class="ui-g ui-fluid">
+  <div *ngIf="detalle" class="ui-md-6 ui-g-offset-3">
+    <button
+      pButton
+      class="ui-button-success ui-state-hover"
+      label="Guardar Cambios"
+      (click)="actualizarHR()"
+      style="height:50px"
+    ></button>
+  </div>
+</div>
+
