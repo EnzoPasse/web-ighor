@@ -17,6 +17,7 @@ import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HttpInterceptorService } from './services/shared/http-interceptor.service';
+
 // import { PagesComponent } from './pages/pages.component';
 // import { PagesModule } from './pages/pages.module';
 
@@ -27,7 +28,7 @@ import { HttpInterceptorService } from './services/shared/http-interceptor.servi
     AppComponent,
     // PagesComponent,
     LoginComponent
-  ],
+    ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

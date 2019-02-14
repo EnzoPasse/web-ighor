@@ -14,6 +14,10 @@ import { BarrioListComponent } from './barrio/barrio-list.component';
 import { BarrioDetailComponent } from './barrio/barrio-detail.component';
 import { CalleListComponent } from './calle/calle-list.component';
 import { CalleDetailComponent } from './calle/calle-detail.component';
+import { ProductoComponent } from './producto/producto.component';
+import { ProductoDetailComponent } from './producto/producto-detail.component';
+import { ObservacionComponent } from './observacion/observacion.component';
+import { ObservacionDetailComponent } from './observacion/observacion-detail.component';
 
 // services
 import { ProvinciaService } from './provincia/provincia.service';
@@ -21,6 +25,8 @@ import { LocalidadService } from './localidad/localidad.service';
 import { SectorService } from './sector/sector.service';
 import { BarrioService } from './barrio/barrio.service';
 import { CalleService } from './calle/calle.service';
+import { ProductoService } from './producto/producto.service';
+import { ObservacionService } from './observacion/observacion.service';
 
 // primeng
 import { PrimeNgModule } from '../primeng.module';
@@ -37,14 +43,20 @@ import { PrimeNgModule } from '../primeng.module';
     BarrioListComponent,
     BarrioDetailComponent,
     CalleListComponent,
-    CalleDetailComponent
+    CalleDetailComponent,
+    ProductoComponent,
+    ProductoDetailComponent,
+    ObservacionComponent,
+    ObservacionDetailComponent
   ],
   providers: [
     ProvinciaService,
     LocalidadService,
     SectorService,
     BarrioService,
-    CalleService
+    CalleService,
+    ProductoService,
+    ObservacionService
   ]
 })
 export class MaestroModule {}

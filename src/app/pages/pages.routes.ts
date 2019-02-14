@@ -17,6 +17,8 @@ import { NormaCalleComponent } from './normalizacion/normalizacion-calle/norma-c
 import { GenerarHojaRutaComponent } from './hoja-ruta/generar-hoja-ruta/generar-hoja-ruta.component';
 import { AsignarHojaRutaComponent } from './hoja-ruta/asignar-hoja-ruta/asignar-hoja-ruta.component';
 import { CargarVisitaHojaRutaComponent } from './hoja-ruta/cargar-visita-hoja-ruta/cargar-visita-hoja-ruta.component';
+import { ProductoComponent } from './maestro/producto/producto.component';
+import { ObservacionComponent } from './maestro/observacion/observacion.component';
 
 const pagesRoutes: Routes = [
   {
@@ -63,6 +65,16 @@ const pagesRoutes: Routes = [
         path: 'calle',
         component: CalleListComponent,
         data: { titulo: 'Calles' }
+      },
+      {
+        path: 'producto',
+        component: ProductoComponent,
+        data: { titulo: 'Productos' }
+      },
+      {
+        path: 'observacion',
+        component: ObservacionComponent,
+        data: { titulo: 'Observaciones' }
       },
       {
         path: 'normalizadorBarrios',

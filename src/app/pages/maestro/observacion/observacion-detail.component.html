@@ -1,0 +1,44 @@
+<div class="row">
+
+
+    <p-dialog header= {{titulo}} [(visible)]="display" modal="true"
+              [responsive]="true" [resizable]="true" [minWidth]="300"
+              appendTo="body" [closable]="false">
+
+      <br>
+
+      <form [formGroup]="observacionForm">
+
+        <div class="form-group">
+          <div class="ui-inputgroup">
+            <span class="ui-float-label">
+              <input id="nombre" type="text" pInputText formControlName="nombreObservacion" class="form-control" name="nombreObservacion" size="40">
+              <label for="nombre">Observacion</label>
+            </span>
+            <span class="ui-inputgroup-addon">
+              <i class="fa fa-tasks"></i>
+            </span>
+          </div>
+
+          <small *ngIf="nombreObservacion.invalid && (nombreObservacion.dirty || nombreObservacion.touched)" class="text-danger">
+            <div *ngIf="nombreObservacion?.errors['required'] " class="text-center">
+                Observacion Requerido!
+            </div>
+            <div *ngIf="nombreObservacion?.errors['minlength']" class=" text-center">
+              Al menos 3 letras.
+            </div>
+          </small>
+
+        </div>
+
+      </form>
+
+      <p-footer>
+        <button [disabled]="observacionForm.invalid" type="submit" pButton icon="fa-check" (click)="saveObservacion(observacionForm.value)" label="Guardar"
+          class="ui-button-success ui-state-hover"></button>
+        <button type="button" pButton icon="fa-close" class="ui-button-danger" (click)=" hideDialog()"  label="Cancelar"></button>
+      </p-footer>
+
+    </p-dialog>
+
+  </div>

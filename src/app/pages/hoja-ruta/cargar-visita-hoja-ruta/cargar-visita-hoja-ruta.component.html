@@ -6,9 +6,9 @@
 </div>
   <div class="ui-g ui-fluid">
     <div class="ui-g-12 ui-md-6 ui-g-offset-3">
+        <!-- <label for="nro">Hoja de Ruta N° </label> -->
       <div class="ui-inputgroup">
-        <label for="nro">Hoja de Ruta N° </label>
-        <input
+         <input
           type="text"
           pInputText
           placeholder="Nro de Hoja de Ruta"
@@ -21,13 +21,13 @@
           #nro="ngModel"
           [required]="true"
           (keyup)="textVacio(nro.value)"/>
-        <button
+       <button
           pButton
           type="button"
           label="Buscar"
           class="ui-button-success ui-state-hover"
           (click)="buscarHojaRuta()"
-        ></button>
+        ><span class="ui-inputgroup-addons"><i class="fa fa-search"></i></span></button>
       </div>
       <div *ngIf="nro.invalid && (nro.dirty || nro.touched)" class="alert alert-danger">
           <div *ngIf="nro?.errors.required" class="text-center">

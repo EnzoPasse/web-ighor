@@ -26,7 +26,9 @@ devolverMenu() {
           { titulo: 'Localidades', url: '/localidad' },
           { titulo: 'Sectores', url: '/sector' },
           { titulo: 'Barrios', url: '/barrio' },
-          { titulo: 'Calles', url: '/calle' }
+          { titulo: 'Calles', url: '/calle' },
+          { titulo: 'Productos', url: '/producto' },
+          { titulo: 'Observaciones', url: '/observacion' }
 
         ]
      },
