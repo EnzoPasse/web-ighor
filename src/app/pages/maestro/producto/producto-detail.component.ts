@@ -35,7 +35,7 @@ export class ProductoDetailComponent implements OnInit, OnChanges {
     this.productoForm = this.fb.group({
       nombreProducto: new FormControl('', [
         Validators.required,
-        Validators.minLength(3)
+        Validators.minLength(2)
       ])
     });
     this.cargarDatos();

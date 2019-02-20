@@ -68,8 +68,8 @@ devolverMenu() {
        icono: 'mdi mdi-map',
        submenu: [
          { titulo: 'Generar Hojas de Rutas', url: '/generarHojaRuta' },
-         { titulo: 'Asignar Hojas de Rutas', url: '/asignarHojaRuta' },
-         { titulo: 'Cargar Hojas de Rutas', url: '/cargarHojaRuta' }
+         { titulo: 'Asignar Hojas de Rutas', url: '/asignarHojaRuta' }
+       //  { titulo: 'Cargar Hojas de Rutas', url: '/cargarHojaRuta' }
 
        ]
      }

@@ -42,8 +42,6 @@ export class GenerarHojaRutaComponent implements OnInit {
       this.barrioService
         .cargarHojaRutas(this.barrioSelected)
         .subscribe((res: HojaRuta) => {
-          console.log(res);
-
           this.caragarDatos(res);
         });
     }
