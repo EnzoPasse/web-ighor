@@ -105,10 +105,11 @@
         <div class="card">
           <div class="card-body">
             <div class="ui-fluid">
-              <h4 class="text-center">Totales</h4>
+              <h4 class="text-center">NORMALIZADOS</h4>
+              <h3 class="text-center">Total Registros</h3>
               <p-chart type="pie" [data]="grafico1"></p-chart>
               <br>
-              <h4 class="text-center">Barrio</h4>
+              <h3 class="text-center">En el Barrio: <small>{{calleSelected?.barrio.nombre}}</small></h3>
               <p-chart type="pie" [data]="grafico2"></p-chart>
             </div>
           </div>

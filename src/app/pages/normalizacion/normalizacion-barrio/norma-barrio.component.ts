@@ -113,21 +113,21 @@ export class NormaBarrioComponent implements OnInit {
 
   cargarGraficos() {
     let total_registros: number;
-    let barrios_sector: number;
-    let usuarios_sector: number;
+    let normalizados: number;
+    let normalizados_sector: number;
     let usuarios_barrio: number;
     // tslint:disable-next-line:radix
     this.normalizadorService.reporteNormalizacion(parseInt(this.barrioSelected.id))
        .subscribe((res: any) => {
-            total_registros = res.cantidad_registros_total;
-            barrios_sector = res.cantidad_barrios_por_sector;
-            usuarios_sector = res.cantidad_registros_barrio_normalizado_por_sector;
+            total_registros = res.cantidad_registros_diccionario;
+            normalizados = res.cantidad_registros_normalizados_diccionario;
+            normalizados_sector = res.cantidad_registros_normalizados_por_sector_diccionario;
             usuarios_barrio = res.cantidad_registros_barrio_normalizado;
        this.grafico1 = {
-        labels: ['Barrios/sector', 'Total'],
+        labels: ['Normalizados', 'Total'],
         datasets: [
           {
-            data: [barrios_sector, total_registros],
+            data: [normalizados, total_registros],
             backgroundColor: ['#FF6384', '#FFCE56'], // , '#FFCE56'
             hoverBackgroundColor: ['#FF6384', '#FFCE56'] // , '#FFCE56'
           }
@@ -135,10 +135,10 @@ export class NormaBarrioComponent implements OnInit {
       };
 
       this.grafico2 = {
-        labels: ['Normalizados', 'Usuarios'],
+        labels: ['Sector', 'Normalizados'],
         datasets: [
           {
-            data: [usuarios_sector, usuarios_barrio],
+            data: [normalizados_sector, normalizados],
             backgroundColor: ['#DD6535', '#36A2EB'],
             hoverBackgroundColor: ['#DD6535', '#36A2EB']
           }
