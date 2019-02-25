@@ -46,7 +46,7 @@ export class NormaCalleComponent implements OnInit {
       .buscarCallePorTexto(event.query)
       .subscribe((res: any) => {
         this.calles = res.calles_barrio; ////// VER SI VIENE ASI EL DATO
-        console.log(this.calles);
+     //   console.log(this.calles);
         this.cargandoFiltros = false;
         this.callesMal = [];
         this.callesMalSelected = [];
@@ -99,7 +99,7 @@ export class NormaCalleComponent implements OnInit {
       event.filtros
     );
 
-    console.log('CONSULTA:' + JSON.stringify(consulta));
+  //  console.log('CONSULTA:' + JSON.stringify(consulta));
 
     this.normalizadorService
       .cargarCallesMal(consulta)
