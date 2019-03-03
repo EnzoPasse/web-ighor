@@ -49,7 +49,19 @@ devolverMenu() {
        { titulo: 'Cargar Hojas de Rutas', url: '/cargarHojaRuta' }
 
      ]
-   }
+  },
+  {
+    titulo: 'Reportes',
+    icono: 'mdi mdi-chart-line',
+    submenu: [
+      { titulo: 'Crecimiento anual', url: '' },
+      { titulo: 'Mineria de Clientes', url: '' },
+      { titulo: 'Rendimiento de Vendedores', url: '' },
+      { titulo: 'Comparacion de Observaciones', url: '' },
+      { titulo: 'Normalizacion', url: '' }
+
+    ]
+  }
      ];
 
      return this.munuAdmin;

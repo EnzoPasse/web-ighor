@@ -115,6 +115,13 @@ export class BarrioListComponent implements OnInit {
                 detail: `${barrio.nombre} Eliminada.`
               }
             ];
+          },
+          error => {
+            this.confirmationService.confirm({
+              header: 'Acción Denegada !',
+              message: `${error}`,
+              accept: () => {}
+            });
           });
       },
       reject: () => {

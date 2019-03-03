@@ -24,6 +24,9 @@ export class AlertService {
             } else {
                errMsg = ` ${JSON.stringify(err.error)} `;
             }
+            if (err.error.length) {
+              errMsg = `${err.error[0]}`;
+             }
             break;
 
           case 401:

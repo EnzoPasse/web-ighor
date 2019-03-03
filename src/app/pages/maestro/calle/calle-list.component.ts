@@ -115,6 +115,13 @@ export class CalleListComponent implements OnInit {
                 detail: `${calle.calle.nombre} Eliminada.`
               }
             ];
+          },
+          error => {
+            this.confirmationService.confirm({
+              header: 'Acción Denegada !',
+              message: `${error}`,
+              accept: () => {}
+            });
           });
       },
       reject: () => {

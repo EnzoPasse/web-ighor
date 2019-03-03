@@ -33,154 +33,72 @@
       <div class="card">
         <div class="card-body">
           <div class="ui-fluid">
-
-              <p-table
+            <p-table
               [value]="hojasFilter"
               [columns]="columnas"
               [loading]="cargando"
               [paginator]="true"
               [rows]="10"
-              [rowsPerPageOptions]="[5,10,20]"
-              [(selection)]="hojasSelected"
-              dataKey="numero"
-              [responsive]="true"
-              #dt>
-              <!-- [globalFilterFields]="['calle.nombre','asignada_a','estado.nombre']"  -->
-
-              <!-- <ng-template pTemplate="caption">
-                  <div style="text-align: right">
-                      <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-                      <input type="text" pInputText  placeholder="Filtrar" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
-                  </div>
-              </ng-template> -->
-
-              <ng-template pTemplate="caption">
-                  <div style="text-align: right">
-                      <p-button class="ui-button-secondary" icon="fa fa-refresh" (click)="recargar()"></p-button>
-                  </div>
-                </ng-template>
-
-              <ng-template pTemplate="header" let-columns>
-                  <!-- <tr>
-                      <th *ngFor="let col of columns" [pSortableColumn]="col.field">
-                          {{col.header}}
-                          <p-sortIcon [field]="col.field"></p-sortIcon>
-                      </th>
-                  </tr> -->
-                  <tr>
-                    <th *ngFor="let col of columns" [ngStyle]="{'width': col.width}">
-                         {{ col.header }}
-                    </th>
-                  </tr>
-                  <tr>
-                      <th *ngFor="let col of columns" [ngSwitch]="col.field">
-                          <p-tableHeaderCheckbox *ngSwitchCase="'check'" [style]="{'width':'100%'}"> </p-tableHeaderCheckbox>
-                          <input *ngSwitchCase="'calle.nombre'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')" [style]="{'width':'100%'}">
-                          <p-dropdown *ngSwitchCase="'asignada_a'" [options]="vendedores" placeholder="Seleccionar" editable="true"	 (onChange)="filtroComboVendedor($event.value)" styleClass="ui-column-filter" [style]="{'width':'100%'}"></p-dropdown>
-                          <p-dropdown *ngSwitchCase="'estado.nombre'" [options]="estados" placeholder="Seleccionar" editable="true" (onChange)="filtroComboEstado($event.value)" styleClass="ui-column-filter" [style]="{'width':'100%'}"></p-dropdown>
-                      </th>
-                  </tr>
-              </ng-template>
-              <ng-template pTemplate="body" let-rowData>
-                  <tr>
-                    <td style="width: 3em">
-                      <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
-                    </td>
-                    <td>{{ rowData.numero }}</td>
-                    <td>{{ rowData.calle.nombre }}</td>
-                    <td>{{ rowData.altura_desde }}</td>
-                    <td>{{ rowData.altura_hasta }}</td>
-                    <td>
-                      <span class="badge badge-secondary">
-                        {{ rowData.cant_registros }}
-                      </span>
-                      <span  class="pointer pull-right">
-                          <i class="fa fa-address-card-o" (click)="detalle(rowData)"></i>
-                      </span>
-                      <!-- <button
-                        type="button"
-                        class="btn btn-link pull-right"
-                        (click)="detalle(rowData)"
-                      >
-                        <small>detalle</small>
-                      </button> -->
-                    </td>
-                    <td pEditableColumn class="pointer">
-                      <p-cellEditor>
-                        <ng-template pTemplate="input">
-                          <p-dropdown
-                            [options]="vendedores"
-                            [(ngModel)]="rowData.asignada_a"
-                            styleClass="ui-column-filter"
-                            [style]="{'width': '100%' }"
-                            placeholder="Seleccionar"
-                          >
-                          </p-dropdown>
-                        </ng-template>
-                        <ng-template pTemplate="output">
-                          {{
-                            rowData.asignada_a
-                              ? rowData.asignada_a.first_name +
-                                ", " +
-                                rowData.asignada_a.last_name
-                              : "Seleccionar"
-                          }}
-                        </ng-template>
-                      </p-cellEditor>
-                    </td>
-                    <td class="text-center">
-                      <span
-                        [ngClass]="{
-                          'badge badge-pill badge-danger':
-                            rowData.estado.nombre === 'Sin Asignar',
-                          'badge badge-pill badge-success':
-                            rowData.estado.nombre === 'Asignada',
-                          'badge badge-pill badge-info': rowData.estado.nombre === 'Cerrada'
-                        }"
-                      >
-                        <small><strong>{{ rowData.estado.nombre }}</strong></small>
-                      </span>
-                    </td>
-                  </tr>
-                </ng-template>
-                <ng-template pTemplate="emptymessage" let-columns>
-                    <tr>
-                        <td [attr.colspan]="columns.length">
-                            No se han encotrado registros
-                        </td>
-                    </tr>
-                </ng-template>
-          </p-table>
-
-           <!--  <p-table
-              [value]="hojaRuta.hojas"
-              [loading]="cargando"
-              [paginator]="true"
-              [rows]="10"
+              [rowsPerPageOptions]="[5, 10, 20]"
               [(selection)]="hojasSelected"
               dataKey="numero"
               [responsive]="true"
               #dt
-              [globalFilterFields]="['Vendedor']"
             >
-            <ng-template pTemplate="caption">
-              <div style="text-align: right">
-                  <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-                  <input type="text" pInputText  placeholder="Filtrar" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
-              </div>
-          </ng-template>
-              <ng-template pTemplate="header">
-                <tr class="text-center">
-                  <th style="width: 3em">
-                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+              <ng-template pTemplate="caption">
+                <div style="text-align: right">
+                  <p-button
+                    class="ui-button-secondary"
+                    icon="fa fa-refresh"
+                    (click)="recargar()"
+                  ></p-button>
+                </div>
+              </ng-template>
+
+              <ng-template pTemplate="header" let-columns>
+                <tr>
+                  <th
+                    *ngFor="let col of columns"
+                    [ngStyle]="{ width: col.width }"
+                  >
+                    {{ col.header }}
                   </th>
-                  <th style="width:60px">Nro.</th>
-                  <th style="width:200px">Calle</th>
-                  <th style="width:80px">Altura desde</th>
-                  <th style="width:80px">Altura hasta</th>
-                  <th style="width:90px">Registros</th>
-                  <th style="width:180px">Vendedor</th>
-                  <th style="width:100px">Estado</th>
+                </tr>
+                <tr>
+                  <th *ngFor="let col of columns" [ngSwitch]="col.field">
+                    <p-tableHeaderCheckbox
+                      *ngSwitchCase="'check'"
+                      [style]="{ width: '100%' }"
+                    >
+                    </p-tableHeaderCheckbox>
+                    <input
+                      *ngSwitchCase="'calle.nombre'"
+                      pInputText
+                      type="text"
+                      (input)="
+                        dt.filter($event.target.value, col.field, 'contains')
+                      "
+                      [style]="{ width: '100%' }"
+                    />
+                    <p-dropdown
+                      *ngSwitchCase="'asignada_a'"
+                      [options]="vendedores"
+                      placeholder="Seleccionar"
+                      editable="true"
+                      (onChange)="filtroComboVendedor($event.value)"
+                      styleClass="ui-column-filter"
+                      [style]="{ width: '100%' }"
+                    ></p-dropdown>
+                    <p-dropdown
+                      *ngSwitchCase="'estado.nombre'"
+                      [options]="estados"
+                      placeholder="Seleccionar"
+                      editable="true"
+                      (onChange)="filtroComboEstado($event.value)"
+                      styleClass="ui-column-filter"
+                      [style]="{ width: '100%' }"
+                    ></p-dropdown>
+                  </th>
                 </tr>
               </ng-template>
               <ng-template pTemplate="body" let-rowData>
@@ -196,13 +114,12 @@
                     <span class="badge badge-secondary">
                       {{ rowData.cant_registros }}
                     </span>
-                    <button
-                      type="button"
-                      class="btn btn-link pull-right"
-                      (click)="detalle(rowData)"
-                    >
-                      <small>detalle</small>
-                    </button>
+                    <span class="pointer pull-right">
+                      <i
+                        class="fa fa-address-card-o"
+                        (click)="detalle(rowData)"
+                      ></i>
+                    </span>
                   </td>
                   <td pEditableColumn class="pointer">
                     <p-cellEditor>
@@ -210,8 +127,10 @@
                         <p-dropdown
                           [options]="vendedores"
                           [(ngModel)]="rowData.asignada_a"
+                          styleClass="ui-column-filter"
                           [style]="{ width: '100%' }"
                           placeholder="Seleccionar"
+                          (onChange)="onChangeVendedor()"
                         >
                         </p-dropdown>
                       </ng-template>
@@ -233,36 +152,49 @@
                           rowData.estado.nombre === 'Sin Asignar',
                         'badge badge-pill badge-success':
                           rowData.estado.nombre === 'Asignada',
-                        'badge badge-pill badge-info': rowData.estado.nombre === 'Cerrada'
+                        'badge badge-pill badge-info':
+                          rowData.estado.nombre === 'Cerrada'
                       }"
                     >
-                      <small>{{ rowData.estado.nombre }}</small>
+                      <small
+                        ><strong>{{ rowData.estado.nombre }}</strong></small
+                      >
                     </span>
                   </td>
                 </tr>
               </ng-template>
-            </p-table> -->
+              <ng-template pTemplate="emptymessage" let-columns>
+                <tr>
+                  <td [attr.colspan]="columns.length">
+                    No se han encotrado registros
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
           </div>
         </div>
       </div>
-      <div *ngIf="hojasSelected.length > 0 && isAsignada()" class="ui-g ui-fluid">
+      <div
+        *ngIf="hojasSelected.length > 0 && isAsignada()"
+        class="ui-g ui-fluid"
+      >
         <div class="ui-md-4">
-            <button
-              pButton
-              class="ui-button-success ui-state-hover"
-              label="Asignar"
-              (click)="actualizarHR()"
-              style="height:50px"
-            ></button>
+          <button
+            pButton
+            class="ui-button-success ui-state-hover"
+            label="Asignar"
+            (click)="actualizarHR()"
+            style="height:50px"
+          ></button>
         </div>
         <div class="ui-md-4">
-            <button
-              pButton
-              class="ui-button-warning ui-state-hover"
-              label="Imprimir"
-              (click)="imprimir()"
-              style="height:50px"
-            ></button>
+          <button
+            pButton
+            class="ui-button-warning ui-state-hover"
+            label="Imprimir"
+            (click)="imprimir()"
+            style="height:50px"
+          ></button>
         </div>
         <div class="ui-md-4">
           <button
@@ -272,7 +204,16 @@
             (click)="AsignarImprimir()"
             style="height:50px"
           ></button>
+        </div>
       </div>
+    </div>
+
+    <div class="ui-md-6 ui-md-offset-3" *ngIf="data">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title text-center">Clientes Asignados</h3>
+          <p-chart type="bar" [data]="data" [options]="options"></p-chart>
+        </div>
       </div>
     </div>
   </div>
@@ -293,4 +234,3 @@
     (displayInfo)="onDialogClosePDF($event)"
   ></app-pdf-modal>
 </div>
-

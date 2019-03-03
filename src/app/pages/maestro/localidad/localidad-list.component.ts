@@ -136,6 +136,13 @@ export class LocalidadListComponent implements OnInit {
                 detail: `${localidad.nombre} Eliminada.`
               }
             ];
+          },
+          error => {
+            this.confirmationService.confirm({
+              header: 'Acción Denegada !',
+              message: `${error}`,
+              accept: () => {}
+            });
           });
       },
       reject: () => {

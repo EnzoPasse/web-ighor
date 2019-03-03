@@ -116,6 +116,13 @@ export class SectorListComponent implements OnInit {
                 detail: `${sector.nombre} Eliminada.`
               }
             ];
+          },
+          error => {
+            this.confirmationService.confirm({
+              header: 'Acción Denegada !',
+              message: `${error}`,
+              accept: () => {}
+            });
           });
       },
       reject: () => {

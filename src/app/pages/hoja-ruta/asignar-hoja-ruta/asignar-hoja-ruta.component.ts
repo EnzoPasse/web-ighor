@@ -7,6 +7,14 @@ import { HojaRutaService } from '../hoja-ruta.service';
 import { Usuario } from '../../usuario/usuario.model';
 import { URL_SERVICIO } from '../../../config/config';
 import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
+import { groupBy, mergeMap, toArray, map, reduce } from 'rxjs/operators';
+import 'rxjs/add/observable/from';
+import 'rxjs/add/observable/of';
+import { from } from 'rxjs/observable/from';
+
+
+
+
 
 @Component({
   selector: 'app-asignar-hoja-ruta',
@@ -28,6 +36,9 @@ export class AsignarHojaRutaComponent implements OnInit {
   displayModal: boolean = false;
   displayModalPDF: boolean = false;
   columnas: any;
+  obj: Resutaldo [] = [];
+  data: any;
+  options: any;
 
   constructor(
     public hojaRutaService: HojaRutaService,
@@ -87,6 +98,8 @@ this.estados.push({label: 'Cerrada' , value: 'Cerrada'});
           this.hojasFilter = res.hojas;
           this.cargando = false;
           this.hojasSelected = [];
+          this.obj = [];
+          this.data = null;
         });
 
         this.columnas = [
@@ -198,4 +211,62 @@ filtroComboEstado(event) {
   }
 
 
+  onChangeVendedor() {
+   this.obj = [];
+   const source = from(this.hojasFilter);
+   const valor = source
+   .pipe(
+    groupBy(person => person.asignada_a ? person.asignada_a.email : null),
+    mergeMap(group => group.pipe(toArray())),
+    map((res: any) => {
+      if ( res[0].asignada_a !== null ) {
+         const nombres = res[0].asignada_a.last_name;
+         const valores = res.reduce(function (acc, obj) { return acc + obj.cant_registros; }, 0);
+         return { nombre: nombres, total: valores} ;
+     }
+    })
+   );
+
+    valor.subscribe((val: Resutaldo) => {
+      if (val !== undefined) {
+      this.obj.push(val);
+    }
+      });
+   this.graficar();
+  }
+
+  graficar() {
+   let nombres: string [] = [];
+   let valores: any [] = [];
+
+    for ( let i = 0 ; this.obj.length > i; i++) {
+     nombres.push(this.obj[i].nombre);
+     valores.push(this.obj[i].total);
+   }
+
+   this.data = {
+     labels: nombres,
+     datasets: [
+       {
+          backgroundColor: '#42A5F5',
+          data: valores
+       }
+      ]
+    };
+
+    this.options = {
+      scales: {
+          yAxes: [{
+                 ticks: {
+                   beginAtZero: true,              }
+                }]
+          }
+    };
+  }
+
+}
+
+export interface Resutaldo {
+  nombre: string;
+  total: number;
 }

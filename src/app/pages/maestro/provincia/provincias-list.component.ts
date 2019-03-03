@@ -103,6 +103,13 @@ export class ProvinciasListComponent implements OnInit {
                 detail: `${provincia.nombre} Eliminada.`
               }
             ];
+          },
+          error => {
+            this.confirmationService.confirm({
+              header: 'Acción Denegada !',
+              message: `${error}`,
+              accept: () => {}
+            });
           });
       },
       reject: () => {
