@@ -12,6 +12,7 @@ import { SharedModule } from '../shared/shared.module';
 import { MaestroModule } from './maestro/maestro.module';
 import { NormalizacionModule } from './normalizacion/normalizacion.module';
 import { HojaRutaModule } from './hoja-ruta/hoja-ruta.module';
+import { ReportesModule } from './reportes/reportes.module';
 
 
 // PAGINAS
@@ -35,7 +36,8 @@ import { UsuarioComponent } from './usuario/usuario.component';
     PagesRoutes,
     MaestroModule,
     NormalizacionModule,
-    HojaRutaModule
+    HojaRutaModule,
+    ReportesModule
   ],
   exports: [],
   providers: []

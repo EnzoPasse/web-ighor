@@ -19,6 +19,10 @@ import { AsignarHojaRutaComponent } from './hoja-ruta/asignar-hoja-ruta/asignar-
 import { CargarVisitaHojaRutaComponent } from './hoja-ruta/cargar-visita-hoja-ruta/cargar-visita-hoja-ruta.component';
 import { ProductoComponent } from './maestro/producto/producto.component';
 import { ObservacionComponent } from './maestro/observacion/observacion.component';
+import { ContactosNormalizadosComponent } from './reportes/contactos-normalizados/contactos-normalizados.component';
+import { ComparacionObservacionesComponent } from './reportes/comparacion-observaciones/comparacion-observaciones.component';
+import { RendimientoAnualComponent } from './reportes/rendimiento-anual/rendimiento-anual.component';
+import { ComparacionVendedoresComponent } from './reportes/comparacion-vendedores/comparacion-vendedores.component';
 
 const pagesRoutes: Routes = [
   {
@@ -100,6 +104,26 @@ const pagesRoutes: Routes = [
         path: 'cargarHojaRuta',
         component: CargarVisitaHojaRutaComponent,
         data: { titulo: 'Cargar Hoja de Ruta' }
+      },
+      {
+        path: 'contactosNormalizados',
+        component: ContactosNormalizadosComponent,
+        data: { titulo: 'Contactos Normalizados' }
+      },
+      {
+        path: 'comparacionObservaciones',
+        component: ComparacionObservacionesComponent,
+        data: { titulo: 'Comparacion de Observaciones' }
+      },
+      {
+        path: 'rendimientoAnual',
+        component: RendimientoAnualComponent,
+        data: { titulo: 'Rendimiento Anual' }
+      },
+      {
+        path: 'comparacionVendedores',
+        component: ComparacionVendedoresComponent,
+        data: { titulo: 'Comparacion de Vendedores' }
       },
       { path: '**', component: PageNoFoundComponent }
     ]

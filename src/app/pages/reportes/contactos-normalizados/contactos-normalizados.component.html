@@ -1,0 +1,87 @@
+<div class="ui-md-12">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="text-center">Filtros:</h4>
+      <div class="ui-g ui-fluid">
+        <div class="ui-md-6">
+          <p-dropdown
+            [options]="provincias"
+            (onChange)="onProvChange()"
+            [(ngModel)]="currentProvincia"
+            [style]="{ width: '100%' }"
+            placeholder="Provincias"
+          ></p-dropdown>
+        </div>
+        <div class="ui-md-6">
+          <p-dropdown
+            [options]="localidades"
+            (onChange)="onLocalidadChange()"
+            [(ngModel)]="currentLocalidad"
+            [style]="{ width: '100%' }"
+            placeholder="Localidades"
+            ></p-dropdown>
+        </div>
+      </div>
+
+      <div class="ui-g ui-fluid">
+        <div class="ui-md-6">
+          <p-dropdown
+            [options]="sectores"
+            (onChange)="onSectorChange()"
+            [(ngModel)]="currentSector"
+            [style]="{ width: '100%' }"
+            placeholder="Sectores"
+          ></p-dropdown>
+        </div>
+        <div class="ui-md-6">
+          <p-dropdown
+            [options]="barrios"
+            [(ngModel)]="currentBarrio"
+            [style]="{ width: '100%' }"
+            placeholder="Barrios"
+          ></p-dropdown>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui-md-4 ui-md-offset-4">
+    <button
+           disable="currentProvincia? false : true"
+           pButton
+           class="ui-button-success ui-state-hover"
+           label="Buscar"
+           (click)="generarReporte()"
+           style="height:50px ; width:100%" >
+    </button>
+  </div>
+
+  </div>
+</div>
+
+<div class="ui-md-12">
+  <div class="card">
+    <div class="card-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Sitio</th>
+            <th scope="col">Clientes</th>
+            <th scope="col">No Clientes</th>
+            <th scope="col">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of resultado; let i = index">
+            <th scope="row">{{ i + 1 }}</th>
+            <td><strong>{{ item.nombre }}</strong ></td>
+            <td>{{ item.cantidad_clientes ? item.cantidad_clientes : " - " }}</td>
+            <td>{{ item.cantidad_no_clientes ? item.cantidad_no_clientes  : " - "}}</td>
+            <td>{{ item.cantidad_total ? item.cantidad_total : " - " }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

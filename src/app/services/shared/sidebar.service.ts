@@ -54,10 +54,10 @@ devolverMenu() {
     titulo: 'Reportes',
     icono: 'mdi mdi-chart-line',
     submenu: [
-      { titulo: 'Crecimiento anual', url: '' },
-      { titulo: 'Mineria de Clientes', url: '' },
-      { titulo: 'Rendimiento de Vendedores', url: '' },
-      { titulo: 'Comparacion de Observaciones', url: '' },
+      { titulo: 'Rendimiento anual', url: '/rendimientoAnual' },
+      { titulo: 'Contactos Normalizados', url: '/contactosNormalizados' },
+      { titulo: 'Vendedores por Observaciones', url: '/comparacionVendedores' },
+      { titulo: 'Comparacion de Observaciones', url: '/comparacionObservaciones' },
       { titulo: 'Normalizacion', url: '' }
 
     ]
