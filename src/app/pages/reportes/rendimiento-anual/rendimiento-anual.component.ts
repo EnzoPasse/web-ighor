@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SelectItem } from 'primeng/components/common/api';
 
 @Component({
   selector: 'app-rendimiento-anual',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RendimientoAnualComponent implements OnInit {
 
+  anio: SelectItem[];
+  currentAnio; any;
   constructor() { }
 
   ngOnInit() {
+    this.anio = [];
+    for (let i = 10; i < 30; i++) {
+        this.anio.push({label: `20${i}` , value: `20${i}` });
+    }
   }
+
+  generarReporte() {}
 
 }
