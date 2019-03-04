@@ -34,6 +34,19 @@ observacionesComparacion(params) {
   );
 }
 
+vendedoresComparacion(params) {
+  let url = `${URL_SERVICIO}/reporte_vendedores_observacion/`;
+
+  if (params) {
+    url += `?${params}`;
+  }
+  console.log(url);
+
+  return this.http.get(url).pipe(
+    catchError(this.alert.handleError('VendedoresObservacion', ORIGEN))
+  );
+}
+
 
   private getHttpHeaders() {
     const httpOptions = {
