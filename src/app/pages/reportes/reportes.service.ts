@@ -19,8 +19,21 @@ contactosNormalizados( parametro) {
     // map((res: any) => res.localidades),
     catchError(this.alert.handleError('contactosNormalizados', ORIGEN))
   );
-
 }
+
+observacionesComparacion(params) {
+  let url = `${URL_SERVICIO}/reporte_observaciones_vendedor/`;
+
+  if (params) {
+    url += `?${params}`;
+  }
+  console.log(url);
+
+  return this.http.get(url).pipe(
+    catchError(this.alert.handleError('ObservacionesVendedor', ORIGEN))
+  );
+}
+
 
   private getHttpHeaders() {
     const httpOptions = {

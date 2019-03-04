@@ -26,6 +26,7 @@ import { ToggleButtonModule } from 'primeng/components/ToggleButton/togglebutton
 import { DropdownModule } from 'primeng/components/dropdown/dropdown';
 import { ChartModule } from 'primeng/chart';
 import { MultiSelectModule } from 'primeng/multiselect';
+import {CalendarModule} from 'primeng/calendar';
 
 
 // PRIMENG SERVICES
@@ -54,7 +55,8 @@ import { ConfirmationService } from 'primeng/components/common/api';
     DropdownModule,
     ChartModule,
     TableModule,
-    MultiSelectModule
+    MultiSelectModule,
+    CalendarModule
     ],
   exports: [
     InputTextModule,
@@ -72,7 +74,8 @@ import { ConfirmationService } from 'primeng/components/common/api';
     DropdownModule,
     ChartModule,
     TableModule,
-    MultiSelectModule
+    MultiSelectModule,
+    CalendarModule
   ],
   providers: [ConfirmationService]// settingService
 })

@@ -1,3 +1,55 @@
-<p>
-  comparacion-observaciones works!
-</p>
+<div class="ui-md-12">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="text-center">Filtros:</h4>
+      <div class="ui-g ui-fluid">
+        <div class="ui-md-6">
+          Desde:
+          <p-calendar
+            [(ngModel)]="fechaDesde"
+            [showIcon]="true"
+            dateFormat="dd-mm-yy"
+            showButtonBar="true"
+          ></p-calendar>
+        </div>
+
+        <div class="ui-md-6">
+          Hasta:
+          <p-calendar
+            [(ngModel)]="fechaHasta"
+            [showIcon]="true"
+            dateFormat="dd-mm-yy"
+            showButtonBar="true"
+          ></p-calendar>
+        </div>
+      </div>
+      <div class="ui-g ui-fluid">
+        <div class="ui-md-6">
+          <p-dropdown
+            [options]="vendedores"
+            [(ngModel)]="currentVendedor"
+            [style]="{ width: '100%' }"
+            placeholder="Vendedor"
+          ></p-dropdown>
+        </div>
+        <div class="ui-md-4 ui-md-offset-1">
+          <button
+            pButton
+            class="ui-button-success ui-state-hover"
+            label="Buscar"
+            (click)="generarReporte()"
+            style="height:40px ; width:100%"
+          ></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ui-md-12">
+    <div class="card">
+      <div class="card-body">
+        <p-chart type="bar" [data] = "data" [options]= "options"></p-chart>
+      </div>
+    </div>
+</div>
+
