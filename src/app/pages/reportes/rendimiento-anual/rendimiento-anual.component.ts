@@ -38,7 +38,7 @@ export class RendimientoAnualComponent implements OnInit {
     }
    this.reporteService.rendimientoAnual(params)
    .subscribe((res) => {
-      console.log(res);
+    //  console.log(res);
       this.data = res.result;
    });
   }

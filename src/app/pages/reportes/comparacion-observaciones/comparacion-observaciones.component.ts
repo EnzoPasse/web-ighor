@@ -18,7 +18,7 @@ export class ComparacionObservacionesComponent implements OnInit {
   data: any;
   options = {
     scales: {
-        yAxes: [{
+        xAxes: [{
                ticks: {
                  beginAtZero: true,              }
               }]
