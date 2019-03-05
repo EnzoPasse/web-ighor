@@ -40,10 +40,19 @@ vendedoresComparacion(params) {
   if (params) {
     url += `?${params}`;
   }
-  console.log(url);
-
   return this.http.get(url).pipe(
     catchError(this.alert.handleError('VendedoresObservacion', ORIGEN))
+  );
+}
+
+rendimientoAnual(params) {
+  let url = `${URL_SERVICIO}/reporte_observaciones_mes/`;
+
+  if (params) {
+    url += `?${params}`;
+  }
+  return this.http.get(url).pipe(
+    catchError(this.alert.handleError('RendimientoAnual', ORIGEN))
   );
 }
 
