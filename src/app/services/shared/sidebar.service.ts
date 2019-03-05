@@ -58,7 +58,7 @@ devolverMenu() {
       { titulo: 'Contactos Normalizados', url: '/contactosNormalizados' },
       { titulo: 'Vendedores por Observaciones', url: '/comparacionVendedores' },
       { titulo: 'Comparacion de Observaciones', url: '/comparacionObservaciones' },
-      { titulo: 'Normalizacion', url: '' }
+      { titulo: 'Normalizacion', url: '/normalizacionReporte' }
 
     ]
   }

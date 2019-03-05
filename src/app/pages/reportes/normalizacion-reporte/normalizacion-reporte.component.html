@@ -1,0 +1,86 @@
+<div class="ui-g">
+  <div class="ui-md-6">
+    <div class="card">
+      <div class="card-body">
+        <h3>Filtros Barrio</h3>
+        <div class="ui-g ui-fluid">
+          <p-autoComplete
+            [suggestions]="barrios"
+            (completeMethod)="buscarBarrios($event)"
+            field="nombre"
+            placeholder="Buscar Barrio ..."
+            [minLength]="3"
+            (onSelect)="cargarFiltrosBarrio($event)"
+            emptyMessage="No existen coincidencias con su busqueda"
+            forceSelection="true"
+          >
+            <ng-template let-sect pTemplate="SelectedItem">
+              {{ sect.cuadrante.localidad.provincia.nombre }} -
+              {{ sect.cuadrante.localidad.nombre }}
+              <small>({{ sect.cuadrante.nombre }})</small> -
+              <strong>{{ sect.nombre }}</strong>
+            </ng-template>
+          </p-autoComplete>
+        </div>
+      </div>
+    </div>
+    <div class="card" *ngIf="currentBarrio">
+      <div class="card-body">
+        <div class="ui-fluid">
+          <h4 class="text-center">NORMALIZADOS</h4>
+          <h3 class="text-center">Total de Registros</h3>
+          <p-chart type="pie" [data]="grafico1Barrio"></p-chart>
+          <br />
+          <h3 class="text-center">
+            En el sector:
+            <small>{{ currentBarrio?.cuadrante.nombre }} </small>
+          </h3>
+          <p-chart type="pie" [data]="grafico2Barrio"></p-chart>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ui-md-6">
+    <div class="card">
+      <div class="card-body">
+        <h3>Filtros Calle</h3>
+        <div class="ui-fluid">
+          <p-autoComplete
+            [suggestions]="calles"
+            (completeMethod)="buscarCalles($event)"
+            field="calle.nombre"
+            placeholder="Buscar Calle ..."
+            [minLength]="3"
+            (onSelect)="cargarFiltrosCalle($event)"
+            emptyMessage="No existen coincidencias con su busqueda"
+            forceSelection="true"
+          >
+            <ng-template let-sect pTemplate="SelectedItem">
+              {{ sect.barrio.cuadrante.localidad.provincia.nombre }} -
+              {{ sect.barrio.cuadrante.localidad.nombre }}
+              <small>({{ sect.barrio.cuadrante.nombre }})</small> -
+              <strong
+                >{{ sect.barrio.nombre }} - {{ sect.calle.nombre }}</strong
+              >
+            </ng-template>
+          </p-autoComplete>
+        </div>
+      </div>
+    </div>
+    <div class="card" *ngIf="currentCalle">
+      <div class="card-body">
+        <div class="ui-fluid">
+          <h4 class="text-center">NORMALIZADOS</h4>
+          <h3 class="text-center">Total Registros</h3>
+          <p-chart type="pie" [data]="grafico1Calle"></p-chart>
+          <br />
+          <h3 class="text-center">
+            En el Barrio: <small>{{ currentCalle?.barrio.nombre }}</small>
+          </h3>
+          <p-chart type="pie" [data]="grafico2Calle"></p-chart>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

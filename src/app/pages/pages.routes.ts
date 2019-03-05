@@ -23,6 +23,7 @@ import { ContactosNormalizadosComponent } from './reportes/contactos-normalizado
 import { ComparacionObservacionesComponent } from './reportes/comparacion-observaciones/comparacion-observaciones.component';
 import { RendimientoAnualComponent } from './reportes/rendimiento-anual/rendimiento-anual.component';
 import { ComparacionVendedoresComponent } from './reportes/comparacion-vendedores/comparacion-vendedores.component';
+import { NormalizacionReporteComponent } from './reportes/normalizacion-reporte/normalizacion-reporte.component';
 
 const pagesRoutes: Routes = [
   {
@@ -124,6 +125,11 @@ const pagesRoutes: Routes = [
         path: 'comparacionVendedores',
         component: ComparacionVendedoresComponent,
         data: { titulo: 'Comparacion de Vendedores' }
+      },
+      {
+        path: 'normalizacionReporte',
+        component: NormalizacionReporteComponent,
+        data: { titulo: 'Reporte Normalizacion' }
       },
       { path: '**', component: PageNoFoundComponent }
     ]

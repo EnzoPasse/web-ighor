@@ -7,6 +7,7 @@ import { ComparacionObservacionesComponent } from './comparacion-observaciones/c
 import { RendimientoAnualComponent } from './rendimiento-anual/rendimiento-anual.component';
 import { ComparacionVendedoresComponent } from './comparacion-vendedores/comparacion-vendedores.component';
 import { ReportesService } from './reportes.service';
+import { NormalizacionReporteComponent } from './normalizacion-reporte/normalizacion-reporte.component';
 
 @NgModule({
   imports: [CommonModule, FormsModule, ReactiveFormsModule, PrimeNgModule],
@@ -14,7 +15,8 @@ import { ReportesService } from './reportes.service';
     ContactosNormalizadosComponent,
     ComparacionObservacionesComponent,
     RendimientoAnualComponent,
-    ComparacionVendedoresComponent
+    ComparacionVendedoresComponent,
+    NormalizacionReporteComponent
   ],
   exports: [],
   providers: [ReportesService]
