@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { HojaRutaService } from '../../hoja-ruta/hoja-ruta.service';
 import { Usuario } from '../../usuario/usuario.model';
 import { SelectItem } from 'primeng/components/common/api';
-import { DatePipe } from '@angular/common';
 import { ReportesService } from '../reportes.service';
 
 @Component({
@@ -45,7 +44,6 @@ export class ComparacionObservacionesComponent implements OnInit {
 
     this.reporteService.observacionesComparacion(this.armarParametros())
     .subscribe((res) => {
-      console.log(res);
       this.data =  res.result;
     });
 
@@ -63,7 +61,6 @@ export class ComparacionObservacionesComponent implements OnInit {
     let params: string = '';
 
     if (this.currentVendedor) {
-     // console.log(this.currentVendedor.id);
       params += `vendedor=${this.currentVendedor.id}`;
     }
 
@@ -84,7 +81,6 @@ export class ComparacionObservacionesComponent implements OnInit {
       mesHasta = this.fechaHasta.getMonth() + 1;
       anioHasta = this.fechaHasta.getFullYear();
       hasta = `${anioHasta}-${mesHasta}-${diaHasta}`;
-      // console.log('HASTA: ' + hasta);
       if (params !== '') {
         params += `&fecha_hasta=${hasta}`;
       } else {
@@ -92,7 +88,6 @@ export class ComparacionObservacionesComponent implements OnInit {
       }
     }
 
-   console.log('PARAMETRO: ' + params);
    return params;
   }
 

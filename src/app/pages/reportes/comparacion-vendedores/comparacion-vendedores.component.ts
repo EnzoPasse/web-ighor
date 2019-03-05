@@ -43,7 +43,6 @@ export class ComparacionVendedoresComponent implements OnInit {
 
     this.reporteService.vendedoresComparacion(this.armarParametros())
     .subscribe((res) => {
-      console.log(res);
       this.data =  res.result;
     });
 
@@ -61,7 +60,6 @@ export class ComparacionVendedoresComponent implements OnInit {
     let params: string = '';
 
     if (this.currentObservacion) {
-     // console.log(this.currentVendedor.id);
       params += `observacion=${this.currentObservacion.id}`;
     }
 
@@ -82,7 +80,6 @@ export class ComparacionVendedoresComponent implements OnInit {
       mesHasta = this.fechaHasta.getMonth() + 1;
       anioHasta = this.fechaHasta.getFullYear();
       hasta = `${anioHasta}-${mesHasta}-${diaHasta}`;
-      // console.log('HASTA: ' + hasta);
       if (params !== '') {
         params += `&fecha_hasta=${hasta}`;
       } else {
@@ -90,7 +87,6 @@ export class ComparacionVendedoresComponent implements OnInit {
       }
     }
 
-   console.log('PARAMETRO: ' + params);
    return params;
   }
 

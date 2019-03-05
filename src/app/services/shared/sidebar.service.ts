@@ -84,6 +84,14 @@ devolverMenu() {
        //  { titulo: 'Cargar Hojas de Rutas', url: '/cargarHojaRuta' }
 
        ]
+     },
+     {
+       titulo: 'Reportes',
+       icono: 'mdi mdi-chart-line',
+       submenu: [
+         { titulo: 'Contactos Normalizados', url: '/contactosNormalizados' },
+         { titulo: 'Normalizacion', url: '/normalizacionReporte' }
+       ]
      }
        ];
        return this.menuReturnJefe;
