@@ -97,6 +97,13 @@ export class ProductoComponent implements OnInit {
                 detail: `${producto.nombre} Eliminada.`
               }
             ];
+          },
+          error => {
+            this.confirmationService.confirm({
+              header: 'Acción Denegada !',
+              message: `${error}`,
+              accept: () => {}
+            });
           });
       },
       reject: () => {

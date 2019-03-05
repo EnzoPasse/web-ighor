@@ -97,6 +97,13 @@ export class ObservacionComponent implements OnInit {
                 detail: `${observacion.nombre} Eliminada.`
               }
             ];
+          },
+          error => {
+            this.confirmationService.confirm({
+              header: 'Acción Denegada !',
+              message: `${error}`,
+              accept: () => {}
+            });
           });
       },
       reject: () => {
